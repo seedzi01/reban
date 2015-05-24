@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="color_white">#FFFFFF</color>
-    
     <color name="color_titlebar_background">#f9f9f9</color>
-    
-    <color name="color_gray">#969696</color>
-    
-      <color name="color_button_normal">#c96cf1</color>
+    <color name="shadow">#a0a0a0</color>
+    <color name="font_module_normal">#434343</color>
+    <color name="font_module_selected">#28b937</color>
+    <color name="font_module_pressed">#28b937</color>
+
 </resources>
