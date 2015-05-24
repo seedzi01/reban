@@ -15,7 +15,7 @@ import android.widget.Toast;
 /**
  * Created by huzhi on 15-2-17.
  */
-public class AbstractActivity extends FragmentActivity{
+public class AbstractActivity extends FragmentActivity {
 
     private static List<Activity>  activities;
     
@@ -29,9 +29,9 @@ public class AbstractActivity extends FragmentActivity{
             activities.clear();
         }
     }
-    
+
     private Context mContext;
-    
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

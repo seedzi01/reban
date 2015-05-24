@@ -17,7 +17,7 @@
         android:background="@color/color_white"
         android:gravity="center_vertical"/>
 
-    <View 
+    <View
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="1px"        
@@ -31,7 +31,5 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_above="@id/line"/>
-
-
 
 </RelativeLayout>
