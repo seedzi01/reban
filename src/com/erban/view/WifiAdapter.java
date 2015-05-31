@@ -3,7 +3,6 @@ package com.erban.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.opengl.Visibility;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -179,14 +178,38 @@ public class WifiAdapter extends BaseAdapter {
 		@Override
 		public void bind(View view, Object model) {
 			WifiInfo wifiInfo = (WifiInfo) model;
-			View bottomLine = view.findViewById(R.id.bottom_line);
+			
 			TextView wifiName = (TextView) view.findViewById(R.id.wifi_name);
 			wifiName.setText(wifiInfo.getWifiName());
+			
+			ImageView wifiStrengthIcon = (ImageView) view.findViewById(R.id.wifi_strength_icon);
+			wifiStrengthIcon.setImageResource(getWifiStrengthIcon(wifiInfo.getSignalStrengthPercent()));
+			
+			View bottomLine = view.findViewById(R.id.bottom_line);
 			bottomLine.setVisibility(showBottomLine ? View.VISIBLE : View.GONE);
+			
+			TextView wifiStrengthText = (TextView) view.findViewById(R.id.wifi_strength_text);
+			wifiStrengthText.setText(wifiInfo.getSignalStrengthPercent() + "%");
 		}
 	};
 	
 	private interface Binder {
 		void bind(View view, Object model);
+	}
+	
+	private static int getWifiStrengthIcon(int percent) {
+		if (percent <= 10) {
+			return R.drawable.wifi_strength_none;
+		} else if (percent <= 20) {
+			return R.drawable.wifi_strength_tiny;
+		} else if (percent <= 40) {
+			return R.drawable.wifi_strength_low;
+		} else if (percent <= 70) {
+			return R.drawable.wifi_strength_normal;
+		} else if (percent <= 90) {
+			return R.drawable.wifi_strength_high;
+		} else {
+			return R.drawable.wifi_strength_full;
+		}
 	}
 }

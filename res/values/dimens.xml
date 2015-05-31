@@ -10,10 +10,10 @@
     <dimen name="title_bar_padding_left_right">10dp</dimen>
     
     <!-- wifi function area -->
-    <dimen name="wifi_function_area_height">96dp</dimen>
+    <dimen name="wifi_function_area_height">72dp</dimen>
     
     <!-- item 之间的间距 -->
     <dimen name="item_margin_normal">15dp</dimen>
     
-    <dimen name="wifi_card_nomal">48dp</dimen>
+    <dimen name="wifi_card_nomal">56dp</dimen>
 </resources>

@@ -87,14 +87,23 @@ public class PhoneWifiManager {
      *
      * @return lastest wifis.
      */
-    public List<ScanResultWrapper> getLastestWifis() {
-        List<ScanResultWrapper> wrapperList = new ArrayList<ScanResultWrapper>();
+    public List<WifiInfo> getLastestWifis() {
+        List<WifiInfo> wrapperList = new ArrayList<WifiInfo>();
         List<ScanResult> result = wifiManager.getScanResults();
         if (result != null) {
             for (ScanResult item : result) {
                 Log.d(TAG, item.toString());
+                wrapperList.add(new ScanResultWrapper(item));
             }
         }
         return wrapperList;
     }
+
+    public void addListener(WifiStateListener listener) {
+    	if (listener == null) {
+    		return;
+    	}
+    	listeners.add(new WeakReference<WifiStateListener>(listener));
+	}
+
 }
