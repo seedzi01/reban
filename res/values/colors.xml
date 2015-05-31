@@ -8,4 +8,7 @@
     <color name="font_module_selected">#28b937</color>
     <color name="font_module_pressed">#28b937</color>
 
+    <color name="wifi_count_bg">#eeeeee</color>
+    <color name="wifi_count_line">#d2d2d2</color>
+    
 </resources>

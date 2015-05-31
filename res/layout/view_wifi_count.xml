@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="32dp"
+    android:gravity="center_vertical"
+    android:background="@color/wifi_count_bg">
+    
+    <View
+        android:id="@+id/up_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/wifi_count_line"
+        android:layout_alignParentTop="true"/>
+    
+    <View 
+        android:id="@+id/down_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/wifi_count_line"
+        android:layout_alignParentBottom="true"
+        />
+    
+    <ImageView 
+        android:id="@+id/wifi_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/up_line"
+        android:layout_above="@id/down_line"
+        android:layout_margin="5dp"
+        android:src="@drawable/wifi_without_password"/>
+
+	<TextView 
+	    android:id="@+id/wifi_count"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/up_line"
+        android:layout_above="@id/down_line"
+	    android:layout_marginTop="5dp"
+	    android:layout_marginBottom="5dp"
+	    android:layout_toRightOf="@id/wifi_type"
+	    android:text="@string/wifi_without_password"/>    
+    
+</RelativeLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/wifi_function_area_height"
+    android:padding="15dp" >
+
+    <RelativeLayout
+        android:id="@+id/wifi_connected_info"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:id="@+id/wifi_connected_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@drawable/wifi_connected" />
+        
+        <ImageView 
+            android:id="@+id/wifi_vetical_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@id/wifi_connected_icon"
+            android:src="@drawable/wifi_vetical_line"/>
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/wifi_connected"
+            android:layout_toRightOf="@id/wifi_vetical_line"
+            android:layout_alignTop="@id/wifi_vetical_line"/>
+        
+        <TextView
+            android:id="@+id/wifi_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/wifi_vetical_line"
+            android:layout_alignBottom="@id/wifi_vetical_line"/>
+        
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/wifi_disconnected_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:drawableLeft="@drawable/wifi_disconnected"
+        android:gravity="center_vertical"
+        android:text="@string/wifi_disconnected"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/wifi_refresh_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:textColor="@color/color_white"
+        android:background="@drawable/wifi_refresh"
+        android:text="@string/wifi_refresh" />
+
+</RelativeLayout>

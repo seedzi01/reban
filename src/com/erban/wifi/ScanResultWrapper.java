@@ -9,7 +9,7 @@ import android.text.TextUtils;
  *
  * @author qisen (woaitqs@gmail.com).
  */
-public class ScanResultWrapper {
+public class ScanResultWrapper implements WifiInfo {
 
     private final ScanResult scanResult;
 
@@ -17,28 +17,27 @@ public class ScanResultWrapper {
         this.scanResult = scanResult;
     }
 
-    public String getWifiName() {
+    /* (non-Javadoc)
+	 * @see com.erban.wifi.WifiInfo#getWifiName()
+	 */
+    @Override
+	public String getWifiName() {
         return scanResult.SSID;
     }
 
-    /**
-     * BSS 是一组相互通信的工作站，基于的通信方式是 <Station> - <Ad> - <Station>,
-     * 所有无线网络中想要通信，都必须通过Ad。
-     *
-     * 这样一套工作站的Id，就是BSSID，一般情况下，是所处无线接入点的MAC地址
-     *
-     * @return bss id.
-     */
-    public String getBSSID() {
+    /* (non-Javadoc)
+	 * @see com.erban.wifi.WifiInfo#getBSSID()
+	 */
+    @Override
+	public String getBSSID() {
         return scanResult.BSSID;
     }
 
-    /**
-     * 获取WIFI的加密方式
-     *
-     * @return SecurityType
-     */
-    public SecurityType getSecurityType() {
+    /* (non-Javadoc)
+	 * @see com.erban.wifi.WifiInfo#getSecurityType()
+	 */
+    @Override
+	public SecurityType getSecurityType() {
         String capablitiesStr = scanResult.capabilities;
         if (TextUtils.isEmpty(scanResult.capabilities)) {
             return SecurityType.NONE;
@@ -62,12 +61,11 @@ public class ScanResultWrapper {
         return SecurityType.NONE;
     }
 
-    /**
-     * 计算得出WiFi的信号强度
-     *
-     * @return signal strength percent.
-     */
-    public int getSignalStrengthPercent() {
+    /* (non-Javadoc)
+	 * @see com.erban.wifi.WifiInfo#getSignalStrengthPercent()
+	 */
+    @Override
+	public int getSignalStrengthPercent() {
         int percent = 0;
         try {
             percent = WifiManager.calculateSignalLevel(scanResult.level, 100);

@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">wifi</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-
+    <string name="app_name">智连</string>
+    <string name="wifi_refresh">一键WiFi刷新</string>
+    
+    <string name="wifi_without_password">免密码wifi (%1$d)</string>
+    <string name="wifi_need_password">需要密码wifi (%1$d)</string>
+	
+    <string name="wifi_disconnected">暂时没有连接到WiFi</string>
+    <string name="wifi_connected">已连接</string>
+    
 </resources>
