@@ -15,4 +15,5 @@
     <!-- item 之间的间距 -->
     <dimen name="item_margin_normal">15dp</dimen>
     
+    <dimen name="wifi_card_nomal">48dp</dimen>
 </resources>

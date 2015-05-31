@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.erban.view.WifiStatusArea
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/wifi_function_area_height"
     android:padding="15dp" >
@@ -62,4 +63,4 @@
         android:background="@drawable/wifi_refresh"
         android:text="@string/wifi_refresh" />
 
-</RelativeLayout>
+</com.erban.view.WifiStatusArea>
