@@ -17,6 +17,7 @@ import com.erban.view.WifiAdapter;
 import com.erban.view.WifiStatusArea;
 import com.erban.wifi.DevicesState;
 import com.erban.wifi.PhoneWifiManager;
+import com.erban.wifi.SecurityType;
 import com.erban.wifi.WifiInfo;
 import com.erban.wifi.WifiStateListener;
 
@@ -36,8 +37,17 @@ public class WifiFragment extends Fragment {
 		public void onWifiScanSuccess() {
 			List<WifiInfo> wifiInfos = PhoneWifiManager.getInstance(getActivity()).getLastestWifis();
 			if (adapter != null && wifiInfos != null) {
+				List<WifiInfo> noPasswords = new ArrayList<WifiInfo>();
+				List<WifiInfo> needPasswords = new ArrayList<WifiInfo>();
+				for (WifiInfo wifiInfo : wifiInfos) {
+					if (SecurityType.NONE.equals(wifiInfo.getSecurityType())) {
+						noPasswords.add(wifiInfo);
+					} else {
+						needPasswords.add(wifiInfo);
+					}
+				}
 				// mock data.
-				adapter.setWifiInfos(wifiInfos, wifiInfos);
+				adapter.setWifiInfos(noPasswords, needPasswords);
 			}
 		}
 		

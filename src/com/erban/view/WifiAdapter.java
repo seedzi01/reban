@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.erban.R;
 import com.erban.util.ViewUtils;
+import com.erban.wifi.SecurityType;
 import com.erban.wifi.WifiInfo;
 
 public class WifiAdapter extends BaseAdapter {
@@ -34,9 +35,9 @@ public class WifiAdapter extends BaseAdapter {
 		int needPasswordSize = needPasswords != null ? needPasswords.size() : 0;
 
 		int typeSize = 0;
-		if (noPasswords != null && needPasswords != null) {
+		if (noPasswordSize != 0 && needPasswordSize != 0) {
 			typeSize = 2;
-		} else if (noPasswords == null && needPasswords == null) {
+		} else if (noPasswordSize == 0 && needPasswordSize == 0) {
 			typeSize = 0;
 		} else {
 			typeSize = 1;
@@ -50,7 +51,7 @@ public class WifiAdapter extends BaseAdapter {
 		switch (types.get(position)) {
 		case NEED_PASSWORD_ITEM:
 			return needPasswords.get(position - 1
-					- (needPasswords != null ? needPasswords.size() + 1 : 0));
+					- (noPasswords != null ? noPasswords.size() + 1 : 0));
 		case NEED_PASSWORD_TITLE:
 			return needPasswords.size();
 		case NO_PASSWORD_ITEM:
@@ -148,7 +149,7 @@ public class WifiAdapter extends BaseAdapter {
 						.findViewById(R.id.wifi_type);
 				count.setText(String.format(
 						view.getResources().getString(
-								R.string.wifi_without_password),
+								R.string.wifi_need_password),
 						((Integer) model)));
 				typeIcon.setImageResource(R.drawable.wifi_with_password);
 			}
@@ -159,10 +160,6 @@ public class WifiAdapter extends BaseAdapter {
 
 		private ViewType(Binder binder) {
 			this.binder = binder;
-		}
-
-		public Binder getBinder() {
-			return binder;
 		}
 
 	}
@@ -181,6 +178,12 @@ public class WifiAdapter extends BaseAdapter {
 			
 			TextView wifiName = (TextView) view.findViewById(R.id.wifi_name);
 			wifiName.setText(wifiInfo.getWifiName());
+			
+			ImageView wifiType = (ImageView) view.findViewById(R.id.wifi_type);
+			// TODO this place need change.
+			wifiType.setImageResource(
+					SecurityType.NONE.equals(wifiInfo.getSecurityType()) 
+					? R.drawable.wifi_no_password_icon : R.drawable.wifi_need_password_icon);
 			
 			ImageView wifiStrengthIcon = (ImageView) view.findViewById(R.id.wifi_strength_icon);
 			wifiStrengthIcon.setImageResource(getWifiStrengthIcon(wifiInfo.getSignalStrengthPercent()));
