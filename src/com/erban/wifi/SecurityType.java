@@ -12,6 +12,7 @@ public enum SecurityType {
     WPA2,
     WPA_WPA2,
     EAP,
+    PSK,
     NONE
 
 }

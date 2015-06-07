@@ -1,14 +1,18 @@
 package com.erban.wifi;
 
-import android.content.Context;
-import android.net.wifi.ScanResult;
-import android.net.wifi.WifiManager;
-import android.util.Log;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+import android.util.Log;
 
 /**
  * Provider Basic function to query and manager wifi state.
@@ -52,6 +56,19 @@ public class PhoneWifiManager {
                         }
                     }
                 }
+
+				@Override
+				public void onWifiStateChanged() {
+					Iterator<WeakReference<WifiStateListener>> iterator = listeners.iterator();
+                    while (iterator.hasNext()) {
+                        WeakReference<WifiStateListener> ref = iterator.next();
+                        if (ref.get() != null) {
+                            ref.get().onWifiStateChanged();
+                        } else {
+                            iterator.remove();
+                        }
+                    }
+				}
             };
 
     private PhoneWifiManager(Context context) {
@@ -87,8 +104,8 @@ public class PhoneWifiManager {
      *
      * @return lastest wifis.
      */
-    public List<WifiInfo> getLastestWifis() {
-        List<WifiInfo> wrapperList = new ArrayList<WifiInfo>();
+    public List<PhoneWifiInfo> getLastestWifis() {
+        List<PhoneWifiInfo> wrapperList = new ArrayList<PhoneWifiInfo>();
         List<ScanResult> result = wifiManager.getScanResults();
         if (result != null) {
             for (ScanResult item : result) {
@@ -99,6 +116,10 @@ public class PhoneWifiManager {
         return wrapperList;
     }
 
+    /**
+     * watch wifi status change.
+     * @param listener
+     */
     public void addListener(WifiStateListener listener) {
     	if (listener == null) {
     		return;
@@ -106,4 +127,35 @@ public class PhoneWifiManager {
     	listeners.add(new WeakReference<WifiStateListener>(listener));
 	}
 
+    /**
+     * check current network type is connected.
+     * 
+     * @param context app context.
+     * @param netWorkType type of network. ConnectivityManager.TYPE_WIFI or ConnectivityManager.TYPE_MOBILE
+     * @return connected or not.
+     */
+    public static boolean isConnected(Context context, int netWorkType) {
+    	ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    	NetworkInfo info = connManager.getNetworkInfo(netWorkType);
+    	return info != null && info.isConnected();
+    }
+
+    public PhoneWifiInfo getConnectedWifi() {
+    	WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+    	List<WifiConfiguration> configurations = wifiManager.getConfiguredNetworks();
+    	if (wifiInfo == null || configurations == null) {
+    		return null;
+    	}
+    	WifiConfiguration matched = null;
+    	for (WifiConfiguration item : configurations) {
+    		if (item.SSID.equals(wifiInfo.getSSID())) {
+    			matched = item;
+    			break;
+    		}
+    	}
+    	if (matched == null) {
+    		return null;
+    	}
+    	return new WifiInfoWrapper(wifiInfo, matched);
+    }
 }

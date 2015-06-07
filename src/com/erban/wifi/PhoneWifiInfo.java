@@ -1,6 +1,8 @@
 package com.erban.wifi;
 
-public interface WifiInfo {
+import java.io.Serializable;
+
+public interface PhoneWifiInfo extends Serializable {
 
 	/**
 	 * @return wifi name.

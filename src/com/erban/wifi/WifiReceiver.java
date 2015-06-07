@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 
 /**
@@ -50,6 +51,10 @@ class WifiReceiver extends BroadcastReceiver {
             if (changeListener != null) {
                 changeListener.onWifiScanSuccess();
             }
+        } else if (ConnectivityManager.CONNECTIVITY_ACTION.equalsIgnoreCase(intent.getAction())) {
+        	if (changeListener != null) {
+                changeListener.onWifiStateChanged();
+            }
         }
     }
 
@@ -59,6 +64,7 @@ class WifiReceiver extends BroadcastReceiver {
             IntentFilter filter = new IntentFilter();
             filter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
             filter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
+            filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
             filter.addAction(WifiManager.NETWORK_STATE_CHANGED_ACTION);
             filter.addAction(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION);
             appContext.registerReceiver(new WifiReceiver(), filter);

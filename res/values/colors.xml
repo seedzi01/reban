@@ -11,4 +11,6 @@
     <color name="wifi_count_bg">#eeeeee</color>
     <color name="wifi_count_line">#d2d2d2</color>
     
+    <color name="color_app_black">#434343</color>
+    <color name="color_app_grey">#939393</color>
 </resources>

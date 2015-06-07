@@ -1,8 +1,11 @@
 package com.erban.view;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,18 +14,19 @@ import android.widget.TextView;
 
 import com.erban.R;
 import com.erban.util.ViewUtils;
+import com.erban.view.dialog.ConnectWifiDialog;
 import com.erban.wifi.SecurityType;
-import com.erban.wifi.WifiInfo;
+import com.erban.wifi.PhoneWifiInfo;
 
 public class WifiAdapter extends BaseAdapter {
 
-	private List<WifiInfo> noPasswords;
-	private List<WifiInfo> needPasswords;
+	private List<PhoneWifiInfo> noPasswords;
+	private List<PhoneWifiInfo> needPasswords;
 
 	private List<ViewType> types = new ArrayList<ViewType>();
 
-	public void setWifiInfos(List<WifiInfo> noPasswords,
-			List<WifiInfo> needPasswords) {
+	public void setWifiInfos(List<PhoneWifiInfo> noPasswords,
+			List<PhoneWifiInfo> needPasswords) {
 		this.noPasswords = noPasswords;
 		this.needPasswords = needPasswords;
 		rebuildTypeList();
@@ -31,8 +35,8 @@ public class WifiAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		int noPasswordSize = noPasswords != null ? noPasswords.size() : 0;
-		int needPasswordSize = needPasswords != null ? needPasswords.size() : 0;
+		int noPasswordSize = !isEmpty(noPasswords) ? noPasswords.size() : 0;
+		int needPasswordSize = !isEmpty(needPasswords) ? needPasswords.size() : 0;
 
 		int typeSize = 0;
 		if (noPasswordSize != 0 && needPasswordSize != 0) {
@@ -51,7 +55,7 @@ public class WifiAdapter extends BaseAdapter {
 		switch (types.get(position)) {
 		case NEED_PASSWORD_ITEM:
 			return needPasswords.get(position - 1
-					- (noPasswords != null ? noPasswords.size() + 1 : 0));
+					- (!isEmpty(noPasswords) ? noPasswords.size() + 1 : 0));
 		case NEED_PASSWORD_TITLE:
 			return needPasswords.size();
 		case NO_PASSWORD_ITEM:
@@ -112,13 +116,13 @@ public class WifiAdapter extends BaseAdapter {
 
 	private void rebuildTypeList() {
 		types.clear();
-		if (noPasswords != null) {
+		if (!isEmpty(noPasswords)) {
 			types.add(ViewType.NO_PASSWORD_TITLE);
 			for (int i = 0; i < noPasswords.size(); i++) {
 				types.add(ViewType.NO_PASSWORD_ITEM);
 			}
 		}
-		if (needPasswords != null) {
+		if (!isEmpty(needPasswords)) {
 			types.add(ViewType.NEED_PASSWORD_TITLE);
 			for (int i = 0; i < needPasswords.size(); i++) {
 				types.add(ViewType.NEED_PASSWORD_ITEM);
@@ -173,8 +177,8 @@ public class WifiAdapter extends BaseAdapter {
 		}
 
 		@Override
-		public void bind(View view, Object model) {
-			WifiInfo wifiInfo = (WifiInfo) model;
+		public void bind(final View view, Object model) {
+			final PhoneWifiInfo wifiInfo = (PhoneWifiInfo) model;
 			
 			TextView wifiName = (TextView) view.findViewById(R.id.wifi_name);
 			wifiName.setText(wifiInfo.getWifiName());
@@ -193,6 +197,17 @@ public class WifiAdapter extends BaseAdapter {
 			
 			TextView wifiStrengthText = (TextView) view.findViewById(R.id.wifi_strength_text);
 			wifiStrengthText.setText(wifiInfo.getSignalStrengthPercent() + "%");
+			
+			view.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					FragmentManager transaction = ((Activity)view.getContext()).getFragmentManager();
+					ConnectWifiDialog dialog = ConnectWifiDialog.newInstance(wifiInfo);
+					dialog.setStyle(R.style.Dialog_No_Border, 0);
+					dialog.show(transaction,"ConnectDialog");
+				}
+			});
 		}
 	};
 	
@@ -215,4 +230,9 @@ public class WifiAdapter extends BaseAdapter {
 			return R.drawable.wifi_strength_full;
 		}
 	}
+
+	private static boolean isEmpty(@SuppressWarnings("rawtypes") Collection collection) {
+		return collection == null || collection.size() == 0;
+	}
+
 }

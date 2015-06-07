@@ -19,4 +19,8 @@ public interface WifiStateListener {
      */
     void onDevicesStateChanged(DevicesState state);
 
+    /**
+     * 通知wifi状态发生改变
+     */
+    void onWifiStateChanged();
 }

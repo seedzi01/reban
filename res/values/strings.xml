@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">智连</string>
-    <string name="wifi_refresh">一键WiFi刷新</string>
+    <string name="wifi_refresh">一键WiFi查询</string>
     
     <string name="wifi_without_password">免密码wifi (%1$d)</string>
     <string name="wifi_need_password">需要密码wifi (%1$d)</string>
@@ -10,8 +10,12 @@
     <string name="wifi_disconnected">暂时没有连接到WiFi</string>
     <string name="wifi_connected">已连接</string>
     
-    
     <string name="forget_password"><u>忘记密码?</u></string>
     <string name="login">登录</string>
     <string name="get_verification_code">获取验证码</string>  
+
+    <string name="wifi_input_hint">请输入密码</string>
+    <string name="wifi_share_or_not">是否共享wifi</string>
+    
+    <string name="confirm">确  认</string>
 </resources>

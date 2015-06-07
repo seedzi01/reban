@@ -9,61 +9,31 @@ import android.text.TextUtils;
  *
  * @author qisen (woaitqs@gmail.com).
  */
-public class ScanResultWrapper implements WifiInfo {
+public class ScanResultWrapper implements PhoneWifiInfo {
 
-    private final ScanResult scanResult;
+	private static final long serialVersionUID = 247088067920540566L;
+
+	private final ScanResult scanResult;
 
     public ScanResultWrapper(ScanResult scanResult) {
         this.scanResult = scanResult;
     }
 
-    /* (non-Javadoc)
-	 * @see com.erban.wifi.WifiInfo#getWifiName()
-	 */
     @Override
 	public String getWifiName() {
         return scanResult.SSID;
     }
 
-    /* (non-Javadoc)
-	 * @see com.erban.wifi.WifiInfo#getBSSID()
-	 */
     @Override
 	public String getBSSID() {
         return scanResult.BSSID;
     }
 
-    /* (non-Javadoc)
-	 * @see com.erban.wifi.WifiInfo#getSecurityType()
-	 */
     @Override
 	public SecurityType getSecurityType() {
-        String capablitiesStr = scanResult.capabilities;
-        if (TextUtils.isEmpty(scanResult.capabilities)) {
-            return SecurityType.NONE;
-        }
-        if (capablitiesStr.contains("WEP")) {
-            return SecurityType.WEP;
-        } else if (capablitiesStr.contains("EAP")) {
-            return SecurityType.EAP;
-        } else {
-            // 处理PSK的加密方式
-            boolean wpa = capablitiesStr.contains("WPA-PSK");
-            boolean wpa2 = capablitiesStr.contains("WPA2-PSK");
-            if (wpa && wpa2) {
-                return SecurityType.WPA_WPA2;
-            } else if (wpa) {
-                return SecurityType.WPA;
-            } else if (wpa2) {
-                return SecurityType.WPA2;
-            }
-        }
-        return SecurityType.NONE;
+        return WifiUtils.formatSecurityType(scanResult.capabilities);
     }
 
-    /* (non-Javadoc)
-	 * @see com.erban.wifi.WifiInfo#getSignalStrengthPercent()
-	 */
     @Override
 	public int getSignalStrengthPercent() {
         int percent = 0;

@@ -17,10 +17,10 @@
         android:id="@+id/strength_area"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_marginRight="20dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical" >
 
         <ImageView
@@ -28,14 +28,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/wifi_strength" />
-        
-        <TextView 
+
+        <TextView
             android:id="@+id/wifi_strength_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#434343"
-            android:textSize="8sp"
-            />
+            android:textSize="8sp" />
     </LinearLayout>
 
     <TextView
@@ -49,10 +48,8 @@
         android:layout_toRightOf="@id/wifi_type"
         android:ellipsize="end"
         android:lines="1"
-        android:text="CMCT-CHINACOMMM"
         android:textColor="#404040"
         android:textSize="17sp" />
-"
 
     <View
         android:id="@+id/bottom_line"
