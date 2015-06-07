@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    android:orientation="vertical" xmlns:app="http://schemas.android.com/apk/res/com.erban">
+
+	<include 
+	    android:layout_width="match_parent"
+	    android:layout_height="@dimen/title_bar_heigt"
+	    layout="@layout/title_bar_layout"
+	    />
+    <ScrollView 
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+      <LinearLayout 
+        android:layout_width="match_parent"	    
+	    android:layout_height="match_parent"
+	    android:orientation="vertical"> 
+	<LinearLayout 
+        android:layout_width="match_parent"	    
+	    android:layout_height="wrap_content" 
+	    android:orientation="vertical"
+	    android:gravity="center_horizontal"
+	    android:background="@drawable/user_banner_bk">
+	    
+        <com.erban.widget.CircleImageView
+            android:layout_marginTop="15dp"
+            android:id="@+id/user_icon"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            app:border_width="3dp"
+            app:border_color="#ffffff"
+            android:src="@drawable/user_default_head_img"/>
+	    <LinearLayout 
+	       android:id="@+id/no_login_layout"
+	       android:layout_marginTop="10dp"
+	       android:layout_gravity="center"
+	       android:layout_width="wrap_content"	    
+	       android:layout_height="wrap_content"
+	       android:orientation="horizontal" 
+	       android:weightSum="2">
+	        <TextView 
+	           android:id="@+id/login_button"
+	           android:layout_width="wrap_content" 
+	           android:layout_height="wrap_content"
+	           android:background="@drawable/user_button_selector"
+	           android:gravity="center"
+	           android:textColor="#ffffff"
+	           android:textSize="17sp"
+	           android:text="登陆"/>
+	       <TextView 
+	           android:id="@+id/register_button"
+	           android:layout_marginLeft="40dp"
+	           android:layout_width="wrap_content" 
+	           android:layout_height="wrap_content"
+	           android:background="@drawable/user_button_selector"
+	           android:gravity="center"
+	           android:textColor="#ffffff"
+	           android:textSize="17sp"
+	           android:text="注册"/>
+	    </LinearLayout> 
+	</LinearLayout>
+    
+
+  		<View
+	       	android:layout_width="match_parent"
+	      	android:layout_height="10dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+        
+        <include android:id="@+id/line1"  layout="@layout/item_center_user_layout" />
+        <include android:id="@+id/line2"  layout="@layout/item_center_user_layout"/>
+        <include android:id="@+id/line3"  layout="@layout/item_center_user_layout" />
+        
+		<View
+         	android:layout_width="match_parent"
+        	android:layout_height="10dp"/>
+        <include android:id="@+id/line4"  layout="@layout/item_center_user_layout" />
+       	<include android:id="@+id/line5"  layout="@layout/item_center_user_layout" />
+		<View
+         	android:layout_width="match_parent"
+        	android:layout_height="10dp" />
+       
+        <include android:id="@+id/line6"  layout="@layout/item_center_user_layout" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    </LinearLayout>
+</ScrollView>
+</LinearLayout>
