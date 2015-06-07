@@ -27,6 +27,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+            
+        <!-- 登陆注册 -->    
+    	<activity 
+    	    android:theme="@android:style/Theme.NoTitleBar"
+		    android:name=".module.user.LoginAndRegisterActivity"/>
     </application>
 
 </manifest>

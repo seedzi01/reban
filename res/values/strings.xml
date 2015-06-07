@@ -10,4 +10,8 @@
     <string name="wifi_disconnected">暂时没有连接到WiFi</string>
     <string name="wifi_connected">已连接</string>
     
+    
+    <string name="forget_password"><u>忘记密码?</u></string>
+    <string name="login">登录</string>
+    <string name="get_verification_code">获取验证码</string>  
 </resources>

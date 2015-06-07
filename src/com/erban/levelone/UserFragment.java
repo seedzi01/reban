@@ -2,6 +2,7 @@ package com.erban.levelone;
 
 import com.erban.R;
 import com.erban.levelone.control.UserControl;
+import com.erban.module.user.LoginAndRegisterActivity;
 import com.erban.widget.TitleBar;
 import com.yuekuapp.BaseFragment;
 
@@ -134,7 +135,6 @@ public class UserFragment extends BaseFragment<UserControl> implements View.OnCl
 
 	@Override
 	public void onClick(View v) {
-		/*
 		int id = v.getId();
 		switch (id) {
 		case R.id.login_button://登录
@@ -144,33 +144,32 @@ public class UserFragment extends BaseFragment<UserControl> implements View.OnCl
 			LoginAndRegisterActivity.startActivity(getActivity(), false);
 			break;
 		case R.id.line1:  //我的订单
-			UserOrderListActivity.startActivity(getActivity());
+//			UserOrderListActivity.startActivity(getActivity());
 			break;
 		case R.id.line2: //我的消息
-			MessageActivity.startActivity(getActivity());
+//			MessageActivity.startActivity(getActivity());
 			break;
 		case R.id.line3: //我的收藏
-			CollectionActivity.startActivity(getActivity());
+//			CollectionActivity.startActivity(getActivity());
 			break;
 		case R.id.line4: //浏览历史
-			HistoryActivity.startActivity(getActivity());
+//			HistoryActivity.startActivity(getActivity());
 			break;
 		case R.id.line5: //意见反馈
-			FeedbackActivity.startActivity(getActivity());
+//			FeedbackActivity.startActivity(getActivity());
 			break;
 		case R.id.line6: //关于我们
-			AboutActivity.startActivity(getActivity());
+//			AboutActivity.startActivity(getActivity());
 			break;
-		case R.id.line7: 
-			showProgressDialog();
-			break;
-		case R.id.user_info_layout:
-			UserInfoActivity.startActivity(getActivity());
-			break;
+//		case R.id.line7: 
+//			showProgressDialog();
+//			break;
+//		case R.id.user_info_layout:
+//			UserInfoActivity.startActivity(getActivity());
+//			break;
 		default:
 			break;
 		}
-		*/
 	}
 	
 	private void showProgressDialog(){

@@ -18,8 +18,6 @@ public class TitleBar extends FrameLayout implements View.OnClickListener{
 	
 	private ImageView mBackButton;
 	
-	private ViewGroup mCenterContainer;
-	
 	private TextView mLoginButton;
 	
 	private TextView mRegisterButton;
@@ -47,7 +45,6 @@ public class TitleBar extends FrameLayout implements View.OnClickListener{
 	private void setupViews(){
 		mTitleView = (TextView) findViewById(R.id.title);
 		mBackButton = (ImageView)findViewById(R.id.back);
-		mCenterContainer = (ViewGroup) findViewById(R.id.center_container);
 		mLoginButton =  (TextView) findViewById(R.id.login);
 		mRegisterButton =  (TextView) findViewById(R.id.register);
 		mLoginButton.setOnClickListener(this);
@@ -65,16 +62,14 @@ public class TitleBar extends FrameLayout implements View.OnClickListener{
 	public void setTitle(String title){
 		mTitleView.setText(title);
 		mTitleView.setVisibility(View.VISIBLE);
-		mCenterContainer.setVisibility(View.GONE);
 	}
 	
-	/**
-	 * 设置titlebar中间控件事件
-	 */
+	public TextView getTitle(){
+		return mTitleView;
+	}
+	
 	public void setListener(Listener listener){
 		mListener = listener;
-		mTitleView.setVisibility(View.GONE);
-		mCenterContainer.setVisibility(View.VISIBLE);
 	}
 	
 	public static interface Listener{
@@ -87,18 +82,16 @@ public class TitleBar extends FrameLayout implements View.OnClickListener{
 		int id = v.getId();
 		switch (id) {
 		case R.id.login:
-//			mLoginButton.setBackgroundResource(R.drawable.login_button_press);
-//			mRegisterButton.setBackgroundResource(R.drawable.register_button);
-//			mLoginButton.setTextColor(getResources().getColor(R.color.color_button_checked));
-//			mRegisterButton.setTextColor(getResources().getColor(R.color.color_button_normal));
+			mTitleView.setText("登录");
+			mLoginButton.setVisibility(View.GONE);
+			mRegisterButton.setVisibility(View.VISIBLE);
 			if(mListener!=null)
 				mListener.switchLogin();
 			break;
 		case R.id.register:
-//			mLoginButton.setBackgroundResource(R.drawable.login_button);
-//			mRegisterButton.setBackgroundResource(R.drawable.register_button_press);
-//			mLoginButton.setTextColor(getResources().getColor(R.color.color_button_normal));
-//			mRegisterButton.setTextColor(getResources().getColor(R.color.color_button_checked));
+			mTitleView.setText("注册");
+			mLoginButton.setVisibility(View.VISIBLE);
+			mRegisterButton.setVisibility(View.GONE);
 			if(mListener!=null)
 				mListener.switchRegister();
 			break;
