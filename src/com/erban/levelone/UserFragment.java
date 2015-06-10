@@ -3,6 +3,7 @@ package com.erban.levelone;
 import com.erban.R;
 import com.erban.levelone.control.UserControl;
 import com.erban.module.user.LoginAndRegisterActivity;
+import com.erban.module.user.UserInfoActivity;
 import com.erban.widget.TitleBar;
 import com.yuekuapp.BaseFragment;
 
@@ -60,7 +61,7 @@ public class UserFragment extends BaseFragment<UserControl> implements View.OnCl
 	
 	private void setUpView(){
 		mRootView.findViewById(R.id.back).setVisibility(View.GONE);
-		mRootView.findViewById(R.id.user_icon);
+		mRootView.findViewById(R.id.user_icon).setOnClickListener(this);;
 		mTitleBar = (TitleBar) mRootView.findViewById(R.id.titlebar);
 		mTitleBar.setTitle("个人中心");
 		
@@ -137,6 +138,9 @@ public class UserFragment extends BaseFragment<UserControl> implements View.OnCl
 	public void onClick(View v) {
 		int id = v.getId();
 		switch (id) {
+		case R.id.user_icon:
+		    UserInfoActivity.startActivity(getActivity());
+		    break;
 		case R.id.login_button://登录
 			LoginAndRegisterActivity.startActivity(getActivity(), true);
 			break;

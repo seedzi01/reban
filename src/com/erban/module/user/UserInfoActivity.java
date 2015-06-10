@@ -86,19 +86,19 @@ public class UserInfoActivity extends AbstractActivity implements View.OnClickLi
 			    }
 			}
 		});
-		findViewById(R.id.loginout).setOnClickListener(this);
-		mUserIcon = (CircleImageView) findViewById(R.id.user_icon);
-		mUserIcon.setOnClickListener(this);
-		
-		nickNameEd = (EditText) findViewById(R.id.nick_name);
-		linkEd = (EditText) findViewById(R.id.link);
-		shengFenZhengHaoEd = (EditText) findViewById(R.id.sheng_fen_zheng_hao);
-		locationEd = (EditText) findViewById(R.id.location);
-		userIcon = (CircleImageView) findViewById(R.id.user_icon);
-		userNameTv = (TextView) findViewById(R.id.user_name);
-		vipTxtTv = (TextView) findViewById(R.id.vip_txt);
-		userTypeDesc = (TextView) findViewById(R.id.user_type_desc);
-		costTv = (TextView) findViewById(R.id.cost);
+//		findViewById(R.id.loginout).setOnClickListener(this);
+//		mUserIcon = (CircleImageView) findViewById(R.id.user_icon);
+//		mUserIcon.setOnClickListener(this);
+//		
+//		nickNameEd = (EditText) findViewById(R.id.nick_name);
+//		linkEd = (EditText) findViewById(R.id.link);
+//		shengFenZhengHaoEd = (EditText) findViewById(R.id.sheng_fen_zheng_hao);
+//		locationEd = (EditText) findViewById(R.id.location);
+//		userIcon = (CircleImageView) findViewById(R.id.user_icon);
+//		userNameTv = (TextView) findViewById(R.id.user_name);
+//		vipTxtTv = (TextView) findViewById(R.id.vip_txt);
+//		userTypeDesc = (TextView) findViewById(R.id.user_type_desc);
+//		costTv = (TextView) findViewById(R.id.cost);
 	}
 	
 	private void initData(){

@@ -3,6 +3,9 @@ package com.erban;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yuekuapp.BaseActivity;
+import com.yuekuapp.BaseControl;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +18,7 @@ import android.widget.Toast;
 /**
  * Created by huzhi on 15-2-17.
  */
-public class AbstractActivity extends FragmentActivity {
+public class AbstractActivity<T extends BaseControl> extends BaseActivity<T> {
 
     private static List<Activity>  activities;
     

@@ -1,12 +1,13 @@
 package com.erban.module.user;
 
 
-import java.util.Map;
-import java.util.Set;
 
 import com.erban.AbstractActivity;
 import com.erban.R;
 import com.erban.container.TabsActivity;
+import com.erban.module.user.control.UserControl;
+import com.erban.util.InputUtils;
+import com.erban.util.MobileUtil;
 import com.erban.widget.TitleBar;
 import com.erban.widget.TitleBar.Listener;
 
@@ -29,7 +30,7 @@ import android.widget.Toast;
 
 
 
-public class LoginAndRegisterActivity extends AbstractActivity
+public class LoginAndRegisterActivity extends AbstractActivity<UserControl>
 		implements Listener,View.OnClickListener{
 	
 	private boolean isFromRegister = false;
@@ -78,10 +79,10 @@ public class LoginAndRegisterActivity extends AbstractActivity
 				return;
 			}
 			showProgressDialog("注册中...");
-//			mControl.registeAsyn(mRegisterUserMobileEdit.getText().toString(),
-//					mRegisterUserPasswordEdit.getText().toString(),
-//					mRegisterUserVerificationEdit.getEditableText()
-//							.toString());
+			mControl.registeAsyn(mRegisterUserMobileEdit.getText().toString(),
+					mRegisterUserPasswordEdit.getText().toString(),
+					mRegisterUserVerificationEdit.getEditableText()
+							.toString());
 		}
 	};
 	LaunchListener LAUNCH_LOGIN = new LaunchListener(){
@@ -93,8 +94,8 @@ public class LoginAndRegisterActivity extends AbstractActivity
 				return;
 			}
 			showProgressDialog("登录中...");
-//			mControl.loginAsyn(mLoginUserMobileEdit.getText().toString(),
-//					mLoginUserPasswordEdit.getText().toString());
+			mControl.loginAsyn(mLoginUserMobileEdit.getText().toString(),
+					mLoginUserPasswordEdit.getText().toString());
 		}
 	};
 	private LaunchListener mLaunchListener =  LAUNCH_LOGIN;
@@ -189,7 +190,7 @@ public class LoginAndRegisterActivity extends AbstractActivity
 //			FindPasswordActivity.startActivity(LoginAndRegisterActivity.this);
 			break;
 		case R.id.launch:
-//			InputUtils.hidSoftInput(LoginAndRegisterActivity.this);//强制关闭软键盘
+			InputUtils.hidSoftInput(LoginAndRegisterActivity.this);//强制关闭软键盘
 			mLaunchListener.onLaunch();
 			break;
 		case	R.id.get_verification:
@@ -201,7 +202,6 @@ public class LoginAndRegisterActivity extends AbstractActivity
 	}
 	
 	private void getVerification(String mobile){
-		/*
 		if(!MobileUtil.isMobileNO(mobile)){
 			Toast.makeText(LoginAndRegisterActivity.this, "输入的号码格式有误", 0).show();
 			return;
@@ -211,7 +211,6 @@ public class LoginAndRegisterActivity extends AbstractActivity
 		msg.arg1 = REFRESH_TIEM;
 		msg.arg2 = 60;
 		mHandler.sendMessage(msg);
-		*/
 	}
 	
 	private void clearMessge(){
@@ -221,22 +220,18 @@ public class LoginAndRegisterActivity extends AbstractActivity
 	}
 	
 	private boolean checkInputData4Registe(){
-		/*
 		if(!MobileUtil.isMobileNO(mRegisterUserMobileEdit.getText().toString()))
 			return false;
 		if(TextUtils.isEmpty(mRegisterUserPasswordEdit.getText().toString()) || TextUtils.isEmpty(mRegisterUserVerificationEdit.getText().toString()) )
 			return false;
-			*/
 		return true;
 	}
 	
 	private boolean checkInputData4Login(){
-		/*
 		if(!MobileUtil.isMobileNO(mLoginUserMobileEdit.getText().toString()))
 			return false;
 		if(TextUtils.isEmpty(mLoginUserMobileEdit.getText().toString()) )
 			return false;
-			*/
 		return true;
 	}
 	
@@ -254,13 +249,11 @@ public class LoginAndRegisterActivity extends AbstractActivity
 	}
 	
 	public void registeAsynCallBack(){
-//		dismissDialog();
-//		Toast.makeText(LoginAndRegisterActivity.this, "注册成功", 0).show();
-		/*
+		dismissDialog();
+		Toast.makeText(LoginAndRegisterActivity.this, "注册成功", 0).show();
 		mControl.loginAsyn(mRegisterUserMobileEdit.getText().toString(),
 				mRegisterUserPasswordEdit.getText().toString());
 		isFromRegister = true;
-		*/
 	}
 	public void registeAsynExceptionCallBack(){
 		dismissDialog();
