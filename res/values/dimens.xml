@@ -16,4 +16,6 @@
     <dimen name="item_margin_normal">15dp</dimen>
     
     <dimen name="wifi_card_nomal">56dp</dimen>
+    
+    
 </resources>

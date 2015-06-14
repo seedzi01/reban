@@ -18,4 +18,7 @@
     <string name="wifi_share_or_not">是否共享wifi</string>
     
     <string name="confirm">确  认</string>
+    
+    <string name="discount">优惠</string>
+    <string name="hire">招聘</string>
 </resources>

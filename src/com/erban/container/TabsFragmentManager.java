@@ -10,7 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.erban.R;
-import com.erban.levelone.MerchantFragment;
+import com.erban.levelone.ShopContainerFragment;
 import com.erban.levelone.TreasureFragment;
 import com.erban.levelone.UserFragment;
 import com.erban.levelone.WifiFragment;
@@ -31,7 +31,7 @@ public class TabsFragmentManager {
 		    fragment = new WifiFragment();
 			break;
 		case 1:
-		    fragment = new MerchantFragment();
+		    fragment = new ShopContainerFragment();
 			break;
 		case 2:
 		    fragment = new TreasureFragment();

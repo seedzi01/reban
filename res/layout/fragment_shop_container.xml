@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_heigt"
+        android:background="#28b937"
+        android:orientation="horizontal"
+        android:weightSum="2" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/shop_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:text="@string/discount"
+                android:textColor="@color/font_title_color"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/shop_white_line"
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_alignLeft="@id/shop_tab"
+                android:layout_alignRight="@id/shop_tab"
+                android:layout_below="@id/shop_tab"
+                android:layout_marginTop="2dp"
+                android:background="@color/color_white" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <TextView
+                android:id="@+id/hire_tab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:text="@string/hire"
+                android:textColor="@color/font_title_color"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/hire_white_line"
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_alignLeft="@id/hire_tab"
+                android:layout_alignRight="@id/hire_tab"
+                android:layout_below="@id/hire_tab"
+                android:layout_marginTop="2dp"
+                android:background="@color/color_white" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

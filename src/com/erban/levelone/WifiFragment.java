@@ -24,104 +24,106 @@ import com.erban.wifi.WifiStateListener;
 
 public class WifiFragment extends Fragment {
 
-	private ListView wifiListView;
-	private ImageView wifiSwitcher;
-	private WifiStatusArea statusView;
+    private ListView wifiListView;
+    private ImageView wifiSwitcher;
+    private WifiStatusArea statusView;
 
-	private boolean enable;
+    private boolean enable;
 
-	private WifiAdapter adapter;
+    private WifiAdapter adapter;
 
-	private WifiStateListener statusListener = new WifiStateListener() {
+    private WifiStateListener statusListener = new WifiStateListener() {
 
-		@Override
-		public void onWifiScanSuccess() {
-			updateWifis();
-		}
+        @Override
+        public void onWifiScanSuccess() {
+            updateWifis();
+        }
 
-		@Override
-		public void onDevicesStateChanged(DevicesState state) {
-			updateWifiStatus();
-		}
+        @Override
+        public void onDevicesStateChanged(DevicesState state) {
+            updateWifiStatus();
+        }
 
-		@Override
-		public void onWifiStateChanged() {
-			updateWifiStatus();
-		}
-	};
+        @Override
+        public void onWifiStateChanged() {
+            updateWifiStatus();
+        }
+    };
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		return ViewUtils.newInstance(inflater, container,
-				R.layout.fragment_wifi);
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState) {
+        return ViewUtils.newInstance(inflater, container,
+                R.layout.fragment_wifi);
+    }
 
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-		PhoneWifiManager.getInstance(getActivity()).addListener(statusListener);
-		PhoneWifiManager.getInstance(getActivity()).startScan();
+        PhoneWifiManager.getInstance(getActivity()).addListener(statusListener);
+        PhoneWifiManager.getInstance(getActivity()).startScan();
 
-		wifiListView = (ListView) view.findViewById(R.id.wifi_listview);
-		wifiSwitcher = (ImageView) view.findViewById(R.id.wifi_switcher);
-		initListView();
-		wifiSwitcher.setOnClickListener(new View.OnClickListener() {
+        wifiListView = (ListView) view.findViewById(R.id.wifi_listview);
+        wifiSwitcher = (ImageView) view.findViewById(R.id.wifi_switcher);
+        initListView();
+        wifiSwitcher.setOnClickListener(new View.OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				toggle();
-			}
-		});
-		// load wifis scan.
-		updateWifis();
-		updateWifiStatus();
-	}
+            @Override
+            public void onClick(View v) {
+                toggle();
+            }
+        });
+        // load wifis scan.
+        updateWifis();
+        updateWifiStatus();
+    }
 
-	private void initListView() {
-		statusView = (WifiStatusArea) ViewUtils.newInstance(wifiListView,
-				R.layout.view_wifi_function_area);
-		wifiListView.addHeaderView(statusView);
-		adapter = new WifiAdapter();
-		wifiListView.setAdapter(adapter);
-	}
+    private void initListView() {
+        statusView = (WifiStatusArea) ViewUtils.newInstance(wifiListView,
+                R.layout.view_wifi_function_area);
+        wifiListView.addHeaderView(statusView);
+        adapter = new WifiAdapter();
+        wifiListView.setAdapter(adapter);
+    }
 
-	private void toggle() {
-		enable = !enable;
-		wifiSwitcher.setImageResource(enable ? R.drawable.view_switcher_on
-				: R.drawable.view_switcher_off);
-	}
+    private void toggle() {
+        enable = !enable;
+        wifiSwitcher.setImageResource(enable ? R.drawable.view_switcher_on
+                : R.drawable.view_switcher_off);
+    }
 
-	private void updateWifis() {
-		List<PhoneWifiInfo> wifiInfos = PhoneWifiManager.getInstance(getActivity())
-				.getLastestWifis();
-		if (adapter != null && wifiInfos != null) {
-			List<PhoneWifiInfo> noPasswords = new ArrayList<PhoneWifiInfo>();
-			List<PhoneWifiInfo> needPasswords = new ArrayList<PhoneWifiInfo>();
-			for (PhoneWifiInfo wifiInfo : wifiInfos) {
-				if (SecurityType.NONE.equals(wifiInfo.getSecurityType())) {
-					noPasswords.add(wifiInfo);
-				} else {
-					needPasswords.add(wifiInfo);
-				}
-			}
-			// mock data.
-			adapter.setWifiInfos(noPasswords, needPasswords);
-		}
-	}
+    private void updateWifis() {
+        List<PhoneWifiInfo> wifiInfos = PhoneWifiManager.getInstance(
+                getActivity()).getLastestWifis();
+        if (adapter != null && wifiInfos != null) {
+            List<PhoneWifiInfo> noPasswords = new ArrayList<PhoneWifiInfo>();
+            List<PhoneWifiInfo> needPasswords = new ArrayList<PhoneWifiInfo>();
+            for (PhoneWifiInfo wifiInfo : wifiInfos) {
+                if (SecurityType.NONE.equals(wifiInfo.getSecurityType())) {
+                    noPasswords.add(wifiInfo);
+                } else {
+                    needPasswords.add(wifiInfo);
+                }
+            }
+            // mock data.
+            adapter.setWifiInfos(noPasswords, needPasswords);
+        }
+    }
 
-	private void updateWifiStatus() {
-		if (statusView != null) {
-			
-			if (!PhoneWifiManager.isConnected(getActivity(), ConnectivityManager.TYPE_WIFI)) {
-				statusView.showDisConnectedStatus();
-				return;
-			}
-			PhoneWifiInfo wifiInfo = PhoneWifiManager.getInstance(getActivity()).getConnectedWifi();
-			if (wifiInfo != null) {
-				statusView.showConnectedStatus(wifiInfo.getWifiName());
-			}
-		}
-	}
+    private void updateWifiStatus() {
+        if (statusView != null) {
+
+            if (!PhoneWifiManager.isConnected(getActivity(),
+                    ConnectivityManager.TYPE_WIFI)) {
+                statusView.showDisConnectedStatus();
+                return;
+            }
+            PhoneWifiInfo wifiInfo = PhoneWifiManager
+                    .getInstance(getActivity()).getConnectedWifi();
+            if (wifiInfo != null) {
+                statusView.showConnectedStatus(wifiInfo.getWifiName());
+            }
+        }
+    }
 }

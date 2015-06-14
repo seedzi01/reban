@@ -26,61 +26,65 @@ public class PhoneWifiManager {
     private static volatile PhoneWifiManager instance;
 
     private WifiManager wifiManager;
-    private List<WeakReference<WifiStateListener>> listeners
-            = new ArrayList<WeakReference<WifiStateListener>>();
+    private List<WeakReference<WifiStateListener>> listeners = new ArrayList<WeakReference<WifiStateListener>>();
 
-    private WifiStateListener innerListener =
-            new WifiStateListener() {
-                @Override
-                public void onWifiScanSuccess() {
-                    Iterator<WeakReference<WifiStateListener>> iterator = listeners.iterator();
-                    while (iterator.hasNext()) {
-                        WeakReference<WifiStateListener> ref = iterator.next();
-                        if (ref.get() != null) {
-                            ref.get().onWifiScanSuccess();
-                        } else {
-                            iterator.remove();
-                        }
-                    }
+    private WifiStateListener innerListener = new WifiStateListener() {
+        @Override
+        public void onWifiScanSuccess() {
+            Iterator<WeakReference<WifiStateListener>> iterator = listeners
+                    .iterator();
+            while (iterator.hasNext()) {
+                WeakReference<WifiStateListener> ref = iterator.next();
+                if (ref.get() != null) {
+                    ref.get().onWifiScanSuccess();
+                } else {
+                    iterator.remove();
                 }
+            }
+        }
 
-                @Override
-                public void onDevicesStateChanged(DevicesState state) {
-                    Iterator<WeakReference<WifiStateListener>> iterator = listeners.iterator();
-                    while (iterator.hasNext()) {
-                        WeakReference<WifiStateListener> ref = iterator.next();
-                        if (ref.get() != null) {
-                            ref.get().onDevicesStateChanged(state);
-                        } else {
-                            iterator.remove();
-                        }
-                    }
+        @Override
+        public void onDevicesStateChanged(DevicesState state) {
+            Iterator<WeakReference<WifiStateListener>> iterator = listeners
+                    .iterator();
+            while (iterator.hasNext()) {
+                WeakReference<WifiStateListener> ref = iterator.next();
+                if (ref.get() != null) {
+                    ref.get().onDevicesStateChanged(state);
+                } else {
+                    iterator.remove();
                 }
+            }
+        }
 
-				@Override
-				public void onWifiStateChanged() {
-					Iterator<WeakReference<WifiStateListener>> iterator = listeners.iterator();
-                    while (iterator.hasNext()) {
-                        WeakReference<WifiStateListener> ref = iterator.next();
-                        if (ref.get() != null) {
-                            ref.get().onWifiStateChanged();
-                        } else {
-                            iterator.remove();
-                        }
-                    }
-				}
-            };
+        @Override
+        public void onWifiStateChanged() {
+            Iterator<WeakReference<WifiStateListener>> iterator = listeners
+                    .iterator();
+            while (iterator.hasNext()) {
+                WeakReference<WifiStateListener> ref = iterator.next();
+                if (ref.get() != null) {
+                    ref.get().onWifiStateChanged();
+                } else {
+                    iterator.remove();
+                }
+            }
+        }
+    };
 
     private PhoneWifiManager(Context context) {
-        wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        wifiManager = (WifiManager) context
+                .getSystemService(Context.WIFI_SERVICE);
         WifiReceiver.setChangeListener(innerListener);
         WifiReceiver.initReceiver(context);
     }
 
     /**
-     * Double - Check and provide stable access function to get PhoneWifiManager instance.
+     * Double - Check and provide stable access function to get PhoneWifiManager
+     * instance.
      *
-     * @param context application context.
+     * @param context
+     *            application context.
      * @return phoneWifiManager instance.
      */
     public static PhoneWifiManager getInstance(Context context) {
@@ -118,44 +122,86 @@ public class PhoneWifiManager {
 
     /**
      * watch wifi status change.
+     * 
      * @param listener
      */
     public void addListener(WifiStateListener listener) {
-    	if (listener == null) {
-    		return;
-    	}
-    	listeners.add(new WeakReference<WifiStateListener>(listener));
-	}
+        if (listener == null) {
+            return;
+        }
+        listeners.add(new WeakReference<WifiStateListener>(listener));
+    }
 
     /**
      * check current network type is connected.
      * 
-     * @param context app context.
-     * @param netWorkType type of network. ConnectivityManager.TYPE_WIFI or ConnectivityManager.TYPE_MOBILE
+     * @param context
+     *            app context.
+     * @param netWorkType
+     *            type of network. ConnectivityManager.TYPE_WIFI or
+     *            ConnectivityManager.TYPE_MOBILE
      * @return connected or not.
      */
     public static boolean isConnected(Context context, int netWorkType) {
-    	ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-    	NetworkInfo info = connManager.getNetworkInfo(netWorkType);
-    	return info != null && info.isConnected();
+        ConnectivityManager connManager = (ConnectivityManager) context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = connManager.getNetworkInfo(netWorkType);
+        return info != null && info.isConnected();
     }
 
+    /**
+     * If wifi is connected currently, get connected wifi infos.
+     * 
+     * @return connected wifi info.
+     */
     public PhoneWifiInfo getConnectedWifi() {
-    	WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-    	List<WifiConfiguration> configurations = wifiManager.getConfiguredNetworks();
-    	if (wifiInfo == null || configurations == null) {
-    		return null;
-    	}
-    	WifiConfiguration matched = null;
-    	for (WifiConfiguration item : configurations) {
-    		if (item.SSID.equals(wifiInfo.getSSID())) {
-    			matched = item;
-    			break;
-    		}
-    	}
-    	if (matched == null) {
-    		return null;
-    	}
-    	return new WifiInfoWrapper(wifiInfo, matched);
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        List<WifiConfiguration> configurations = wifiManager
+                .getConfiguredNetworks();
+        if (wifiInfo == null || configurations == null) {
+            return null;
+        }
+        WifiConfiguration matched = null;
+        for (WifiConfiguration item : configurations) {
+            if (item.SSID.equals(wifiInfo.getSSID())) {
+                matched = item;
+                break;
+            }
+        }
+        if (matched == null) {
+            return null;
+        }
+        return new WifiInfoWrapper(wifiInfo, matched);
     }
+
+    private static String wrapQuote(String origin) {
+        return "\"" + origin + "\"";
+    }
+
+    public void connect(String ssid, String password, SecurityType type) {
+        WifiConfiguration conf = new WifiConfiguration();
+        conf.SSID = wrapQuote(ssid);
+        switch (type) {
+        case WPA:
+        case WPA2:
+        case WPA_WPA2:
+            conf.preSharedKey = "\""+ password +"\"";
+        case WEP:
+        case PSK:
+        case EAP:
+            conf.wepKeys[0] = wrapQuote(password);
+            conf.wepTxKeyIndex = 0;
+            conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+            conf.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.WEP40);
+            break;
+        case NONE:
+        default:
+            conf.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+            break;
+        }
+        wifiManager.addNetwork(conf);
+        
+        // remember wifi.
+    }
+
 }
