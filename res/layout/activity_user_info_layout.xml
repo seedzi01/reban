@@ -14,7 +14,47 @@
     
     <include android:id="@+id/titlebar"  layout="@layout/title_bar_layout"/>
     <!-- 头像 -->
-    <include android:id="@+id/item1"  layout="@layout/item_user_info_layout"/>
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:background="@color/color_white">
+        <TextView 
+            android:layout_marginLeft="@dimen/item_margin_normal"
+            android:id="@+id/title"
+            android:text="头像"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+         <ImageView 
+            android:layout_marginRight="@dimen/item_margin_normal"
+            android:id="@+id/tag"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/right_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+         
+        <com.erban.widget.CircleImageView
+            android:id="@+id/user_icon"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            app:border_width="3dp"
+            app:border_color="#ffffff"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/tag"
+            android:layout_marginRight="@dimen/item_margin_normal"
+            android:src="@drawable/user_default_head_img"/>  
+            <View 
+            android:id="@+id/division"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentBottom="true"
+            android:background="#f2f2f2"
+            android:layout_height="1px"
+            android:layout_width="match_parent"
+            />
+	</RelativeLayout>
+	
     <!-- 昵称 -->
     <include android:id="@+id/item2"  layout="@layout/item_user_info_layout"/>
     <!-- 姓名 -->

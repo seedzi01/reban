@@ -13,12 +13,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +28,8 @@ import android.widget.Toast;
 
 import com.erban.AbstractActivity;
 import com.erban.R;
+import com.erban.bean.User.UserInfo;
+import com.erban.util.UserUtil;
 import com.erban.widget.CircleImageView;
 import com.erban.widget.TitleBar;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -78,6 +82,8 @@ public class UserInfoActivity extends AbstractActivity implements View.OnClickLi
 	private void initView(){
 		mTitlebar = (TitleBar) findViewById(R.id.titlebar);
 		mTitlebar.setTitle("用戶信息");
+		mTitlebar.setBackgroundColor(Color.parseColor("#28b937"));
+		mTitlebar.findViewById(R.id.right_root).setVisibility(View.GONE);
 		mTitlebar.setBackListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -99,6 +105,22 @@ public class UserInfoActivity extends AbstractActivity implements View.OnClickLi
 //		vipTxtTv = (TextView) findViewById(R.id.vip_txt);
 //		userTypeDesc = (TextView) findViewById(R.id.user_type_desc);
 //		costTv = (TextView) findViewById(R.id.cost);
+		UserInfo user = UserUtil.getUser().getUserInfo();
+		initViewItem((ViewGroup)findViewById(R.id.item2), "昵称", user.getUsername());
+		initViewItem((ViewGroup)findViewById(R.id.item3), "姓名", user.getUsername());
+		initViewItem((ViewGroup)findViewById(R.id.item4), "性别", user.getUsername());
+		initViewItem((ViewGroup)findViewById(R.id.item5), "出生年月", user.getUsername());
+		initViewItem((ViewGroup)findViewById(R.id.item6), "所在地", user.getUsername());
+		initViewItem((ViewGroup)findViewById(R.id.item7), "手机", user.getUsername());
+		initViewItem((ViewGroup)findViewById(R.id.item8), "QQ", user.getUsername());
+	}
+	
+	private void initViewItem(ViewGroup viewGroup,String tilte, String data){
+		TextView title = (TextView) viewGroup.findViewById(R.id.title);
+		TextView value = (TextView) viewGroup.findViewById(R.id.value);
+		title.setText(tilte);
+		value.setText(data);
+		viewGroup.setOnClickListener(this);
 	}
 	
 	private void initData(){
@@ -169,6 +191,9 @@ public class UserInfoActivity extends AbstractActivity implements View.OnClickLi
              intent.setAction(Intent.ACTION_GET_CONTENT);   
              /* 取得相片后返回本画面 */  
              startActivityForResult(intent, 1);
+			break;
+		case R.id.item2:
+			UserInfoModifyActivity.startActivity(this,"昵称");
 			break;
 		default:
 			break;
@@ -264,15 +289,15 @@ public class UserInfoActivity extends AbstractActivity implements View.OnClickLi
             }
         },500);
 	}
-	
+	/*
 	@Override
 	public void onBackPressed() {
-
+		
 	    if(showDialog4UserUpload()){
 	    }else{
 	        super.onBackPressed();
 	    }
-	}
+	}*/
 	
     // =========================================== user upload =================================================
 	/**
@@ -357,7 +382,7 @@ public class UserInfoActivity extends AbstractActivity implements View.OnClickLi
 	    });  
 	    builder.create().show();
 	    */
-	    return true;
+	    return false;
 	}
 
 	

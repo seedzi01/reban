@@ -6,6 +6,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.yuekuapp.proxy.ControlFactory;
 
 import android.app.Activity;
 import android.app.Application;
@@ -26,8 +27,6 @@ public class WifiApplication extends Application{
         return instance;
     }
     
-    private WifiApplication(){}
-
     private WifiApi api;
     
     @Override
@@ -35,7 +34,7 @@ public class WifiApplication extends Application{
         super.onCreate();
         instance = this;
         api = new WifiApi("Wifi1.0", this);
-//        ControlFactory.init(this);
+        ControlFactory.init(this);
         initImageLoader(this);
     }
 

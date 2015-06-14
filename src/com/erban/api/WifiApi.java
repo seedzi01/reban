@@ -48,11 +48,11 @@ public class WifiApi {
     /**
      * 注册
      */
-    public NetResult userRegister(String userid,String passwd,String rdcode) 
+    public NetResult userRegister(String telno,String passwd,String rdcode) 
             throws XiaoMeiCredentialsException,XiaoMeiIOException,XiaoMeiJSONException ,XiaoMeiOtherException {
-        BasicNameValuePair[] values = {new BasicNameValuePair("userid", userid) ,
-                new BasicNameValuePair("passwd", passwd),
-                new BasicNameValuePair("rdcode", rdcode),
+        BasicNameValuePair[] values = {new BasicNameValuePair("telno", telno) ,
+                new BasicNameValuePair("pwd", passwd),
+                new BasicNameValuePair("randcode", rdcode),
                 new BasicNameValuePair("uptime", String.valueOf(System.currentTimeMillis()/1000))} ; 
         HttpPost httpPost = mHttpApi.createHttpPost(urlManager.getUserRegisterUrl(),
                 values[0],
@@ -68,8 +68,8 @@ public class WifiApi {
      */
     public User userLogin(String userid,String passwd) 
             throws XiaoMeiCredentialsException,XiaoMeiIOException,XiaoMeiJSONException ,XiaoMeiOtherException {
-        BasicNameValuePair[] values = {new BasicNameValuePair("userid", userid) ,
-                new BasicNameValuePair("passwd", passwd),
+        BasicNameValuePair[] values = {new BasicNameValuePair("telno", userid) ,
+                new BasicNameValuePair("pwd", passwd),
                 new BasicNameValuePair("uptime", String.valueOf(System.currentTimeMillis()/1000))} ; 
         HttpPost httpPost = mHttpApi.createHttpPost(urlManager.getUserLoginUrl(),
                 values[0],
@@ -114,9 +114,9 @@ public class WifiApi {
      */
     public NetResult findPassword(String userid,String passwd,String rdcode)
         throws XiaoMeiCredentialsException,XiaoMeiIOException,XiaoMeiJSONException ,XiaoMeiOtherException {
-        BasicNameValuePair[] values = {new BasicNameValuePair("userid", userid) ,
-                new BasicNameValuePair("passwd", passwd),
-                new BasicNameValuePair("rdcode", rdcode),
+        BasicNameValuePair[] values = {new BasicNameValuePair("telno", userid) ,
+                new BasicNameValuePair("pwd", passwd),
+                new BasicNameValuePair("randcode", rdcode),
                 new BasicNameValuePair("uptime", String.valueOf(System.currentTimeMillis()/1000))} ; 
         HttpPost httpPost = mHttpApi.createHttpPost(urlManager.getFindPwdUrl(),
                 values[0],
