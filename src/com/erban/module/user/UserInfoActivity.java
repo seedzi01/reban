@@ -93,8 +93,8 @@ public class UserInfoActivity extends AbstractActivity implements View.OnClickLi
 			}
 		});
 //		findViewById(R.id.loginout).setOnClickListener(this);
-//		mUserIcon = (CircleImageView) findViewById(R.id.user_icon);
-//		mUserIcon.setOnClickListener(this);
+		mUserIcon = (CircleImageView) findViewById(R.id.user_icon);
+		mUserIcon.setOnClickListener(this);
 //		
 //		nickNameEd = (EditText) findViewById(R.id.nick_name);
 //		linkEd = (EditText) findViewById(R.id.link);

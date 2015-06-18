@@ -25,5 +25,7 @@ public class HttpUrlManager {
     String getFindPwdUrl(){
         return HOST + "/resetpwd";
     }
+    
+ // ========================== 登录与注册 =================================
 }
 

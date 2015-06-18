@@ -14,6 +14,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.dx.util.FileUtils;
 import com.erban.api.builder.NetResultBuilder;
 import com.erban.api.builder.UserLoginBuilder;
 import com.erban.api.builder.UserRegisterBuilder;
@@ -41,7 +42,7 @@ public class WifiApi {
                 clientVersion);
         urlManager = new HttpUrlManager();
     }
- // ========================================================================================
+    // ========================================================================================
     // 用户注册与登录(NET)
     // ========================================================================================
     
@@ -125,6 +126,23 @@ public class WifiApi {
                 values[3],
                 new BasicNameValuePair("fig", Security.get32MD5Str(values)));
         return  mHttpApi.doHttpRequestObject(httpPost, new NetResultBuilder());
+    }
+    // ========================================================================================
+    // 用户资料(NET)
+    // ========================================================================================
+    /**
+     * 更新用户头像
+     * @throws Exception 
+     */
+    public String uploadFile(String token,String filePath) throws Exception{
+        BasicNameValuePair[] values = {
+                new BasicNameValuePair("token", token),
+                new BasicNameValuePair("uptime", String.valueOf(System.currentTimeMillis()/1000))};
+        Map<String,String> params = new HashMap<String, String>();
+        params.put("token", token);
+        params.put("uptime", String.valueOf(System.currentTimeMillis()/1000));
+        params.put("fig",  Security.get32MD5Str(values));
+        return new UploadFIleBuilder().build(new JSONObject(FileUtils.uploadSubmit(urlManager.upoadAvatarUrl(),params,new File(filePath))));
     }
     
 }
