@@ -31,7 +31,7 @@ public class ScanResultWrapper implements PhoneWifiInfo {
 
     @Override
 	public SecurityType getSecurityType() {
-        return WifiUtils.formatSecurityType(scanResult.capabilities);
+        return WifiUtil.formatSecurityType(scanResult.capabilities);
     }
 
     @Override
