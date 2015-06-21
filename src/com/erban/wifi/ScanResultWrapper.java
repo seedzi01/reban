@@ -11,31 +11,31 @@ import android.text.TextUtils;
  */
 public class ScanResultWrapper implements PhoneWifiInfo {
 
-	private static final long serialVersionUID = 247088067920540566L;
+    private static final long serialVersionUID = 247088067920540566L;
 
-	private final ScanResult scanResult;
+    private final ScanResult scanResult;
 
     public ScanResultWrapper(ScanResult scanResult) {
         this.scanResult = scanResult;
     }
 
     @Override
-	public String getWifiName() {
+    public String getWifiName() {
         return scanResult.SSID;
     }
 
     @Override
-	public String getBSSID() {
+    public String getBSSID() {
         return scanResult.BSSID;
     }
 
     @Override
-	public SecurityType getSecurityType() {
+    public SecurityType getSecurityType() {
         return WifiUtil.formatSecurityType(scanResult.capabilities);
     }
 
     @Override
-	public int getSignalStrengthPercent() {
+    public int getSignalStrengthPercent() {
         int percent = 0;
         try {
             percent = WifiManager.calculateSignalLevel(scanResult.level, 100);
