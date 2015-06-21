@@ -22,8 +22,8 @@ public class ShopContainerFragment extends Fragment {
     private View shopLine;
     private View hireLine;
 
-    private ShopFragment shopFragment;
-    private HireFragment hireFragment;
+    private DiscountShopFragment shopFragment;
+    private HireShopFragment hireFragment;
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,16 +67,16 @@ public class ShopContainerFragment extends Fragment {
         Fragment displayFragment;
         if (isShop) {
             if (shopFragment == null) {
-                shopFragment = new ShopFragment();
+                shopFragment = new DiscountShopFragment();
             }
             displayFragment = shopFragment;
         } else {
             if (hireFragment == null) {
-                hireFragment = new HireFragment();
+                hireFragment = new HireShopFragment();
             }
             displayFragment = hireFragment;
         }
-        getFragmentManager().beginTransaction()
+        getChildFragmentManager().beginTransaction()
             .replace(R.id.fragment_container, displayFragment)
             .commit();
     }

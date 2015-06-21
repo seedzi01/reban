@@ -4,46 +4,52 @@ import java.io.Serializable;
 
 public class NormalGoods implements Serializable {
 
-	private static final long serialVersionUID = -2635270951888214909L;
-	private long id;
-	private String goods;
-	private String logo;
-	private String dprice;
-	private String price;
-	private boolean groupby;
-	private boolean coupon;
-	private String gets;
+    private static final long serialVersionUID = -2635270951888214909L;
 
-	public long getId() {
-		return id;
-	}
+    public long id;
+    public String goods;
+    public String logo;
+    public String dprice;
+    public String price;
+    public boolean groupby;
+    public boolean coupon;
+    public String gets;
+    public String desc;
 
-	public String getGoods() {
-		return goods;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public String getLogo() {
-		return logo;
-	}
+    public String getGoods() {
+        return goods;
+    }
 
-	public String getDprice() {
-		return dprice;
-	}
+    public String getLogo() {
+        return logo;
+    }
 
-	public String getPrice() {
-		return price;
-	}
+    public String getDprice() {
+        return dprice;
+    }
 
-	public boolean isGroupby() {
-		return groupby;
-	}
+    public String getPrice() {
+        return price;
+    }
 
-	public boolean isCoupon() {
-		return coupon;
-	}
+    public boolean isGroupby() {
+        return groupby;
+    }
 
-	public String getGets() {
-		return gets;
-	}
+    public boolean isCoupon() {
+        return coupon;
+    }
+
+    public String getGets() {
+        return gets;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
 
 }
