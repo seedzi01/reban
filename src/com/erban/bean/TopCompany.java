@@ -4,11 +4,11 @@ import java.io.Serializable;
 
 public class TopCompany implements Serializable {
 
-    private static final long serialVersionUID = -7563531291559262093L;
+    private static final long serialVersionUID = 6991026210027656832L;
 
     public long id;
     public String logo;
-    public String name;
+    public String firm;
     public String detail;
     public String salary;
 

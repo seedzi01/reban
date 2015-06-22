@@ -126,5 +126,6 @@ public class WifiApi {
                 new BasicNameValuePair("fig", Security.get32MD5Str(values)));
         return  mHttpApi.doHttpRequestObject(httpPost, new NetResultBuilder());
     }
+
     
 }

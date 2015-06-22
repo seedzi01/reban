@@ -51,10 +51,10 @@ public class HireAdapter extends BaseAdapter {
         NormalCompany item = getItem(position);
         viewHolder.title.setText(item.title);
         viewHolder.address.setText(item.address);
-        viewHolder.date.setText(item.date);
+        viewHolder.date.setText(item.uptime);
         viewHolder.salary.setText(item.salary);
-        viewHolder.detail.setText(item.detail);
-        viewHolder.company.setText(item.company);
+        viewHolder.detail.setText(item.exp);
+        viewHolder.company.setText(item.firm);
         return convertView;
     }
 

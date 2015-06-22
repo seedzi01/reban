@@ -1,5 +1,7 @@
 package com.erban;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.erban.api.WifiApi;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -71,4 +73,9 @@ public class WifiApplication extends Application{
     public Activity getCurrentActivity(){
         return mCurrentActivity;
     } 
+
+    public static RequestQueue getRequestQueue() {
+        return Volley.newRequestQueue(instance);
+    }
+
 }

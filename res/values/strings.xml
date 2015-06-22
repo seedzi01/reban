@@ -29,4 +29,6 @@
     <string name="zoom">区域</string>
     <string name="pay">薪水</string>
 
+    <string name="fetch_tips">获取数据失败</string>
+    
 </resources>
