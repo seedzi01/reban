@@ -7,6 +7,7 @@
         <attr name="border_color" format="color" />
     </declare-styleable>
     <!-- 下拉刷新 -->
+    
     <declare-styleable name="PullToRefresh">
         <attr name="ptrAdapterViewBackground" format="reference|color" />
         <attr name="ptrHeaderBackground" format="reference|color" />
