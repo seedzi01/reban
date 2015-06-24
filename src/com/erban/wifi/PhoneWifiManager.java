@@ -180,64 +180,70 @@ public class PhoneWifiManager {
 
     public void connect(String ssid, String password, SecurityType type) {
         WifiConfiguration conf = generateConfig(ssid, type, password);
-        
+
         if (conf == null) {
-        	Log.d(TAG, "failed to know how to genreate wifi info.");
+            Log.d(TAG, "failed to know how to genreate wifi info.");
         }
-        
+
         // 如果wifi已经被记录过？
         int networkId = wifiManager.addNetwork(conf);
-        
+
         // remember wifi.
         wifiManager.enableNetwork(networkId, true);
-        wifiManager.saveConfiguration();
+        wifiManager.saveConfiguration(); 
         // reconnect.
         wifiManager.reconnect();
     }
 
-    public static WifiConfiguration generateConfig(String ssid, SecurityType security, String password) {
+    public static WifiConfiguration generateConfig(String ssid,
+            SecurityType security, String password) {
         WifiConfiguration wifiConfiguration = new WifiConfiguration();
         wifiConfiguration.SSID = wrapQuote(ssid);
         // wifiConfiguration.BSSID = accessPoint.bssid;
         // 不能设置BSSID！ 否则设置了bssid就会强制选择这个bssid 的ap
         switch (security) {
-          case NONE:
-            wifiConfiguration.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
+        case NONE:
+            wifiConfiguration.allowedKeyManagement
+                    .set(WifiConfiguration.KeyMgmt.NONE);
             break;
-          case WEP:
-            wifiConfiguration.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
-            wifiConfiguration.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.OPEN);
-            wifiConfiguration.allowedAuthAlgorithms.set(WifiConfiguration.AuthAlgorithm.SHARED);
+        case WEP:
+            wifiConfiguration.allowedKeyManagement
+                    .set(WifiConfiguration.KeyMgmt.NONE);
+            wifiConfiguration.allowedAuthAlgorithms
+                    .set(WifiConfiguration.AuthAlgorithm.OPEN);
+            wifiConfiguration.allowedAuthAlgorithms
+                    .set(WifiConfiguration.AuthAlgorithm.SHARED);
 
             if (password == null) {
-              password = "";
+                password = "";
             }
 
             int length = password.length();
 
             // WEP-40, WEP-104, and 256-bit WEP (WEP-232?)
-            if ((length == 10 || length == 26 || length == 58) &&
-                password.matches("[0-9A-Fa-f]*")) {
-              wifiConfiguration.wepKeys[0] = password;
+            if ((length == 10 || length == 26 || length == 58)
+                    && password.matches("[0-9A-Fa-f]*")) {
+                wifiConfiguration.wepKeys[0] = password;
             } else {
-              wifiConfiguration.wepKeys[0] = '"' + password + '"';
+                wifiConfiguration.wepKeys[0] = '"' + password + '"';
             }
 
             break;
 
-          case PSK:
-            wifiConfiguration.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.WPA_PSK);
+        case PSK:
+            wifiConfiguration.allowedKeyManagement
+                    .set(WifiConfiguration.KeyMgmt.WPA_PSK);
 
             if (password.matches("[0-9A-Fa-f]{64}")) {
-              wifiConfiguration.preSharedKey = password;
+                wifiConfiguration.preSharedKey = password;
             } else {
-              wifiConfiguration.preSharedKey = '"' + password + '"';
+                wifiConfiguration.preSharedKey = '"' + password + '"';
             }
             break;
-		default:
-			break;
+        default:
+            break;
         }
         return wifiConfiguration;
-      }
-    
+    }
+
 }

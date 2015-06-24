@@ -1,6 +1,5 @@
 package com.erban.levelone;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
@@ -60,17 +59,6 @@ public class HireShopFragment extends BaseShopFragment {
         HireAdapter adapter = new HireAdapter();
         adapter.setItems(companies);
         shopListView.setAdapter(adapter);
-    }
-
-    private NormalCompany generateMockCompany() {
-        NormalCompany company = new NormalCompany();
-        company.title = "销售招聘";
-        company.salary = "5000-10000元";
-        company.exp = "5人 焊工，钳工";
-        company.firm = "北京味多美公司";
-        company.address = "国贸-北京";
-        company.uptime = "06-15";
-        return company;
     }
 
     public void fetchHireList() {

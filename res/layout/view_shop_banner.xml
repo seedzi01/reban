@@ -3,18 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="160dp" >
 
-    <ImageView
-        android:id="@+id/banner_bg"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"/>
+        android:foreground="@drawable/fore_dark_alpha_fg"
+        >
+        <ImageView
+            android:id="@+id/banner_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+    </FrameLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp">
+        android:paddingRight="15dp" >
 
         <TextView
             android:id="@+id/origin_price"
@@ -24,18 +30,18 @@
             android:layout_alignParentRight="true"
             android:paddingBottom="15dp"
             android:textColor="#b1b1b1"
-            android:textSize="13sp"/>
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/discount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:paddingBottom="10dp"
+            android:layout_gravity="bottom"
             android:layout_marginRight="6dp"
             android:layout_toLeftOf="@id/origin_price"
             android:gravity="bottom"
-            android:layout_gravity="bottom"
+            android:paddingBottom="10dp"
             android:textColor="#ff4305"
             android:textSize="32sp" />
 

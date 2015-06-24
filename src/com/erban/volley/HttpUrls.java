@@ -7,4 +7,9 @@ public class HttpUrls {
     public static String getHireListUrl() {
         return ROOT_URL + "hire/hires";
     }
+
+    public static String getDiscountUrl() {
+        return ROOT_URL + "sale/sales";
+    }
+
 }
