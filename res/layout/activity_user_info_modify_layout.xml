@@ -25,7 +25,6 @@
     android:layout_centerVertical="true"
     android:layout_toLeftOf="@+id/cancel"
     android:layout_marginLeft="@dimen/item_margin_normal"
-    android:text="昵称" 
     android:background="@null"/>
 
 <ImageView

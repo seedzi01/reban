@@ -28,13 +28,15 @@ import android.widget.Toast;
 
 import com.erban.AbstractActivity;
 import com.erban.R;
+import com.erban.WifiApplication;
 import com.erban.bean.User.UserInfo;
+import com.erban.module.user.control.UserInfoControl;
 import com.erban.util.UserUtil;
 import com.erban.widget.CircleImageView;
 import com.erban.widget.TitleBar;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-public class UserInfoActivity extends AbstractActivity implements View.OnClickListener{
+public class UserInfoActivity extends AbstractActivity<UserInfoControl> implements View.OnClickListener{
 
 	public static void startActivity(Activity ac){
 		Intent intent = new Intent(ac,UserInfoActivity.class);
@@ -76,7 +78,6 @@ public class UserInfoActivity extends AbstractActivity implements View.OnClickLi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_info_layout);
 		initView();
-		initData();
 	}
 	
 	private void initView(){
@@ -84,35 +85,25 @@ public class UserInfoActivity extends AbstractActivity implements View.OnClickLi
 		mTitlebar.setTitle("用戶信息");
 		mTitlebar.setBackgroundColor(Color.parseColor("#28b937"));
 		mTitlebar.findViewById(R.id.right_root).setVisibility(View.GONE);
-		mTitlebar.setBackListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-			    if(!showDialog4UserUpload()){
-			        finish();
-			    }
-			}
-		});
+//		mTitlebar.setBackListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//			    if(!showDialog4UserUpload()){
+//			        finish();
+//			    }
+//			}
+//		});
 //		findViewById(R.id.loginout).setOnClickListener(this);
 		mUserIcon = (CircleImageView) findViewById(R.id.user_icon);
 		mUserIcon.setOnClickListener(this);
-//		
-//		nickNameEd = (EditText) findViewById(R.id.nick_name);
-//		linkEd = (EditText) findViewById(R.id.link);
-//		shengFenZhengHaoEd = (EditText) findViewById(R.id.sheng_fen_zheng_hao);
-//		locationEd = (EditText) findViewById(R.id.location);
-//		userIcon = (CircleImageView) findViewById(R.id.user_icon);
-//		userNameTv = (TextView) findViewById(R.id.user_name);
-//		vipTxtTv = (TextView) findViewById(R.id.vip_txt);
-//		userTypeDesc = (TextView) findViewById(R.id.user_type_desc);
-//		costTv = (TextView) findViewById(R.id.cost);
 		UserInfo user = UserUtil.getUser().getUserInfo();
-		initViewItem((ViewGroup)findViewById(R.id.item2), "昵称", user.getUsername());
+		initViewItem((ViewGroup)findViewById(R.id.item2), "昵称", user.getNickname());
 		initViewItem((ViewGroup)findViewById(R.id.item3), "姓名", user.getUsername());
-		initViewItem((ViewGroup)findViewById(R.id.item4), "性别", user.getUsername());
-		initViewItem((ViewGroup)findViewById(R.id.item5), "出生年月", user.getUsername());
-		initViewItem((ViewGroup)findViewById(R.id.item6), "所在地", user.getUsername());
-		initViewItem((ViewGroup)findViewById(R.id.item7), "手机", user.getUsername());
-		initViewItem((ViewGroup)findViewById(R.id.item8), "QQ", user.getUsername());
+		initViewItem((ViewGroup)findViewById(R.id.item4), "性别", user.getSex());
+		initViewItem((ViewGroup)findViewById(R.id.item5), "出生年月", user.getBirth());
+		initViewItem((ViewGroup)findViewById(R.id.item6), "所在地", user.getAddress());
+		initViewItem((ViewGroup)findViewById(R.id.item7), "手机", user.getTelno());
+		initViewItem((ViewGroup)findViewById(R.id.item8), "QQ", user.getQq());
 	}
 	
 	private void initViewItem(ViewGroup viewGroup,String tilte, String data){
@@ -123,41 +114,6 @@ public class UserInfoActivity extends AbstractActivity implements View.OnClickLi
 		viewGroup.setOnClickListener(this);
 	}
 	
-	private void initData(){
-		/*
-	    try {
-	        User.UserInfo userInfo = UserUtil.getUser().getUserInfo();
-	        android.util.Log.d("111", "userInfo = " + userInfo);
-	        nickNameEd.setText(userInfo.getUsername());
-	        linkEd.setText(userInfo.getMobile());
-	        userNameTv.setText(userInfo.getUsername());
-	        if(!TextUtils.isEmpty(userInfo.getAvatar()))
-	            ImageLoader.getInstance().displayImage(userInfo.getAvatar(), userIcon);
-	        vipTxtTv.setText(userInfo.getUserTypeDesc());
-	        userTypeDesc.setText(userInfo.getUserTypeDesc());
-	        costTv.setText("累计消费：" + userInfo.getCost());
-	        shengFenZhengHaoEd.setText(userInfo.getIdcard());
-	        locationEd.setText(userInfo.getAddress());
-	        switch (Integer.valueOf(userInfo.getUserType())) {
-			case 1:
-				vipTxtTv.setText("普通会员");
-				break;
-			case 2:
-				vipTxtTv.setText("银牌会员");
-				break;
-			case 3:
-				vipTxtTv.setText("金牌会员");
-				break;
-			case 4:
-				vipTxtTv.setText("砖石会员");
-				break;
-			default:
-				break;
-			}
-        } catch (Exception e) {
-        }*/
-	}
-
 	@Override
 	public void onClick(View v) {
 		int id = v.getId();
@@ -193,8 +149,24 @@ public class UserInfoActivity extends AbstractActivity implements View.OnClickLi
              startActivityForResult(intent, 1);
 			break;
 		case R.id.item2:
-			UserInfoModifyActivity.startActivity(this,"昵称");
+			UserInfoModifyActivity.startActivity(this, "昵称", "nickname", UserUtil.getUser().getUserInfo().getNickname());
 			break;
+        case R.id.item3:
+            UserInfoModifyActivity.startActivity(this, "姓名", "username", UserUtil.getUser().getUserInfo().getUsername());
+            break;
+        case R.id.item4:
+            UserInfoModifyActivity.startActivity(this, "性别", "gender", UserUtil.getUser().getUserInfo().getGender());
+            break;
+        case R.id.item6:
+            UserInfoModifyActivity.startActivity(this, "所在地", "addr", UserUtil.getUser().getUserInfo().getAddress());
+            break;
+        case R.id.item7:
+            UserInfoModifyActivity.startActivity(this, "手机", "nickname", UserUtil.getUser().getUserInfo().getTelno());
+            break;
+        case R.id.item8:
+            UserInfoModifyActivity.startActivity(this, "QQ", "qq", UserUtil.getUser().getUserInfo().getQq());
+            break;
+            
 		default:
 			break;
 		}
@@ -222,7 +194,7 @@ public class UserInfoActivity extends AbstractActivity implements View.OnClickLi
 	}
 	
 	private void uploadIcon(String filePath){
-//		mControl.uploadIcon(filePath);
+		mControl.uploadIcon(filePath);
 	}
 	
 	// =========================================== ProgressDialog ==========================================
@@ -322,67 +294,6 @@ public class UserInfoActivity extends AbstractActivity implements View.OnClickLi
             return false;
         }*/
 		return false;
-	}
-	/**
-	 * 如果用户信息修改了 弹出对话框
-	 */
-	private String server_username;
-	private String server_link;
-	private String server_location;
-	private String server_shengFenZheng;
-    private String server_iconUrl;
-	private boolean showDialog4UserUpload(){
-		/*
-	    if(!isUserMessgaeChanged())
-	        return false;
-	    AlertDialog.Builder builder = new Builder(this);
-	    builder.setMessage("您确认修改信息吗?");  
-	    builder.setTitle("提示");  
-	    
-	    server_username = nickNameEd.getText().toString();
-        if(TextUtils.isEmpty(server_username))
-            server_username = UserUtil.getUser().getUserInfo().getUsername();
-        
-        server_link = linkEd.getText().toString();
-        if(TextUtils.isEmpty(server_link))
-            server_link = UserUtil.getUser().getUserInfo().getMobile();
-        
-        server_location = locationEd.getText().toString();
-        if(TextUtils.isEmpty(server_location))
-            server_location = UserUtil.getUser().getUserInfo().getAddress();
-        
-        server_shengFenZheng = shengFenZhengHaoEd.getText().toString();
-        if(TextUtils.isEmpty(server_shengFenZheng))
-            server_shengFenZheng = UserUtil.getUser().getUserInfo().getIdcard();
-        
-        server_iconUrl = mControl.getModel().getUploadFileUrl();
-        if(TextUtils.isEmpty(server_iconUrl))
-            server_iconUrl = UserUtil.getUser().getUserInfo().getAvatar();
-        
-	    builder.setPositiveButton("确认", new OnClickListener() {   
-	        @Override
-	        public void onClick(DialogInterface dialog, int which) {
-	        	/*
-	            mControl.uploadUserInfo(
-	                    server_username,
-	                    server_link,
-	                    server_location,
-	                    server_shengFenZheng,
-	                    server_iconUrl);
-	            dialog.dismiss();    
-	            showProgressDialog("用户信息上传中...");
-	            
-	         }
-	    });  
-	    builder.setNegativeButton("取消", new OnClickListener() {   @Override
-    	     public void onClick(DialogInterface dialog, int which) {
-    	          dialog.dismiss();
-    	          finish();
-    	     }
-	    });  
-	    builder.create().show();
-	    */
-	    return false;
 	}
 
 	

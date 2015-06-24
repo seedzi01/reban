@@ -14,8 +14,6 @@ public class SharePreferenceKey {
 	
 	public static final String USER_MODIFYDATE= "modifydate";
 	
-	public static final String USER_SEX= "sex";
-	
 	public static final String USER_TYPE= "user_type";
 	
 	public static final String USER_AGE= "age";
@@ -35,11 +33,18 @@ public class SharePreferenceKey {
     public static final String USER_IDCARD = "idcard";
     
     public static final String USER_ADDRESS = "address";
-	/*
-	{"token":"75ced4559baf29cc7ba5c80add96c39af2f15cd1a348227bf0652508225e8e34",
-		"userinfo":
-		{"modifydate":"1428493921","sex":"0","username":"未定义","user_type":"1","age":"0","createdate":"1428493921","userid":"19062270","mobile":"13716417246"}}
-		*/
+    
+    public static final String USER_BIRTH = "birth";
+    
+    public static final String USER_NICKNAME = "nickname";
+    
+    public static final String USER_TELNO = "telno";
+    
+    public static final String USER_GENDER = "gender";
+    
+    public static final String USER_OPENID = "openid";
+    
+    public static final String USER_QQ = "qq";
     
     public static final String APP = "app"; 
 	public static final String APP_KEY_INSTALL_FIRST = "app_install_first";

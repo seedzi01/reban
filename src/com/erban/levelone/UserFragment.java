@@ -1,10 +1,13 @@
 package com.erban.levelone;
 
 import com.erban.R;
+import com.erban.bean.User;
 import com.erban.levelone.control.UserControl;
 import com.erban.module.user.LoginAndRegisterActivity;
 import com.erban.module.user.UserInfoActivity;
+import com.erban.util.UserUtil;
 import com.erban.widget.TitleBar;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yuekuapp.BaseFragment;
 
 import android.annotation.SuppressLint;
@@ -15,6 +18,7 @@ import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,9 +44,13 @@ public class UserFragment extends BaseFragment<UserControl> implements View.OnCl
 	
 	private TextView mRegisterButton;
 	
-	private View mUserInfoLayout;
-	
 	private View mNoLoginLayout;
+	
+	private View mloginLayout;
+	
+	private TextView mNickNameTv;
+	
+	private TextView mIdTv;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,44 +94,30 @@ public class UserFragment extends BaseFragment<UserControl> implements View.OnCl
 		
 		mLoginButton.setOnClickListener(this);
 		mRegisterButton.setOnClickListener(this);
+		
+		mloginLayout = mRootView.findViewById(R.id.login_layout);
+		mNickNameTv = (TextView) mRootView.findViewById(R.id.nickname);
+		mIdTv = (TextView) mRootView.findViewById(R.id.id);
 	}
 	
 	private void initData(){
-		/*
 		User user = UserUtil.getUser();
 		if(user == null){
-			mNoLoginLayout.setVisibility(View.VISIBLE);
-			mUserInfoLayout.setVisibility(View.GONE);
+		    mNoLoginLayout.setVisibility(View.VISIBLE);
+		    mloginLayout.setVisibility(View.GONE);
 			return;
 		}else{
 			mNoLoginLayout.setVisibility(View.GONE);
-			mUserInfoLayout.setVisibility(View.VISIBLE);
+			mloginLayout.setVisibility(View.VISIBLE);
 		}
-		
 	    try {
 	        User.UserInfo userInfo = UserUtil.getUser().getUserInfo();
 	        if(!TextUtils.isEmpty(userInfo.getAvatar()))
 	            ImageLoader.getInstance().displayImage(userInfo.getAvatar(), mUserIconIv);
-	        mUserNameTv.setText(userInfo.getUsername());   
-	        switch (Integer.valueOf(userInfo.getUserType())) {
-			case 1:
-				mUserGradeTv.setText("普通会员");
-				break;
-			case 2:
-				mUserGradeTv.setText("银牌会员");
-				break;
-			case 3:
-				mUserGradeTv.setText("金牌会员");
-				break;
-			case 4:
-				mUserGradeTv.setText("砖石会员");
-				break;
-			default:
-				break;
-			}
+	        mNickNameTv.setText(TextUtils.isEmpty(userInfo.getNickname())?"未命名":userInfo.getNickname());
+	        mIdTv.setText("ID:"+userInfo.getUserid());
         } catch (Exception e) {
         }
-        */
 	}
 	
 	private void setUpUserItem(ViewGroup rootView,String title,View.OnClickListener clickListener,int drawableRes){

@@ -1,5 +1,7 @@
 package com.erban.bean;
 
+import android.text.TextUtils;
+
 import com.erban.SharePreferenceKey;
 import com.erban.SharePreferenceWrap;
 
@@ -26,9 +28,24 @@ public class User {
 	public void setUserInfo(UserInfo userInfo) {
 		this.userInfo = userInfo;
 	}
-
-
-
+/*
+	{
+	    "msg": {
+	        "platform": null,
+	        "birth": null,
+	        "username": "",
+	        "nickname": "",
+	        "telno": "13436934495",
+	        "userid": "1",
+	        "gender": "0",
+	        "addr": "",
+	        "openid": null,
+	        "avatar": "",
+	        "qq": ""
+	    },
+	    "code": 0
+	}
+	*/
 	/**
 	 *  用戶中心的信息
 	 */
@@ -37,8 +54,6 @@ public class User {
 		private String userTypeDesc;
 		
 		private  String modifydate;
-		
-		private String sex;
 		
 		private String username;
 		
@@ -59,6 +74,18 @@ public class User {
 		private String idcard;
 		
 		private String address;
+		
+		private String birth;
+		
+		private String nickname;
+		
+		private String telno;
+		
+		private String gender;
+		
+		private String openid;
+		
+		private String qq;
 		
 		public String getIdcard() {
 			return idcard;
@@ -90,14 +117,6 @@ public class User {
 
 		public void setModifydate(String modifydate) {
 			this.modifydate = modifydate;
-		}
-
-		public String getSex() {
-			return sex;
-		}
-
-		public void setSex(String sex) {
-			this.sex = sex;
 		}
 
 		public String getUsername() {
@@ -164,17 +183,75 @@ public class User {
 			this.userTypeDesc = userTypeDesc;
 		}
 
-		@Override
-		public String toString() {
-			return "UserInfo [userTypeDesc=" + userTypeDesc + ", modifydate="
-					+ modifydate + ", sex=" + sex + ", username=" + username
-					+ ", userType=" + userType + ", age=" + age
-					+ ", createdate=" + createdate + ", userid=" + userid
-					+ ", mobile=" + mobile + ", avatar=" + avatar + ", cost="
-					+ cost + ", idcard=" + idcard + ", address=" + address
-					+ "]";
-		}
+		public String getBirth() {
+            return birth;
+        }
 
+        public void setBirth(String birth) {
+            this.birth = birth;
+        }
+
+        public String getNickname() {
+            return nickname;
+        }
+
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
+        }
+
+        public String getTelno() {
+            return telno;
+        }
+
+        public void setTelno(String telno) {
+            this.telno = telno;
+        }
+
+        public String getGender() {
+            return gender;
+        }
+
+        public void setGender(String gender) {
+            this.gender = gender;
+        }
+
+        public String getOpenid() {
+            return openid;
+        }
+
+        public void setOpenid(String openid) {
+            this.openid = openid;
+        }
+
+        public String getQq() {
+            return qq;
+        }
+
+        public void setQq(String qq) {
+            this.qq = qq;
+        }
+
+        public String getSex(){
+            if(!TextUtils.isEmpty(gender) && "0".equals(gender)){
+                return "男";
+            }else if(!TextUtils.isEmpty(gender) && "1".equals(gender)){
+                return "女";
+            }
+            return "未定义";
+        }
+        
+        @Override
+        public String toString() {
+            return "UserInfo [userTypeDesc=" + userTypeDesc + ", modifydate="
+                    + modifydate +  ", username=" + username
+                    + ", userType=" + userType + ", age=" + age
+                    + ", createdate=" + createdate + ", userid=" + userid
+                    + ", mobile=" + mobile + ", avatar=" + avatar + ", cost="
+                    + cost + ", idcard=" + idcard + ", address=" + address
+                    + ", birth=" + birth + ", nickname=" + nickname
+                    + ", telno=" + telno + ", gender=" + gender + ", openid="
+                    + openid + ", qq=" + qq + "]";
+        }
 	}
 
 
@@ -183,7 +260,6 @@ public class User {
 		sharePreferenceWrap.putString(SharePreferenceKey.USER_TYPE_DESC, user.getUserInfo().userTypeDesc);
 		sharePreferenceWrap.putString(SharePreferenceKey.USER_NAME, user.getUserInfo().username);
 		sharePreferenceWrap.putString(SharePreferenceKey.USER_MODIFYDATE, user.getUserInfo().modifydate);
-		sharePreferenceWrap.putString(SharePreferenceKey.USER_SEX, user.getUserInfo().sex);
 		sharePreferenceWrap.putString(SharePreferenceKey.USER_TYPE, user.getUserInfo().userType);
 		sharePreferenceWrap.putString(SharePreferenceKey.USER_AGE, user.getUserInfo().age);
 		sharePreferenceWrap.putString(SharePreferenceKey.USER_CREATEDATE, user.getUserInfo().createdate);
@@ -193,6 +269,12 @@ public class User {
 		sharePreferenceWrap.putString(SharePreferenceKey.USER_COST, user.getUserInfo().cost);
 		sharePreferenceWrap.putString(SharePreferenceKey.USER_IDCARD, user.getUserInfo().idcard);
 		sharePreferenceWrap.putString(SharePreferenceKey.USER_ADDRESS, user.getUserInfo().address);
+		sharePreferenceWrap.putString(SharePreferenceKey.USER_BIRTH, user.getUserInfo().birth);
+		sharePreferenceWrap.putString(SharePreferenceKey.USER_NICKNAME, user.getUserInfo().nickname);
+		sharePreferenceWrap.putString(SharePreferenceKey.USER_TELNO, user.getUserInfo().telno);
+		sharePreferenceWrap.putString(SharePreferenceKey.USER_GENDER, user.getUserInfo().gender);
+		sharePreferenceWrap.putString(SharePreferenceKey.USER_OPENID, user.getUserInfo().openid);
+		sharePreferenceWrap.putString(SharePreferenceKey.USER_QQ, user.getUserInfo().qq);
 	}
 	
 	public static User getFromShareP(){
@@ -207,7 +289,6 @@ public class User {
 		userInfo.setCreatedate(sharePreferenceWrap.getString(SharePreferenceKey.USER_CREATEDATE, ""));
 		userInfo.setMobile(sharePreferenceWrap.getString(SharePreferenceKey.USER_MOBILE, ""));
 		userInfo.setModifydate(sharePreferenceWrap.getString(SharePreferenceKey.USER_MODIFYDATE, ""));
-		userInfo.setSex(sharePreferenceWrap.getString(SharePreferenceKey.USER_SEX, ""));
 		userInfo.setUserid(sharePreferenceWrap.getString(SharePreferenceKey.USER_USERID, ""));
 		userInfo.setUsername(sharePreferenceWrap.getString(SharePreferenceKey.USER_NAME, ""));
 		userInfo.setUserType(sharePreferenceWrap.getString(SharePreferenceKey.USER_TYPE, ""));
@@ -216,6 +297,13 @@ public class User {
 		userInfo.setCost(sharePreferenceWrap.getString(SharePreferenceKey.USER_COST, ""));
 		userInfo.setIdcard(sharePreferenceWrap.getString(SharePreferenceKey.USER_IDCARD, ""));
 		userInfo.setAddress(sharePreferenceWrap.getString(SharePreferenceKey.USER_ADDRESS, ""));
+		userInfo.setBirth(sharePreferenceWrap.getString(SharePreferenceKey.USER_BIRTH, ""));
+	    userInfo.setNickname(sharePreferenceWrap.getString(SharePreferenceKey.USER_NICKNAME, ""));
+	    userInfo.setTelno(sharePreferenceWrap.getString(SharePreferenceKey.USER_TELNO ,"")); 
+	    userInfo.setGender(sharePreferenceWrap.getString(SharePreferenceKey.USER_GENDER ,"")); 
+	    userInfo.setOpenid(sharePreferenceWrap.getString(SharePreferenceKey.USER_OPENID ,"")); 
+	    userInfo.setQq(sharePreferenceWrap.getString(SharePreferenceKey.USER_QQ ,"")); 
+		
 		user.setUserInfo(userInfo);
 		return user;
 	}
@@ -224,41 +312,5 @@ public class User {
 	public String toString() {
 		return "User [token=" + token + ", userInfo=" + userInfo + "]";
 	}
-	
-//	public static class UserInfo{
-//		
-//		private String username;
-//		
-//		private String grade;
-//		
-//		private String iconUrl;
-//
-//		public String getUsername() {
-//			return username;
-//		}
-//
-//		public void setUsername(String username) {
-//			this.username = username;
-//		}
-//
-//		public String getGrade() {
-//			return grade;
-//		}
-//
-//		public void setGrade(String grade) {
-//			this.grade = grade;
-//		}
-//
-//		public String getIconUrl() {
-//			return iconUrl;
-//		}
-//
-//		public void setIconUrl(String iconUrl) {
-//			this.iconUrl = iconUrl;
-//		}
-//
-//	}
-	
-
 	
 }

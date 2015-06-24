@@ -2,30 +2,44 @@ package com.erban.api;
 
 public class HttpUrlManager {
 	
-	private static String HOST = "http://101.200.176.151/client/signup"; 
+	private static String HOST = "http://101.200.176.151/client"; 
 	
 	// ========================== 登录与注册 =================================
     /**注册*/
     String getUserRegisterUrl(){
-        return HOST + "/register";
+        return HOST + "/signup/register";
     }
     /**登录*/
     String getUserLoginUrl(){
-        return HOST + "/login";
+        return HOST + "/signup/login";
     }
     /**登出*/
     String getUserLoginOutUrl(){
-        return HOST + "/logout";
+        return HOST + "/signup/logout";
     }
     /**短信验证*/
     String getVerificationCodeUrl(){
-        return HOST + "/randcode";
+        return HOST + "/signup/randcode";
     }
     /**找回密碼*/
     String getFindPwdUrl(){
-        return HOST + "/resetpwd";
+        return HOST + "/signup/resetpwd";
     }
     
- // ========================== 登录与注册 =================================
+ // ========================== 用户信息 =================================
+    /**获取用户信息*/
+    String userInfosUrl(){
+        return HOST + "/user/infos";
+    }
+    
+    /**更新用户信息*/
+    String userUpdateUrl(){
+        return HOST + "/user/update";
+    }
+    
+    /**更新用户头像*/
+    String upoadAvatarUrl(){
+        return HOST + "/user/uploadAvatar";
+    }
 }
 

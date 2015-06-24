@@ -28,8 +28,8 @@
             android:layout_toLeftOf="@id/tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#969696"
-            android:text="我的订单"/>
+            
+            android:text="我的订单"/><!-- android:textColor="#969696" -->
         
             <View 
             android:id="@+id/division"

@@ -102,7 +102,6 @@ public class AbstractActivity<T extends BaseControl> extends BaseActivity<T> {
 			}
 		}
     };
-    
 	// ===========================  Toast ====================================
     
 }

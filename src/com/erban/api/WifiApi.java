@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
@@ -14,8 +15,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.dx.util.FileUtils;
 import com.erban.api.builder.NetResultBuilder;
+import com.erban.api.builder.UploadFIleBuilder;
 import com.erban.api.builder.UserLoginBuilder;
 import com.erban.api.builder.UserRegisterBuilder;
 import com.erban.api.exception.XiaoMeiCredentialsException;
@@ -27,6 +28,7 @@ import com.erban.api.http.HttpApi;
 import com.erban.api.http.HttpApiWithSession;
 import com.erban.bean.NetResult;
 import com.erban.bean.User;
+import com.erban.util.FileUtils;
 import com.erban.util.Security;
 
 /**
@@ -130,6 +132,24 @@ public class WifiApi {
     // ========================================================================================
     // 用户资料(NET)
     // ========================================================================================
+    
+    /**
+     * 获取用户信息
+     * @throws Exception 
+     */
+    public User fetchUserInfo(String token,String userId) throws Exception{
+        BasicNameValuePair[] values = {
+                new BasicNameValuePair("userid", userId),
+                new BasicNameValuePair("token", token),
+                new BasicNameValuePair("uptime", String.valueOf(System.currentTimeMillis()/1000))};
+        HttpGet httpGet = mHttpApi.createHttpGet(urlManager.userInfosUrl(),
+                values[0],
+                values[1],
+                values[2],
+                new BasicNameValuePair("fig", Security.get32MD5Str(values)));
+        return  mHttpApi.doHttpRequestObject(httpGet, new UserLoginBuilder());
+    }
+    
     /**
      * 更新用户头像
      * @throws Exception 
@@ -143,6 +163,24 @@ public class WifiApi {
         params.put("uptime", String.valueOf(System.currentTimeMillis()/1000));
         params.put("fig",  Security.get32MD5Str(values));
         return new UploadFIleBuilder().build(new JSONObject(FileUtils.uploadSubmit(urlManager.upoadAvatarUrl(),params,new File(filePath))));
+    }
+    
+    /**
+     * 更新用户信息
+     * @throws Exception 
+     */
+    public User updateUserInfo(String token,String userid,String key,String value) throws Exception{
+        BasicNameValuePair[] values = {
+                new BasicNameValuePair("token", token),
+                new BasicNameValuePair("userid", userid),
+                new BasicNameValuePair(key, value),
+                new BasicNameValuePair("uptime", String.valueOf(System.currentTimeMillis()/1000))};
+        HttpGet httpGet = mHttpApi.createHttpGet(urlManager.userUpdateUrl(),
+                values[0],
+                values[1],
+                values[2],
+                new BasicNameValuePair("fig", Security.get32MD5Str(values)));
+        return  mHttpApi.doHttpRequestObject(httpGet, new UserLoginBuilder());
     }
     
 }

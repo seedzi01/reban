@@ -25,7 +25,6 @@
 	    android:orientation="vertical"
 	    android:gravity="center_horizontal"
 	    android:background="@drawable/user_banner_bk">
-	    
         <com.erban.widget.CircleImageView
             android:layout_marginTop="15dp"
             android:id="@+id/user_icon"
@@ -34,6 +33,28 @@
             app:border_width="3dp"
             app:border_color="#ffffff"
             android:src="@drawable/user_default_head_img"/>
+        
+        <LinearLayout 
+           android:id="@+id/login_layout"
+           android:layout_width="match_parent"      
+           android:layout_height="wrap_content"            
+           android:orientation="vertical"
+           android:gravity="center"
+           android:layout_marginTop="10dp"
+           android:visibility="gone">
+            <TextView 
+                android:id="@+id/nickname"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#ffffff"/>
+            <TextView 
+                android:id="@+id/id"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#ffffff"/>            
+        </LinearLayout>
 	    <LinearLayout 
 	       android:id="@+id/no_login_layout"
 	       android:layout_marginTop="10dp"
@@ -41,7 +62,8 @@
 	       android:layout_width="wrap_content"	    
 	       android:layout_height="wrap_content"
 	       android:orientation="horizontal" 
-	       android:weightSum="2">
+	       android:weightSum="2"
+	       android:visibility="gone">
 	        <TextView 
 	           android:id="@+id/login_button"
 	           android:layout_width="wrap_content" 
