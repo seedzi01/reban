@@ -24,6 +24,7 @@ import android.widget.TextView;
 public class BaseShopFragment extends Fragment {
 
     protected ListView shopListView;
+    protected ListView choicesListView;
 
     protected FilterView first;
     protected FilterView second;
@@ -36,6 +37,7 @@ public class BaseShopFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         shopListView = (ListView) view.findViewById(R.id.shopListView);
+        choicesListView = (ListView) view.findViewById(R.id.choice_list);
 
         first = (FilterView) view.findViewById(R.id.first);
         second = (FilterView) view.findViewById(R.id.second);

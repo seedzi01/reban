@@ -47,4 +47,10 @@
         android:layout_below="@id/divide_line" >
     </ListView>
 
+    <ListView
+        android:id="@+id/choice_list"
+        android:layout_below="@id/divide_line"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:visibility="gone"/>
 </RelativeLayout>

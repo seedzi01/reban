@@ -1,5 +1,6 @@
 package com.erban.levelone;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.graphics.Paint;
@@ -19,6 +20,8 @@ import com.erban.bean.NormalGoods;
 import com.erban.util.ViewUtils;
 import com.erban.view.FilterView;
 import com.erban.view.ShopAdapter;
+import com.erban.view.SingleItemAdapter;
+import com.erban.view.SingleItemAdapter.ExecuteItem;
 import com.erban.volley.GsonRequest;
 import com.erban.volley.HttpUrls;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -33,6 +36,13 @@ public class DiscountShopFragment extends BaseShopFragment {
     
     protected void initTabs(List<FilterView> tabs) {
         tabs.get(0).setTitle(getString(R.string.distance));
+        tabs.get(0).setOnClickListener(new View.OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                bindDistances();
+            }
+        });
         tabs.get(1).setTitle(getString(R.string.category));
         tabs.get(2).setTitle(getString(R.string.sort));
     }
@@ -66,6 +76,20 @@ public class DiscountShopFragment extends BaseShopFragment {
 
     private void bindDistances() {
         // bind disntances.
+        SingleItemAdapter itemAdapter = new SingleItemAdapter();
+        ExecuteItem item = new ExecuteItem();
+        item.title = "hulan";
+        ExecuteItem item1 = new ExecuteItem();
+        item1.title = "fujian";
+        ExecuteItem item2 = new ExecuteItem();
+        item2.title = "beijing";
+        List<ExecuteItem> executeItems = new ArrayList<SingleItemAdapter.ExecuteItem>();
+        executeItems.add(item);
+        executeItems.add(item1);
+        executeItems.add(item2);
+        itemAdapter.setItems(executeItems);
+        choicesListView.setVisibility(View.VISIBLE);
+        choicesListView.setAdapter(itemAdapter);
     }
 
     public void fetchDiscountList() {
@@ -98,5 +122,5 @@ public class DiscountShopFragment extends BaseShopFragment {
                 });
         WifiApplication.getRequestQueue().add(hireRequest);
     }
-    
+
 }

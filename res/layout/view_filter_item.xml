@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
+        android:textColor="#434343"
         android:drawablePadding="2dp"
         android:drawableRight="@drawable/pull_up"
         android:gravity="center"/>

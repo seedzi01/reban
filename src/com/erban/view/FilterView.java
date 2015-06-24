@@ -1,6 +1,7 @@
 package com.erban.view;
 
 import com.erban.R;
+import com.erban.WifiApplication;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -39,6 +40,9 @@ public class FilterView extends RelativeLayout {
         bottomLine.setVisibility(selected ? View.VISIBLE : View.GONE);
         Drawable rightIcon = getResources().getDrawable(
                 selected ? R.drawable.pull_up : R.drawable.pull_down);
+        titleView.setTextColor(selected 
+                ? WifiApplication.getInstance().getResources().getColor(R.color.font_module_pressed) 
+                : WifiApplication.getInstance().getResources().getColor(R.color.color_app_black));
         rightIcon.setBounds(0, 0, rightIcon.getMinimumWidth(), rightIcon.getMinimumHeight());
         titleView.setCompoundDrawables(
                 null, null, rightIcon, null);
