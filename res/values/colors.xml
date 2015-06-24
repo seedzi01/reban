@@ -13,4 +13,7 @@
     
     <color name="color_app_black">#434343</color>
     <color name="color_app_grey">#939393</color>
+    
+    <!-- 下拉刷新 -->
+     <color name="home_allsub_child_topnews">#595959</color>
 </resources>
