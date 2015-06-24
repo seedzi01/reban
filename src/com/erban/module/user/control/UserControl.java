@@ -11,7 +11,7 @@ import com.yuekuapp.BaseControl;
 import com.yuekuapp.annotations.AsynMethod;
 import com.yuekuapp.proxy.MessageProxy;
 
-public class UserControl extends BaseControl{
+public class UserControl extends BaseControl {
 
     private UserModel mModel;
 

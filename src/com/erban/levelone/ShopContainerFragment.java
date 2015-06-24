@@ -1,14 +1,14 @@
 package com.erban.levelone;
 
-import com.erban.R;
-import com.erban.util.ViewUtils;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.erban.R;
+import com.erban.util.ViewUtils;
 
 /**
  * Container will contain two fragment.
@@ -22,6 +22,9 @@ public class ShopContainerFragment extends Fragment {
     private View shopLine;
     private View hireLine;
 
+    private DiscountShopFragment shopFragment;
+    private HireShopFragment hireFragment;
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -40,14 +43,17 @@ public class ShopContainerFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 select(true);
+                updateFragment(true);
             }
         });
         hireTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 select(false);
+                updateFragment(false);
             }
         });
+        updateFragment(true);
     }
 
     private void select(boolean isShop) {
@@ -57,4 +63,21 @@ public class ShopContainerFragment extends Fragment {
         hireLine.setVisibility(isShop ? View.GONE : View.VISIBLE);
     }
 
+    private void updateFragment(boolean isShop) {
+        Fragment displayFragment;
+        if (isShop) {
+            if (shopFragment == null) {
+                shopFragment = new DiscountShopFragment();
+            }
+            displayFragment = shopFragment;
+        } else {
+            if (hireFragment == null) {
+                hireFragment = new HireShopFragment();
+            }
+            displayFragment = hireFragment;
+        }
+        getChildFragmentManager().beginTransaction()
+            .replace(R.id.fragment_container, displayFragment)
+            .commit();
+    }
 }

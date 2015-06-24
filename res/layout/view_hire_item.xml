@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="118dp"
+    android:paddingLeft="11dp"
+    android:paddingRight="11dp"
+    android:paddingTop="11dp">
+
+    <ImageView
+        android:id="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/hot_icon"/>
+    
+    <TextView 
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="朝陽-國貿"
+        android:textSize="13sp"
+        android:textColor="#808080"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/type"/>
+    
+    <TextView 
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="05-26"
+        android:textSize="13sp"
+        android:textColor="#808080"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/address"/>
+    
+    <TextView
+        android:id="@+id/title"
+        android:textSize="15sp"
+        android:textColor="#000000"
+        android:text="招聘销售，无责任底薪3000"
+        android:layout_alignParentLeft="true"
+        android:layout_toRightOf="@id/address"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <TextView
+        android:id="@+id/salary"
+        android:textSize="14sp"
+        android:textColor="#ff4305"
+        android:text="8000-10000元"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_toRightOf="@id/address"
+        android:layout_below="@id/title"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+    
+    <TextView
+        android:id="@+id/detail"
+        android:textSize="13sp"
+        android:textColor="#808080"
+        android:text="招聘5人，经验1-3年"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_toRightOf="@id/address"
+        android:layout_below="@id/salary"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+    
+    <TextView
+        android:id="@+id/company"
+        android:textSize="13sp"
+        android:textColor="#808080"
+        android:text="北京某公司"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_toRightOf="@id/address"
+        android:layout_below="@id/detail"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dcdcdc"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

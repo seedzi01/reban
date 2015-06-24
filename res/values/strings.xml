@@ -21,4 +21,14 @@
     
     <string name="discount">优惠</string>
     <string name="hire">招聘</string>
+    
+    <string name="distance">距离</string>
+    <string name="category">类别</string>
+    <string name="sort">排序</string>
+
+    <string name="zoom">区域</string>
+    <string name="pay">薪水</string>
+
+    <string name="fetch_tips">获取数据失败</string>
+    
 </resources>
