@@ -5,6 +5,7 @@ import com.erban.bean.User;
 import com.erban.levelone.control.UserControl;
 import com.erban.module.user.LoginAndRegisterActivity;
 import com.erban.module.user.UserInfoActivity;
+import com.erban.module.user.center.FavActivity;
 import com.erban.util.UserUtil;
 import com.erban.widget.TitleBar;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -155,6 +156,7 @@ public class UserFragment extends BaseFragment<UserControl> implements View.OnCl
 			break;
 		case R.id.line5: //意见反馈
 //			FeedbackActivity.startActivity(getActivity());
+			FavActivity.startActivity(getActivity());
 			break;
 		case R.id.line6: //关于我们
 //			AboutActivity.startActivity(getActivity());

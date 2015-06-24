@@ -57,9 +57,15 @@
     	<activity 
     	    android:theme="@android:style/Theme.NoTitleBar"
 		    android:name=".module.user.LoginAndRegisterActivity"/>
+    	<!-- 修改用户信息 -->
     	<activity 
   			android:theme="@android:style/Theme.NoTitleBar"
 		    android:name="com.erban.module.user.UserInfoModifyActivity"/>
+    	<!-- 收藏用户 -->
+    	<activity 
+  			android:theme="@android:style/Theme.NoTitleBar"
+		    android:name="com.erban.module.user.center.FavActivity"/>
+    	
     </application>
 
 </manifest>

@@ -41,5 +41,18 @@ public class HttpUrlManager {
     String upoadAvatarUrl(){
         return HOST + "/user/uploadAvatar";
     }
+ // ========================== 个人中心 =================================
+    /**收藏列表*/
+    String favListsUrl(){
+    	return HOST + "/fav/lists";
+    }
+    /**收藏添加*/
+    String addFavUrl(){
+    	return HOST + "/fav/add";
+    }
+    /**收藏删除*/
+    String delFavUrl(){
+    	return HOST + "/fav/del";
+    }
 }
 

@@ -221,7 +221,8 @@ public class LoginAndRegisterActivity extends AbstractActivity<UserControl>
 	private boolean checkInputData4Registe(){
 		if(!MobileUtil.isMobileNO(mRegisterUserMobileEdit.getText().toString()))
 			return false;
-		if(TextUtils.isEmpty(mRegisterUserPasswordEdit.getText().toString()) || TextUtils.isEmpty(mRegisterUserVerificationEdit.getText().toString()) )
+		if(TextUtils.isEmpty(mRegisterUserPasswordEdit.getText().toString()) || 
+				TextUtils.isEmpty(mRegisterUserVerificationEdit.getText().toString()))
 			return false;
 		return true;
 	}

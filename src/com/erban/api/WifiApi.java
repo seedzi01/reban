@@ -28,6 +28,7 @@ import com.erban.api.http.HttpApi;
 import com.erban.api.http.HttpApiWithSession;
 import com.erban.bean.NetResult;
 import com.erban.bean.User;
+import com.erban.module.user.LoginAndRegisterActivity;
 import com.erban.util.FileUtils;
 import com.erban.util.Security;
 
@@ -183,4 +184,41 @@ public class WifiApi {
         return  mHttpApi.doHttpRequestObject(httpGet, new UserLoginBuilder());
     }
     
+    // ========================================================================================
+    // 个人中心(NET)
+    // ========================================================================================   
+    /**
+     * 收藏列表
+     */
+	public User showUserFav(String userid,String token)
+			throws XiaoMeiCredentialsException,XiaoMeiIOException,XiaoMeiJSONException ,XiaoMeiOtherException {
+				BasicNameValuePair[] values = {
+				        new BasicNameValuePair("userid", userid) ,
+						new BasicNameValuePair("token", token) ,
+						new BasicNameValuePair("uptime", String.valueOf(System.currentTimeMillis()/1000)),
+				} ; 
+				HttpGet httpGet = mHttpApi.createHttpGet(urlManager.favListsUrl(),
+						values[0],
+						values[1],
+						values[2],
+						new BasicNameValuePair("fig", Security.get32MD5Str(values)));
+				 return mHttpApi.doHttpRequestObject(httpGet, new UserLoginBuilder());
+	}
+	/**
+     * 添加收藏
+     */
+	public User addUserFav(String userid,String token)
+			throws XiaoMeiCredentialsException,XiaoMeiIOException,XiaoMeiJSONException ,XiaoMeiOtherException {
+				BasicNameValuePair[] values = {
+				        new BasicNameValuePair("userid", userid) ,
+						new BasicNameValuePair("token", token) ,
+						new BasicNameValuePair("uptime", String.valueOf(System.currentTimeMillis()/1000)),
+				} ; 
+				HttpGet httpGet = mHttpApi.createHttpGet(urlManager.favListsUrl(),
+						values[0],
+						values[1],
+						values[2],
+						new BasicNameValuePair("fig", Security.get32MD5Str(values)));
+				 return mHttpApi.doHttpRequestObject(httpGet, new UserLoginBuilder());
+	}
 }
