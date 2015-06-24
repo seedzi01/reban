@@ -22,6 +22,10 @@ public class ShopAdapter extends BaseAdapter {
     public void setItems(List<NormalGoods> items) {
         this.items = items;
     }
+    
+    public List<NormalGoods> getItems(){
+    	return this.items;
+    }
 
     @Override
     public int getCount() {

@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.erban.api.builder.NetResultBuilder;
+import com.erban.api.builder.NormalGoodsBuilder;
 import com.erban.api.builder.UploadFIleBuilder;
 import com.erban.api.builder.UserLoginBuilder;
 import com.erban.api.builder.UserRegisterBuilder;
@@ -27,6 +28,7 @@ import com.erban.api.http.AbstractHttpApi;
 import com.erban.api.http.HttpApi;
 import com.erban.api.http.HttpApiWithSession;
 import com.erban.bean.NetResult;
+import com.erban.bean.NormalGoods;
 import com.erban.bean.User;
 import com.erban.module.user.LoginAndRegisterActivity;
 import com.erban.util.FileUtils;
@@ -190,7 +192,7 @@ public class WifiApi {
     /**
      * 收藏列表
      */
-	public User showUserFav(String userid,String token)
+	public List<NormalGoods> showUserFav(String userid,String token)
 			throws XiaoMeiCredentialsException,XiaoMeiIOException,XiaoMeiJSONException ,XiaoMeiOtherException {
 				BasicNameValuePair[] values = {
 				        new BasicNameValuePair("userid", userid) ,
@@ -202,7 +204,7 @@ public class WifiApi {
 						values[1],
 						values[2],
 						new BasicNameValuePair("fig", Security.get32MD5Str(values)));
-				 return mHttpApi.doHttpRequestObject(httpGet, new UserLoginBuilder());
+				 return mHttpApi.doHttpRequestObject(httpGet, new NormalGoodsBuilder());
 	}
 	/**
      * 添加收藏

@@ -8,12 +8,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
+import com.erban.AbstractActivity;
 import com.erban.R;
+import com.erban.module.user.center.control.UserCenterControl;
+import com.erban.view.ShopAdapter;
 import com.erban.view.pullrefreshview.PullToRefreshListView;
 import com.erban.widget.TitleBar;
 import com.yuekuapp.BaseActivity;
 
-public class FavActivity extends BaseActivity{
+public class FavActivity extends AbstractActivity<UserCenterControl>{
 	
 	public static void startActivity(Activity ac){
 		Intent intent = new Intent(ac,FavActivity.class);
@@ -23,11 +26,13 @@ public class FavActivity extends BaseActivity{
 	private TitleBar mTitlebar;
 	private PullToRefreshListView mPullToRefreshListView;
 	private ListView mListView;
+	private ShopAdapter mAdapter;
 	
     protected void onCreate(android.os.Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fav_layout);
         setupView();
+        initData();
     };
     
     private void setupView(){
@@ -45,33 +50,23 @@ public class FavActivity extends BaseActivity{
     	
     	mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.list);
     	mListView = mPullToRefreshListView.getRefreshableView();
-    	
+    	mAdapter = new ShopAdapter();
+    	mListView.setAdapter(mAdapter);
     }
     
-    private class FavAdapter extends BaseAdapter{
-    	
-    	public FavAdapter(){
-    	}
-    	
-		@Override
-		public int getCount() {
-			return 0;
-		}
-
-		@Override
-		public Object getItem(int position) {
-			return null;
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return 0;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			return null;
-		}
+    private void initData(){
+    	mControl.showFavList();
+    }
+    
+    // ======================================= Callback ============================================= //
+    
+    public void showFavListCallback(){
+    	mAdapter.setItems(null);
+    }
+    
+    public void showFavListExceptionCallback(){
     	
     }
+//    public ShopAdapter
+    
 }
