@@ -61,11 +61,15 @@
     	<activity 
   			android:theme="@android:style/Theme.NoTitleBar"
 		    android:name="com.erban.module.user.UserInfoModifyActivity"/>
-    	<!-- 收藏用户 -->
+     	<!-- 消息 -->
+    	<activity 
+  			android:theme="@android:style/Theme.NoTitleBar"
+		    android:name="com.erban.module.user.center.MessageActivity"/>
+    	<!-- 收藏 -->
     	<activity 
   			android:theme="@android:style/Theme.NoTitleBar"
 		    android:name="com.erban.module.user.center.FavActivity"/>
-    	
+   	
     </application>
 
 </manifest>

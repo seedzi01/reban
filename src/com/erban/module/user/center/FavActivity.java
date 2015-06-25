@@ -61,12 +61,12 @@ public class FavActivity extends AbstractActivity<UserCenterControl>{
     // ======================================= Callback ============================================= //
     
     public void showFavListCallback(){
-    	mAdapter.setItems(null);
+    	mAdapter.setItems(mControl.getModel().getGoodsList());
+    	mAdapter.notifyDataSetChanged();
     }
     
     public void showFavListExceptionCallback(){
     	
     }
-//    public ShopAdapter
     
 }

@@ -54,5 +54,32 @@ public class HttpUrlManager {
     String delFavUrl(){
     	return HOST + "/fav/del";
     }
+    /*
+    请求Host:	http://101.200.176.151/client/notice/
+
+    	1.	接口地址:	lists
+    		接口功能:	获取个人消息列表
+    		接口方式:	Get
+    		请求参数:	userid
+    					token
+    		认证方式:	Token
+    		接口返回:	对应用户消息列表
+    		接口返回示例:
+    	[
+    		{
+    			"from" : "系统",
+    			"content" : "今日系统维护,造成的不变敬请谅解",
+    			"uptime" : "2015年3月11日"
+    		},
+    		{
+    			"from" : "系统",
+    			"content" : "今日系统维护,造成的不变敬请谅解",
+    			"uptime" : "2015年3月11日"
+    		}
+    	]*/
+    /**消息列表*/
+    String noticeUrl(){
+    	return HOST + "/notice/lists";
+    }
 }
 

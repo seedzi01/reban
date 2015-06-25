@@ -6,6 +6,7 @@ import com.erban.levelone.control.UserControl;
 import com.erban.module.user.LoginAndRegisterActivity;
 import com.erban.module.user.UserInfoActivity;
 import com.erban.module.user.center.FavActivity;
+import com.erban.module.user.center.MessageActivity;
 import com.erban.util.UserUtil;
 import com.erban.widget.TitleBar;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -145,17 +146,16 @@ public class UserFragment extends BaseFragment<UserControl> implements View.OnCl
 		case R.id.line1:  //我的订单
 //			UserOrderListActivity.startActivity(getActivity());
 			break;
-		case R.id.line2: //我的消息
+		case R.id.line2: 
 //			MessageActivity.startActivity(getActivity());
 			break;
 		case R.id.line3: //我的收藏
 //			CollectionActivity.startActivity(getActivity());
 			break;
-		case R.id.line4: //浏览历史
-//			HistoryActivity.startActivity(getActivity());
+		case R.id.line4: //我的消息
+			MessageActivity.startActivity(getActivity());
 			break;
-		case R.id.line5: //意见反馈
-//			FeedbackActivity.startActivity(getActivity());
+		case R.id.line5: //我的收藏
 			FavActivity.startActivity(getActivity());
 			break;
 		case R.id.line6: //关于我们
