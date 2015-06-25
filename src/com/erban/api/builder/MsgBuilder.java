@@ -22,9 +22,11 @@ public class MsgBuilder extends AbstractJSONBuilder<List<Msg>> {
 			jsonArray = jsonObject.getJSONArray("msg");
 		else
 			return list;
-		for(int i=0;i>jsonArray.length();i++){
+		for(int i=0;i<jsonArray.length();i++){
 			JSONObject jObj = jsonArray.getJSONObject(i);
 			msg = new Msg();
+			if(jObj.has("title"))
+				msg.setTitle(jObj.getString("title"));
 			if(jObj.has("uptime"))
 				msg.setUptime(jObj.getString("uptime"));
 			if(jObj.has("content"))

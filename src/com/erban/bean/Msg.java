@@ -18,11 +18,17 @@ public class Msg {
 	    "code": 0
 	}
 	*/
-	
+	private String title;
 	private String uptime;
 	private String content;
 	private String from;
 	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public String getUptime() {
 		return uptime;
 	}

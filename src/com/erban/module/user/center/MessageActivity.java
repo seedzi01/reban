@@ -3,12 +3,14 @@ package com.erban.module.user.center;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
 import com.erban.AbstractActivity;
 import com.erban.R;
 import com.erban.module.user.center.control.UserCenterControl;
+import com.erban.view.MsgAdapter;
 import com.erban.view.pullrefreshview.PullToRefreshListView;
 import com.erban.widget.TitleBar;
 
@@ -22,6 +24,7 @@ public class MessageActivity extends AbstractActivity<UserCenterControl>{
     private TitleBar mTitlebar;
     private PullToRefreshListView mPullToRefreshListView;
     private ListView mListView;
+    private MsgAdapter mAdapter;
     
     protected void onCreate(android.os.Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,8 @@ public class MessageActivity extends AbstractActivity<UserCenterControl>{
     	
         mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.list);
         mListView = mPullToRefreshListView.getRefreshableView();
+        mAdapter = new MsgAdapter();
+        mListView.setAdapter(mAdapter);
     }
 
     private void initData(){
@@ -53,7 +58,9 @@ public class MessageActivity extends AbstractActivity<UserCenterControl>{
 
   // ======================================= Callback ============================================= //
     public void showUserNoticeCallback(){
-    	
+    	Log.d("111", "showUserNoticeCallback");
+       	mAdapter.setItems(mControl.getModel().getMsgList());
+    	mAdapter.notifyDataSetChanged();
     }
     
     public void showUserNoticeExceptionCallback(){
