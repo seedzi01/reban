@@ -3,47 +3,48 @@ package com.erban.levelone;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.erban.R;
-import com.erban.bean.NormalGoods;
-import com.erban.bean.TopGoods;
-import com.erban.util.ViewUtils;
-import com.erban.view.FilterView;
-import com.erban.view.ShopAdapter;
-import com.nostra13.universalimageloader.core.ImageLoader;
-
-import android.graphics.Paint;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.view.WindowManager;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.PopupWindow;
+import android.widget.PopupWindow.OnDismissListener;
+
+import com.erban.R;
+import com.erban.util.ViewUtils;
+import com.erban.view.FilterView;
 
 public class BaseShopFragment extends Fragment {
 
     protected ListView shopListView;
-    protected ListView choicesListView;
 
     protected FilterView first;
     protected FilterView second;
     protected FilterView third;
 
-    private FilterViewGroup filterViewGroup;
+    protected PopupWindow popupWindow;
+    
+    protected FilterViewGroup filterViewGroup;
 
+    protected List<FilterView> tabs;
+    
+    protected ListView filterListView;
+    
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         shopListView = (ListView) view.findViewById(R.id.shopListView);
-        choicesListView = (ListView) view.findViewById(R.id.choice_list);
 
         first = (FilterView) view.findViewById(R.id.first);
         second = (FilterView) view.findViewById(R.id.second);
         third = (FilterView) view.findViewById(R.id.third);
 
-        List<FilterView> tabs = new ArrayList<FilterView>();
+        tabs = new ArrayList<FilterView>();
         tabs.add(first);
         tabs.add(second);
         tabs.add(third);
@@ -57,6 +58,30 @@ public class BaseShopFragment extends Fragment {
         initItems();
         
         initHeader();
+        
+        initPopUpWindow();
+    }
+
+    protected void initPopUpWindow() {
+        filterListView = new ListView(getActivity());
+        popupWindow = new PopupWindow(getActivity());
+        popupWindow.setWidth(WindowManager.LayoutParams.MATCH_PARENT);
+        popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+        popupWindow.setContentView(filterListView);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setOnDismissListener(new OnDismissListener() {
+            
+            @Override
+            public void onDismiss() {
+                tabs.get(0).setSelected(false);
+                tabs.get(1).setSelected(false);
+                tabs.get(2).setSelected(false);
+            }
+        });
+        popupWindow.setAnimationStyle(android.R.style.Animation_Dialog);
+        popupWindow.setBackgroundDrawable(new ColorDrawable(getResources()
+                .getColor(R.color.color_white)));
+        filterListView.setDivider(null);
     }
 
     protected void initTabs(List<FilterView> tabs) {
@@ -76,8 +101,14 @@ public class BaseShopFragment extends Fragment {
                 R.layout.fragment_item_list);
     }
 
-    private class FilterViewGroup {
+    public class FilterViewGroup {
         private final List<FilterView> filterViews = new ArrayList<FilterView>();
+
+        private onSelectedListener listener;
+
+        public void setListener(onSelectedListener listener) {
+            this.listener = listener;
+        }
 
         public void appendView(FilterView view) {
             filterViews.add(view);
@@ -98,6 +129,9 @@ public class BaseShopFragment extends Fragment {
 
                             @Override
                             public void onClick(View v) {
+                                if (listener != null) {
+                                    listener.onSelected(position);
+                                }
                                 select(position);
                             }
                         });
@@ -109,5 +143,10 @@ public class BaseShopFragment extends Fragment {
                 filterViews.get(i).setSelected(i == position);
             }
         }
+        
+    }
+    
+    public interface onSelectedListener {
+        void onSelected(int pos);
     }
 }

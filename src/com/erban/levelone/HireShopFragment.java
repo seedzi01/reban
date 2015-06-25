@@ -1,10 +1,12 @@
 package com.erban.levelone;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,8 @@ import com.erban.bean.TopCompany;
 import com.erban.util.ViewUtils;
 import com.erban.view.FilterView;
 import com.erban.view.HireAdapter;
+import com.erban.view.SingleItemAdapter;
+import com.erban.view.SingleItemAdapter.ExecuteItem;
 import com.erban.volley.GsonRequest;
 import com.erban.volley.HttpUrls;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -38,6 +42,50 @@ public class HireShopFragment extends BaseShopFragment {
         tabs.get(2).setTitle(getString(R.string.category));
     }
 
+    @Override
+    protected void initPopUpWindow() {
+        super.initPopUpWindow();
+        filterViewGroup.setListener(new onSelectedListener() {
+            @Override
+            public void onSelected(int pos) {
+                switch (pos) {
+                case 0:
+                    bindDistances(filterListView);
+                    break;
+                case 1:
+                    bindDistances(filterListView);
+                    break;
+                case 2:
+                    bindDistances(filterListView);
+                    break;
+                default:
+                    break;
+                }
+            }
+        });
+    }
+    
+    private void bindDistances(ListView listview) {
+
+        // bind disntances.
+        SingleItemAdapter itemAdapter = new SingleItemAdapter();
+        ExecuteItem item = new ExecuteItem();
+        item.title = "海淀";
+        ExecuteItem item1 = new ExecuteItem();
+        item1.title = "朝阳";
+        ExecuteItem item2 = new ExecuteItem();
+        item2.title = "东城";
+        List<ExecuteItem> executeItems = new ArrayList<SingleItemAdapter.ExecuteItem>();
+        executeItems.add(item);
+        executeItems.add(item1);
+        executeItems.add(item2);
+        itemAdapter.setItems(executeItems);
+        listview.setAdapter(itemAdapter);
+
+        popupWindow.showAsDropDown(tabs.get(0));
+    }
+
+    
     private void showHeader(TopCompany topCompany) {
         View header = ViewUtils.newInstance(shopListView,
                 R.layout.view_shop_banner);
