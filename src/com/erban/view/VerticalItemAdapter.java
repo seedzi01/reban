@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.erban.R;
 import com.erban.util.ViewUtils;
+import com.erban.view.SingleItemAdapter.ExecuteItem;
 
 import android.text.TextUtils;
 import android.view.View;
@@ -12,10 +13,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class SingleItemAdapter extends BaseAdapter {
+public class VerticalItemAdapter extends BaseAdapter  {
 
     private List<ExecuteItem> items;
-    
+
     public void setItems(List<ExecuteItem> items) {
         this.items = items;
     }
@@ -38,7 +39,7 @@ public class SingleItemAdapter extends BaseAdapter {
     @Override
     public View getView(int pos, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = ViewUtils.newInstance(parent, R.layout.view_single_item);
+            convertView = ViewUtils.newInstance(parent, R.layout.view_vertical_single_item);
         }
         ImageView iconView = (ImageView) convertView.findViewById(R.id.icon);
         TextView titleView = (TextView) convertView.findViewById(R.id.title);
@@ -61,13 +62,4 @@ public class SingleItemAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public static class ExecuteItem {
-        public String icon;
-        public String title;
-        public ExecuteAction action;
-    }
-    
-    public interface ExecuteAction {
-        void execute();
-    }
 }

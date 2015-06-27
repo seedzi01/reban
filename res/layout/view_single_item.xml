@@ -9,9 +9,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#c9c9c9"
-        />
-    
+        android:background="#c9c9c9"/>
+
     <ImageView 
         android:id="@+id/icon"
         android:layout_height="wrap_content"
@@ -24,8 +23,8 @@
         android:layout_toRightOf="@id/icon"
         android:layout_centerVertical="true"
         android:textSize="14sp"
-        android:textColor="#434343"
+        android:textColor="@color/app_pressed_color"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"/>
-    
+        android:layout_width="match_parent"/>
+
 </RelativeLayout>

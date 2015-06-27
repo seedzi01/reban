@@ -100,15 +100,18 @@ public class DiscountShopFragment extends BaseShopFragment {
         // bind disntances.
         SingleItemAdapter itemAdapter = new SingleItemAdapter();
         ExecuteItem item = new ExecuteItem();
-        item.title = "海淀";
+        item.title = "附近";
         ExecuteItem item1 = new ExecuteItem();
-        item1.title = "朝阳";
+        item1.title = "热门";
         ExecuteItem item2 = new ExecuteItem();
-        item2.title = "东城";
+        item2.title = "海淀";
+        ExecuteItem item3 = new ExecuteItem();
+        item3.title = "朝阳";
         List<ExecuteItem> executeItems = new ArrayList<SingleItemAdapter.ExecuteItem>();
         executeItems.add(item);
         executeItems.add(item1);
         executeItems.add(item2);
+        executeItems.add(item3);
         itemAdapter.setItems(executeItems);
         listview.setAdapter(itemAdapter);
 
@@ -120,15 +123,30 @@ public class DiscountShopFragment extends BaseShopFragment {
         // bind disntances.
         SingleItemAdapter itemAdapter = new SingleItemAdapter();
         ExecuteItem item = new ExecuteItem();
-        item.title = "西餐";
+        item.title = "美食";
+        item.icon = String.valueOf(R.drawable.food_state);
         ExecuteItem item1 = new ExecuteItem();
-        item1.title = "电影院";
+        item1.title = "电影";
+        item1.icon = String.valueOf(R.drawable.movie_state);
         ExecuteItem item2 = new ExecuteItem();
-        item2.title = "游戏";
+        item2.title = "购物";
+        item2.icon = String.valueOf(R.drawable.buy_state);
+        ExecuteItem item3 = new ExecuteItem();
+        item3.title = "娱乐";
+        item3.icon = String.valueOf(R.drawable.play_state);
+        ExecuteItem item4 = new ExecuteItem();
+        item4.title = "酒店";
+        item4.icon = String.valueOf(R.drawable.hotel_state);
+        ExecuteItem item5 = new ExecuteItem();
+        item5.title = "运动";
+        item5.icon = String.valueOf(R.drawable.sport_state);
         List<ExecuteItem> executeItems = new ArrayList<SingleItemAdapter.ExecuteItem>();
         executeItems.add(item);
         executeItems.add(item1);
         executeItems.add(item2);
+        executeItems.add(item3);
+        executeItems.add(item4);
+        executeItems.add(item5);
         itemAdapter.setItems(executeItems);
         listview.setAdapter(itemAdapter);
 
@@ -140,15 +158,22 @@ public class DiscountShopFragment extends BaseShopFragment {
         // bind disntances.
         SingleItemAdapter itemAdapter = new SingleItemAdapter();
         ExecuteItem item = new ExecuteItem();
-        item.title = "按距离排序";
+        item.title = "离我最近";
+        item.icon = String.valueOf(R.drawable.distance_state);
         ExecuteItem item1 = new ExecuteItem();
-        item1.title = "按评价排序";
+        item1.title = "人气最旺";
+        item1.icon = String.valueOf(R.drawable.hot_state);
         ExecuteItem item2 = new ExecuteItem();
-        item2.title = "按价格排序";
+        item2.title = "优惠最大";
+        item2.icon = String.valueOf(R.drawable.cheap_state);
+        ExecuteItem item3 = new ExecuteItem();
+        item3.title = "评价最好";
+        item3.icon = String.valueOf(R.drawable.comment_state);
         List<ExecuteItem> executeItems = new ArrayList<SingleItemAdapter.ExecuteItem>();
         executeItems.add(item);
         executeItems.add(item1);
         executeItems.add(item2);
+        executeItems.add(item3);
         itemAdapter.setItems(executeItems);
         listview.setAdapter(itemAdapter);
 
@@ -168,8 +193,8 @@ public class DiscountShopFragment extends BaseShopFragment {
                             DiscountContentModel contentModel = listModel
                                     .getMsg();
                             if (contentModel != null) {
-                                showHeader(contentModel.getTop());
-                                showItems(contentModel.getList());
+                                // showHeader(contentModel.getTop());
+                                // showItems(contentModel.getList());
                             }
                         }
                     }
