@@ -3,6 +3,7 @@ package com.erban.module.user.control;
 import android.text.TextUtils;
 
 import com.erban.WifiApplication;
+import com.erban.bean.NetResult;
 import com.erban.module.user.control.model.UserInfoModel;
 import com.erban.util.UserUtil;
 import com.yuekuapp.BaseControl;
@@ -58,4 +59,20 @@ public class UserInfoControl extends BaseControl {
             sendMessage("updateUserInfoExceptionCallBack");
         }
     }
+    
+    @AsynMethod
+	public void loginOutAsyn(){
+		try {
+			NetResult netResult = WifiApplication.getInstance().getApi().loginOut(UserUtil.getUser().getToken());
+			if(netResult.getCode().trim().equals("0")){
+				UserUtil.clearUser();
+				sendMessage("loginOutAsynCallBack");
+			}else{
+				sendMessage("loginOutAsynExceptionCallBack");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			sendMessage("loginOutAsynExceptionCallBack");
+		} 				
+	}
 }

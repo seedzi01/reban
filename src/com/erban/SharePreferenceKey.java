@@ -46,6 +46,8 @@ public class SharePreferenceKey {
     
     public static final String USER_QQ = "qq";
     
+    public static final String USER_LINK = "link";
+    
     public static final String APP = "app"; 
 	public static final String APP_KEY_INSTALL_FIRST = "app_install_first";
 }

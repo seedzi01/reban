@@ -137,7 +137,8 @@ public class UserFragment extends BaseFragment<UserControl> implements View.OnCl
 		int id = v.getId();
 		switch (id) {
 		case R.id.user_icon:
-		    UserInfoActivity.startActivity(getActivity());
+			if(UserUtil.getUser()!=null)
+				UserInfoActivity.startActivity(getActivity());
 		    break;
 		case R.id.login_button://登录
 			LoginAndRegisterActivity.startActivity(getActivity(), true);

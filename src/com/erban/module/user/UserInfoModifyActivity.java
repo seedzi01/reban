@@ -67,6 +67,12 @@ public class UserInfoModifyActivity extends AbstractActivity<UserInfoControl> im
 		mTitleBar.findViewById(R.id.login).setVisibility(View.GONE);
 		mTitleBar.findViewById(R.id.register).setVisibility(View.GONE);
 		mTitleBar.findViewById(R.id.back).setVisibility(View.VISIBLE);
+		mTitleBar.setBackListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 		((ImageView)mTitleBar.findViewById(R.id.back)).setImageResource(R.drawable.white_left_arrow);
 		mTitleBar.findViewById(R.id.finish).setOnClickListener(this);
 		
@@ -130,6 +136,20 @@ public class UserInfoModifyActivity extends AbstractActivity<UserInfoControl> im
 	
 	// =========================================== CallBack =================================================
 	public void updateUserInfoCallBack(){
+		User user = UserUtil.getUser();
+		UserInfo userInfo = user.getUserInfo();
+		if(mKey.equals("nickname")){
+			userInfo.setNickname(mEdit.getText().toString());
+		}else if(mKey.equals("username")){
+			userInfo.setUsername(mEdit.getText().toString());
+		}else if(mKey.equals("addr")){
+			userInfo.setAddress(mEdit.getText().toString());
+		}else if(mKey.equals("link")){
+			userInfo.setLink(mEdit.getText().toString());
+		}else if(mKey.equals("qq")){
+			userInfo.setQq(mEdit.getText().toString());
+		}
+		User.save(user);
 	    dismissDialog();
 	    Toast.makeText(this, "修改成功", 0).show();
 	    finish();

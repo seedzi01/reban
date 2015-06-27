@@ -87,6 +87,8 @@ public class User {
 		
 		private String qq;
 		
+		private String link;
+		
 		public String getIdcard() {
 			return idcard;
 		}
@@ -231,7 +233,15 @@ public class User {
             this.qq = qq;
         }
 
-        public String getSex(){
+        public String getLink() {
+			return link;
+		}
+
+		public void setLink(String link) {
+			this.link = link;
+		}
+
+		public String getSex(){
             if(!TextUtils.isEmpty(gender) && "0".equals(gender)){
                 return "男";
             }else if(!TextUtils.isEmpty(gender) && "1".equals(gender)){
@@ -250,7 +260,7 @@ public class User {
                     + cost + ", idcard=" + idcard + ", address=" + address
                     + ", birth=" + birth + ", nickname=" + nickname
                     + ", telno=" + telno + ", gender=" + gender + ", openid="
-                    + openid + ", qq=" + qq + "]";
+                    + openid + ", qq=" + qq + ", link=" + link + "]";
         }
 	}
 
@@ -275,6 +285,7 @@ public class User {
 		sharePreferenceWrap.putString(SharePreferenceKey.USER_GENDER, user.getUserInfo().gender);
 		sharePreferenceWrap.putString(SharePreferenceKey.USER_OPENID, user.getUserInfo().openid);
 		sharePreferenceWrap.putString(SharePreferenceKey.USER_QQ, user.getUserInfo().qq);
+		sharePreferenceWrap.putString(SharePreferenceKey.USER_LINK, user.getUserInfo().link);
 	}
 	
 	public static User getFromShareP(){
@@ -303,7 +314,7 @@ public class User {
 	    userInfo.setGender(sharePreferenceWrap.getString(SharePreferenceKey.USER_GENDER ,"")); 
 	    userInfo.setOpenid(sharePreferenceWrap.getString(SharePreferenceKey.USER_OPENID ,"")); 
 	    userInfo.setQq(sharePreferenceWrap.getString(SharePreferenceKey.USER_QQ ,"")); 
-		
+	    userInfo.setLink(sharePreferenceWrap.getString(SharePreferenceKey.USER_LINK ,"")); 
 		user.setUserInfo(userInfo);
 		return user;
 	}

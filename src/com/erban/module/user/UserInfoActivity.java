@@ -73,6 +73,7 @@ public class UserInfoActivity extends AbstractActivity<UserInfoControl> implemen
 	private TextView userTypeDesc;
 	/**累计消费*/	
 	private TextView costTv;
+	private View loginOutBt;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +86,14 @@ public class UserInfoActivity extends AbstractActivity<UserInfoControl> implemen
 	public void onResume() {
 		super.onResume();
 		ImageLoader.getInstance().displayImage(UserUtil.getUser().getUserInfo().getAvatar(),mUserIcon);
+		UserInfo user = UserUtil.getUser().getUserInfo();
+		initViewItem((ViewGroup)findViewById(R.id.item2), "昵称", user.getNickname());
+		initViewItem((ViewGroup)findViewById(R.id.item3), "姓名", user.getUsername());
+		initViewItem((ViewGroup)findViewById(R.id.item4), "性别", user.getSex());
+		initViewItem((ViewGroup)findViewById(R.id.item5), "出生年月", user.getBirth());
+		initViewItem((ViewGroup)findViewById(R.id.item6), "所在地", user.getAddress());
+		initViewItem((ViewGroup)findViewById(R.id.item7), "手机", user.getLink());
+		initViewItem((ViewGroup)findViewById(R.id.item8), "QQ", user.getQq());
 	}
 	
 	private void initView(){
@@ -103,14 +112,8 @@ public class UserInfoActivity extends AbstractActivity<UserInfoControl> implemen
 //		findViewById(R.id.loginout).setOnClickListener(this);
 		mUserIcon = (CircleImageView) findViewById(R.id.user_icon);
 		mUserIcon.setOnClickListener(this);
-		UserInfo user = UserUtil.getUser().getUserInfo();
-		initViewItem((ViewGroup)findViewById(R.id.item2), "昵称", user.getNickname());
-		initViewItem((ViewGroup)findViewById(R.id.item3), "姓名", user.getUsername());
-		initViewItem((ViewGroup)findViewById(R.id.item4), "性别", user.getSex());
-		initViewItem((ViewGroup)findViewById(R.id.item5), "出生年月", user.getBirth());
-		initViewItem((ViewGroup)findViewById(R.id.item6), "所在地", user.getAddress());
-		initViewItem((ViewGroup)findViewById(R.id.item7), "手机", user.getTelno());
-		initViewItem((ViewGroup)findViewById(R.id.item8), "QQ", user.getQq());
+		loginOutBt = findViewById(R.id.login_out);
+		loginOutBt.setOnClickListener(this);
 	}
 	
 	private void initViewItem(ViewGroup viewGroup,String tilte, String data){
@@ -168,12 +171,30 @@ public class UserInfoActivity extends AbstractActivity<UserInfoControl> implemen
             UserInfoModifyActivity.startActivity(this, "所在地", "addr", UserUtil.getUser().getUserInfo().getAddress());
             break;
         case R.id.item7:
-            UserInfoModifyActivity.startActivity(this, "手机", "nickname", UserUtil.getUser().getUserInfo().getTelno());
+            UserInfoModifyActivity.startActivity(this, "手机", "link", UserUtil.getUser().getUserInfo().getLink());
             break;
         case R.id.item8:
             UserInfoModifyActivity.startActivity(this, "QQ", "qq", UserUtil.getUser().getUserInfo().getQq());
             break;
-            
+        case R.id.login_out:
+        	 AlertDialog.Builder builder = new Builder(this);
+             builder.setMessage("您确认要登出吗?");
+             builder.setTitle("提示");
+             builder.setPositiveButton("确认", new OnClickListener() {
+                 @Override
+                 public void onClick(DialogInterface dialog, int which) {
+                     dialog.dismiss();
+                     loginOut();
+                 }
+             });
+             builder.setNegativeButton("取消", new OnClickListener() {
+                 @Override
+                 public void onClick(DialogInterface dialog, int which) {
+                     dialog.dismiss();
+                 }
+             });
+             builder.create().show();
+        	break;
 		default:
 			break;
 		}
@@ -198,7 +219,7 @@ public class UserInfoActivity extends AbstractActivity<UserInfoControl> implemen
 	
 	private void loginOut(){
 		showProgressDialog("登出中...");
-//		mControl.loginOutAsyn();
+		mControl.loginOutAsyn();
 	}
 	
 	private void uploadIcon(String filePath){
@@ -228,9 +249,7 @@ public class UserInfoActivity extends AbstractActivity<UserInfoControl> implemen
 	    UserUtil.clearUser();
 		dismissDialog();
 		AbstractActivity.clearActivity();
-		/*
 		LoginAndRegisterActivity.startActivity(this);
-		*/
 	}
 	
 	public void loginOutAsynExceptionCallBack(){
