@@ -6,17 +6,19 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.LayoutInflater.Filter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.erban.AbstractActivity;
 import com.erban.R;
 import com.erban.module.user.center.control.UserCenterControl;
+import com.erban.view.FilterView;
 import com.erban.view.ShopAdapter;
 import com.erban.view.pullrefreshview.PullToRefreshListView;
 import com.erban.widget.TitleBar;
 
-public class DiscountActivity extends AbstractActivity<UserCenterControl> {
+public class DiscountActivity extends AbstractActivity<UserCenterControl> implements View.OnClickListener{
 
 
     public static void startActivity(Activity ac){
@@ -50,9 +52,13 @@ public class DiscountActivity extends AbstractActivity<UserCenterControl> {
         mTitlebar.setTitle("我的优惠");
         
         //init inavgation
-        setupNavItem((ViewGroup)findViewById(R.id.first));
-        setupNavItem((ViewGroup)findViewById(R.id.second));
-        setupNavItem((ViewGroup)findViewById(R.id.third));
+        mFirstTitle = (FilterView) findViewById(R.id.first);
+        mSecondTitle = (FilterView) findViewById(R.id.second);
+        mThirdTttle = (FilterView) findViewById(R.id.third);
+        setupNavItem(mFirstTitle);
+        setupNavItem(mSecondTitle);
+        setupNavItem(mThirdTttle);
+        mFirstTitle.performClick();
         
         mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.list);
         mListView = mPullToRefreshListView.getRefreshableView();
@@ -60,34 +66,56 @@ public class DiscountActivity extends AbstractActivity<UserCenterControl> {
         mListView.setAdapter(mAdapter);
     }
     
-    TextView mFirstTitle;
-    TextView mSecondTitle;
-    TextView mThirdTttle;
-    private void setupNavItem(ViewGroup root){
+    FilterView mFirstTitle;
+    FilterView mSecondTitle;
+    FilterView mThirdTttle;
+    private void setupNavItem(FilterView root){
+    	root.setRightIconVisiable(false);
         TextView title = (TextView) root.findViewById(R.id.title);
         title.setCompoundDrawables(null, null, null, null);
         switch (root.getId()) {
         case R.id.first:
-            mFirstTitle = title;
-            mFirstTitle.setText("已抢购");
+            mFirstTitle.setTitle("已抢购");
             break;
         case R.id.second:
-            mSecondTitle = title;
-            mFirstTitle.setText("已过期");
+            mSecondTitle.setTitle("已过期");
             break;
         case R.id.third:
-            mThirdTttle = title;
-            mFirstTitle.setText("已使用");
+            mThirdTttle.setTitle("已使用");
             break;
         default:
             break;
         }
+        root.setOnClickListener(this);
     }
     
     
     private void initData(){
         mControl.showFavList();
     }
+    
+    @Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.first:
+			mFirstTitle.setSelected(true);
+			mSecondTitle.setSelected(false);
+			mThirdTttle.setSelected(false);
+			break;
+		case R.id.second:
+			mFirstTitle.setSelected(false);
+			mSecondTitle.setSelected(true);
+			mThirdTttle.setSelected(false);
+			break;
+		case R.id.third:
+			mFirstTitle.setSelected(false);
+			mSecondTitle.setSelected(false);
+			mThirdTttle.setSelected(true);
+			break;
+		default:
+			break;
+		}
+	}
     
     // ======================================= Callback ============================================= //
     
@@ -99,4 +127,6 @@ public class DiscountActivity extends AbstractActivity<UserCenterControl> {
     public void showFavListExceptionCallback(){
         
     }
+
+	
 }

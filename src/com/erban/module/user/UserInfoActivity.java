@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.erban.AbstractActivity;
 import com.erban.R;
 import com.erban.WifiApplication;
+import com.erban.bean.User;
 import com.erban.bean.User.UserInfo;
 import com.erban.module.user.control.UserInfoControl;
 import com.erban.util.UserUtil;
@@ -78,6 +79,12 @@ public class UserInfoActivity extends AbstractActivity<UserInfoControl> implemen
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_info_layout);
 		initView();
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		ImageLoader.getInstance().displayImage(UserUtil.getUser().getUserInfo().getAvatar(),mUserIcon);
 	}
 	
 	private void initView(){
@@ -183,6 +190,7 @@ public class UserInfoActivity extends AbstractActivity<UserInfoControl> implemen
             String path = cursor.getString(column_index);  
             iconPath = path;
             uploadIcon(path);
+            
         }  
 		super.onActivityResult(requestCode, resultCode, data);
 	}
@@ -194,6 +202,7 @@ public class UserInfoActivity extends AbstractActivity<UserInfoControl> implemen
 	}
 	
 	private void uploadIcon(String filePath){
+		showProgressDialog("上传图片中...");
 		mControl.uploadIcon(filePath);
 	}
 	
@@ -216,10 +225,10 @@ public class UserInfoActivity extends AbstractActivity<UserInfoControl> implemen
 	
 	// =========================================== CallBack =================================================
 	public void loginOutAsynCallBack(){
-		/*
 	    UserUtil.clearUser();
 		dismissDialog();
 		AbstractActivity.clearActivity();
+		/*
 		LoginAndRegisterActivity.startActivity(this);
 		*/
 	}
@@ -233,6 +242,9 @@ public class UserInfoActivity extends AbstractActivity<UserInfoControl> implemen
 		if(iconPath!=null){
 	        Bitmap bitmap = BitmapFactory.decodeFile(iconPath);
 			mUserIcon.setImageBitmap(bitmap);
+			User user = UserUtil.getUser();
+			user.getUserInfo().setAvatar(mControl.getModel().getUploadFileUrl());
+			UserUtil.getUser().save(user);
 		}
 	}
 	

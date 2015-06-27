@@ -73,7 +73,10 @@
         <activity 
             android:theme="@android:style/Theme.NoTitleBar"
             android:name="com.erban.module.user.center.DiscountActivity"/>
-   	
+   		<!-- 会员 -->
+ 		<activity 
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:name="com.erban.module.user.center.MembershipCardActivity"/>
     </application>
 
 </manifest>

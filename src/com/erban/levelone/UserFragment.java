@@ -7,6 +7,7 @@ import com.erban.module.user.LoginAndRegisterActivity;
 import com.erban.module.user.UserInfoActivity;
 import com.erban.module.user.center.DiscountActivity;
 import com.erban.module.user.center.FavActivity;
+import com.erban.module.user.center.MembershipCardActivity;
 import com.erban.module.user.center.MessageActivity;
 import com.erban.util.UserUtil;
 import com.erban.widget.TitleBar;
@@ -150,8 +151,8 @@ public class UserFragment extends BaseFragment<UserControl> implements View.OnCl
 		case R.id.line2: 
 		    DiscountActivity.startActivity(getActivity());
 			break;
-		case R.id.line3: //我的收藏
-//			CollectionActivity.startActivity(getActivity());
+		case R.id.line3: 
+			MembershipCardActivity.startActivity(getActivity());
 			break;
 		case R.id.line4: //我的消息
 			MessageActivity.startActivity(getActivity());

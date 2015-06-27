@@ -137,7 +137,6 @@ public class WifiApi {
     // ========================================================================================
     // 用户资料(NET)
     // ========================================================================================
-    
     /**
      * 获取用户信息
      * @throws Exception 
@@ -154,7 +153,6 @@ public class WifiApi {
                 new BasicNameValuePair("fig", Security.get32MD5Str(values)));
         return  mHttpApi.doHttpRequestObject(httpGet, new UserLoginBuilder());
     }
-    
     /**
      * 更新用户头像
      * @throws Exception 
@@ -167,14 +165,14 @@ public class WifiApi {
         params.put("token", token);
         params.put("uptime", String.valueOf(System.currentTimeMillis()/1000));
         params.put("fig",  Security.get32MD5Str(values));
-        return new UploadFIleBuilder().build(new JSONObject(FileUtils.uploadSubmit(urlManager.upoadAvatarUrl(),params,new File(filePath))));
+        String fileUrl = FileUtils.uploadSubmit(urlManager.upoadAvatarUrl(),params,new File(filePath));
+        return fileUrl;
     }
-    
     /**
      * 更新用户信息
      * @throws Exception 
      */
-    public User updateUserInfo(String token,String userid,String key,String value) throws Exception{
+    public NetResult updateUserInfo(String token,String userid,String key,String value) throws Exception{
         BasicNameValuePair[] values = {
                 new BasicNameValuePair("token", token),
                 new BasicNameValuePair("userid", userid),
@@ -185,7 +183,7 @@ public class WifiApi {
                 values[1],
                 values[2],
                 new BasicNameValuePair("fig", Security.get32MD5Str(values)));
-        return  mHttpApi.doHttpRequestObject(httpGet, new UserLoginBuilder());
+        return  mHttpApi.doHttpRequestObject(httpGet, new NetResultBuilder());
     }
     
     // ========================================================================================

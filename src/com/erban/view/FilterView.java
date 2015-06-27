@@ -44,8 +44,9 @@ public class FilterView extends RelativeLayout {
                 ? WifiApplication.getInstance().getResources().getColor(R.color.font_module_pressed) 
                 : WifiApplication.getInstance().getResources().getColor(R.color.color_app_black));
         rightIcon.setBounds(0, 0, rightIcon.getMinimumWidth(), rightIcon.getMinimumHeight());
-        titleView.setCompoundDrawables(
-                null, null, rightIcon, null);
+        if(rightIconVisiable)
+	        titleView.setCompoundDrawables(
+	                null, null, rightIcon, null);
         invalidate();
     }
 
@@ -55,5 +56,10 @@ public class FilterView extends RelativeLayout {
     
     public void setTitle(CharSequence title) {
         titleView.setText(title);
+    }
+    
+    private boolean rightIconVisiable = true;
+    public void setRightIconVisiable(boolean visiable){
+    	rightIconVisiable = visiable;	
     }
 }

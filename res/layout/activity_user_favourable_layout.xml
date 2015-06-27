@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
+    android:background="#ffffff"
     xmlns:ptr="http://schemas.android.com/apk/res/com.erban">
     
     <include android:id="@+id/titlebar" layout="@layout/title_bar_layout"/>
@@ -35,6 +36,12 @@
             android:layout_weight="1"
             layout="@layout/view_filter_item"/>
     </LinearLayout>
+    
+        <View 
+        android:id="@+id/divide_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dcdcdc"/>
       <RelativeLayout 
         android:id="@+id/container"
         android:layout_height="match_parent"

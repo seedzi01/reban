@@ -15,6 +15,11 @@ public class UserInfoControl extends BaseControl {
 
     public UserInfoControl(MessageProxy mMethodCallBack) {
         super(mMethodCallBack);
+        mModel = new UserInfoModel();
+    }
+    
+    public UserInfoModel getModel(){
+    	return mModel;
     }
 
     @AsynMethod
@@ -22,14 +27,23 @@ public class UserInfoControl extends BaseControl {
         String uploadFileUrl = null;
         try {
             uploadFileUrl = WifiApplication.getInstance().getApi().uploadFile(UserUtil.getUser().getToken(),filePath);
+            android.util.Log.d("111", "uploadFileUrl =" + uploadFileUrl);
         } catch (Exception e) {
             sendMessage("uploadIconExceptionCallBack");
             e.printStackTrace();
         }
         mModel.setUploadFileUrl(uploadFileUrl);
-        if(!TextUtils.isEmpty(uploadFileUrl))
+        if(!TextUtils.isEmpty(uploadFileUrl)){
+        	 try {
+				WifiApplication.getInstance().getApi().updateUserInfo(UserUtil.getUser().getToken(),
+				         UserUtil.getUser().getUserInfo().getUserid(),"avatar", uploadFileUrl);
+			} catch (Exception e) {
+				sendMessage("uploadIconExceptionCallBack");
+				e.printStackTrace();
+				return;
+			}
             sendMessage("uploadIconCallBack");
-        else
+        }else
             sendMessage("uploadIconExceptionCallBack");
     }
 
