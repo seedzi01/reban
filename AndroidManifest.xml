@@ -69,6 +69,10 @@
     	<activity 
   			android:theme="@android:style/Theme.NoTitleBar"
 		    android:name="com.erban.module.user.center.FavActivity"/>
+        <!-- 优惠 -->
+        <activity 
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:name="com.erban.module.user.center.DiscountActivity"/>
    	
     </application>
 
