@@ -171,7 +171,7 @@ public class UserInfoModifyActivity extends AbstractActivity<UserInfoControl> im
         builder.setPositiveButton("确认", new OnClickListener() {   
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mControl.updateUserInfo(mKey,mValue);
+                mControl.updateUserInfo(mKey,mEdit.getText().toString());
                 dialog.dismiss();    
                 showProgressDialog("用户信息上传中...");
              }

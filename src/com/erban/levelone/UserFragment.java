@@ -20,6 +20,7 @@ import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -75,7 +76,9 @@ public class UserFragment extends BaseFragment<UserControl> implements View.OnCl
 		mRootView.findViewById(R.id.back).setVisibility(View.GONE);
 		mRootView.findViewById(R.id.user_icon).setOnClickListener(this);;
 		mTitleBar = (TitleBar) mRootView.findViewById(R.id.titlebar);
+		mTitleBar.getTitle().setTextColor(Color.parseColor("#28b937"));
 		mTitleBar.setTitle("个人中心");
+		mTitleBar.setVisibility(View.GONE);
 		
 		line1 = (ViewGroup) mRootView.findViewById(R.id.line1);
 		setUpUserItem(line1, "我的积分", this,R.drawable.user_integral_icon);
