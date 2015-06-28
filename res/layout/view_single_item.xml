@@ -6,11 +6,6 @@
     android:background="@color/color_white"
     android:paddingLeft="17dp">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#c9c9c9"/>
-
     <ImageView 
         android:id="@+id/icon"
         android:layout_height="wrap_content"
@@ -26,5 +21,11 @@
         android:textColor="@color/app_pressed_color"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c9c9c9"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

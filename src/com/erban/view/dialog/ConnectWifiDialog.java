@@ -1,8 +1,10 @@
 package com.erban.view.dialog;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -59,7 +61,7 @@ public class ConnectWifiDialog extends DialogFragment {
         confirm.setOnClickListener(new View.OnClickListener() {
             
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 if (TextUtils.isEmpty(input.getText().toString())) {
                     ViewUtils.showShortToast(R.string.no_password);
                     return;
@@ -69,6 +71,11 @@ public class ConnectWifiDialog extends DialogFragment {
                         WifiApplication.getInstance()).connect(
                                 wifiInfo.getWifiName(), input.getText().toString(), wifiInfo.getSecurityType());
                 dialog.cancel();
+                FragmentManager transaction = ((Activity) view.getContext())
+                        .getFragmentManager();
+                ConnectingWifiDialog connectWifiDialog = ConnectingWifiDialog.newInstance();
+                connectWifiDialog.setStyle(R.style.Dialog_No_Border, 0);
+                connectWifiDialog.show(transaction, "ConnectingDialog");
             }
         });
         

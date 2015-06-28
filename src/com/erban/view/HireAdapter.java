@@ -2,6 +2,7 @@ package com.erban.view;
 
 import java.util.List;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import com.erban.R;
 import com.erban.bean.NormalCompany;
 import com.erban.util.ViewUtils;
+import com.erban.webview.WebPageActivity;
 
 public class HireAdapter extends BaseAdapter {
 
@@ -48,13 +50,23 @@ public class HireAdapter extends BaseAdapter {
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(ITEM_TAG, viewHolder);
         }
-        NormalCompany item = getItem(position);
+        final NormalCompany item = getItem(position);
         viewHolder.title.setText(item.title);
         viewHolder.address.setText(item.address);
         viewHolder.date.setText(item.uptime);
         viewHolder.salary.setText(item.salary);
         viewHolder.detail.setText(item.exp);
         viewHolder.company.setText(item.firm);
+        convertView.setOnClickListener(new View.OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(item.jump)) {
+                    return;
+                }
+                WebPageActivity.launch(v.getContext(), item.jump);
+            }
+        });
         return convertView;
     }
 

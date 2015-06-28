@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.erban.R;
+import com.erban.WifiApplication;
 import com.erban.util.ViewUtils;
 import com.erban.view.WifiAdapter;
 import com.erban.view.WifiStatusArea;
@@ -114,7 +115,7 @@ public class WifiFragment extends Fragment {
     private void updateWifiStatus() {
         if (statusView != null) {
 
-            if (!PhoneWifiManager.isConnected(getActivity(),
+            if (!PhoneWifiManager.isConnected(WifiApplication.getInstance(),
                     ConnectivityManager.TYPE_WIFI)) {
                 statusView.showDisConnectedStatus();
                 return;

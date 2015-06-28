@@ -5,8 +5,10 @@ import java.util.List;
 import com.erban.R;
 import com.erban.bean.NormalGoods;
 import com.erban.util.ViewUtils;
+import com.erban.webview.WebPageActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -53,7 +55,7 @@ public class ShopAdapter extends BaseAdapter {
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(ITEM_TAG, viewHolder);
         }
-        NormalGoods item = getItem(position);
+        final NormalGoods item = getItem(position);
         viewHolder.distance.setText("500m");
         viewHolder.title.setText(item.getGoods());
         viewHolder.subTitle.setText(item.getDesc());
@@ -61,6 +63,16 @@ public class ShopAdapter extends BaseAdapter {
         viewHolder.current.setText(item.getDprice());
         viewHolder.origin.setText(item.getPrice());
         ImageLoader.getInstance().displayImage(item.getLogo(), viewHolder.icon);
+        convertView.setOnClickListener(new View.OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(item.jump)) {
+                    return;
+                }
+                WebPageActivity.launch(v.getContext(), item.jump);
+            }
+        });
         return convertView;
     }
 

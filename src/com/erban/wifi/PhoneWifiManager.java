@@ -229,8 +229,8 @@ public class PhoneWifiManager {
             }
 
             break;
-
         case PSK:
+        default:
             wifiConfiguration.allowedKeyManagement
                     .set(WifiConfiguration.KeyMgmt.WPA_PSK);
 
@@ -239,8 +239,6 @@ public class PhoneWifiManager {
             } else {
                 wifiConfiguration.preSharedKey = '"' + password + '"';
             }
-            break;
-        default:
             break;
         }
         return wifiConfiguration;

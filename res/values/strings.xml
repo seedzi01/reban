@@ -32,4 +32,8 @@
     <string name="fetch_tips">获取数据失败</string>
     
     <string name="no_password">请输入密码</string>
+    <string name="detail">详细信息</string>
+    
+    <string name="state_connecting">正在连接中...</string>
+    <string name="state_connected">连接成功</string>
 </resources>

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class NormalCompany implements Serializable {
 
-    private static final long serialVersionUID = -7117375314569964501L;
+    private static final long serialVersionUID = 8345533671876334445L;
 
     public long id;
     public String title;
@@ -13,5 +13,5 @@ public class NormalCompany implements Serializable {
     public String firm;
     public String address;
     public String uptime;
-    
+    public String jump;
 }

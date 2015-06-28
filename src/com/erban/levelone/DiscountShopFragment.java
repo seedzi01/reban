@@ -5,7 +5,10 @@ import java.util.List;
 
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,6 +28,7 @@ import com.erban.view.SingleItemAdapter;
 import com.erban.view.SingleItemAdapter.ExecuteItem;
 import com.erban.volley.GsonRequest;
 import com.erban.volley.HttpUrls;
+import com.erban.webview.WebPageActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class DiscountShopFragment extends BaseShopFragment {
@@ -89,7 +93,7 @@ public class DiscountShopFragment extends BaseShopFragment {
         shopListView.addHeaderView(header);
     }
 
-    protected void showItems(List<NormalGoods> items) {
+    protected void showItems(final List<NormalGoods> items) {
         ShopAdapter adapter = new ShopAdapter();
         adapter.setItems(items);
         shopListView.setAdapter(adapter);
@@ -193,8 +197,8 @@ public class DiscountShopFragment extends BaseShopFragment {
                             DiscountContentModel contentModel = listModel
                                     .getMsg();
                             if (contentModel != null) {
-                                // showHeader(contentModel.getTop());
-                                // showItems(contentModel.getList());
+                                showHeader(contentModel.getTop());
+                                showItems(contentModel.getList());
                             }
                         }
                     }
