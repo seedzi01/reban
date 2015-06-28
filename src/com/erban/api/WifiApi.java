@@ -240,4 +240,24 @@ public class WifiApi {
 						new BasicNameValuePair("fig", Security.get32MD5Str(values)));
 				 return mHttpApi.doHttpRequestObject(httpGet, new MsgBuilder());
 	}
+	
+	/**
+     * 优惠列表
+     */
+	/*
+	public User showDiscount(String cp,String)
+			throws XiaoMeiCredentialsException,XiaoMeiIOException,XiaoMeiJSONException ,XiaoMeiOtherException {
+				BasicNameValuePair[] values = {
+				        new BasicNameValuePair("userid", userid) ,
+						new BasicNameValuePair("token", token) ,
+						new BasicNameValuePair("uptime", String.valueOf(System.currentTimeMillis()/1000)),
+				} ; 
+				HttpGet httpGet = mHttpApi.createHttpGet(urlManager.favListsUrl(),
+						values[0],
+						values[1],
+						values[2],
+						new BasicNameValuePair("fig", Security.get32MD5Str(values)));
+				 return mHttpApi.doHttpRequestObject(httpGet, new UserLoginBuilder());
+	}
+	*/
 }

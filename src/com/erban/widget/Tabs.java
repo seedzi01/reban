@@ -3,6 +3,8 @@ package com.erban.widget;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.waps.AppConnect;
+
 import com.erban.R;
 import com.erban.container.TabsFragmentManager;
 import com.erban.util.ScreenUtils;
@@ -94,6 +96,10 @@ public class Tabs extends LinearLayout implements View.OnClickListener{
     @Override
     public void onClick(View v) {
     	int tag = (Integer) v.getTag();
+    	if(tag==2){
+    		AppConnect.getInstance(getContext()).showOffers(getContext());
+    		return;
+    	}
     	if(v instanceof Tab){
         	int index = 0;
     		for(Tab tab :tabViews){

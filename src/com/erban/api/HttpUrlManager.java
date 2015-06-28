@@ -54,6 +54,10 @@ public class HttpUrlManager {
     String delFavUrl(){
     	return HOST + "/fav/del";
     }
+    /**优惠*/
+    String showDiscount(){
+        return HOST + "/user/sales";
+    }
     /*
     请求Host:	http://101.200.176.151/client/notice/
 
