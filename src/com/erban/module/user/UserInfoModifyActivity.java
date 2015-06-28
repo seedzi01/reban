@@ -124,6 +124,10 @@ public class UserInfoModifyActivity extends AbstractActivity<UserInfoControl> im
 			mCancel.setVisibility(View.GONE);
 		}else{
 			mCancel.setVisibility(View.VISIBLE);
+			if(s.toString().length() >15){
+				mEdit.setText(s.toString().substring(0, 15));
+				mEdit.setSelection(s.length()-1);
+			}
 		}
 	}
 	
