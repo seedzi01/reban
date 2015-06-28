@@ -2,6 +2,7 @@ package com.erban.module.user.center.model;
 
 import java.util.List;
 
+import com.erban.bean.MemberShip;
 import com.erban.bean.Msg;
 import com.erban.bean.NormalGoods;
 
@@ -26,4 +27,15 @@ public class UserCenterModel {
 	public List<Msg> getMsgList(){
 		return mMsgList;
 	}
+
+	private List<MemberShip> mMemberShips;
+
+	public void setMemberShip(List<MemberShip> list) {
+	    mMemberShips = list;
+	}
+
+	public List<MemberShip> getMemberShips() {
+        return mMemberShips;
+    }
+
 }

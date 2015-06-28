@@ -3,10 +3,7 @@ package com.erban.module.user.center.control;
 import java.util.List;
 
 import com.erban.WifiApplication;
-import com.erban.api.exception.XiaoMeiCredentialsException;
-import com.erban.api.exception.XiaoMeiIOException;
-import com.erban.api.exception.XiaoMeiJSONException;
-import com.erban.api.exception.XiaoMeiOtherException;
+import com.erban.bean.MemberShip;
 import com.erban.bean.Msg;
 import com.erban.bean.NormalGoods;
 import com.erban.module.user.center.model.UserCenterModel;
@@ -54,4 +51,18 @@ public class UserCenterControl extends BaseControl {
 		} 
 	}
 	
+	@AsynMethod
+	public void showMemeberShipAsyn() {
+	    try {
+	        // TODO replace 1 with UserUtil.getUser().getUserInfo().getUserid()
+	        List<MemberShip> data = WifiApplication.getInstance().getApi().showMemberShip(
+	                "1",
+                    UserUtil.getUser().getToken());
+	        mModel.setMemberShip(data);
+	        // sendMessage("showMemberShipCallback");
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        // sendMessage("showMemberShipExceptionCallback");
+	    }
+	}
 }

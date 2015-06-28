@@ -85,5 +85,9 @@ public class HttpUrlManager {
     String noticeUrl(){
     	return HOST + "/notice/lists";
     }
+    /*会员卡列表*/
+    String memberShip() {
+        return HOST + "/vip/lists";
+    }
 }
 

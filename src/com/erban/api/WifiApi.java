@@ -12,9 +12,11 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.provider.MediaStore.Audio.Genres.Members;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.erban.api.builder.MemberShipBuilder;
 import com.erban.api.builder.MsgBuilder;
 import com.erban.api.builder.NetResultBuilder;
 import com.erban.api.builder.NormalGoodsBuilder;
@@ -28,6 +30,7 @@ import com.erban.api.exception.XiaoMeiOtherException;
 import com.erban.api.http.AbstractHttpApi;
 import com.erban.api.http.HttpApi;
 import com.erban.api.http.HttpApiWithSession;
+import com.erban.bean.MemberShip;
 import com.erban.bean.Msg;
 import com.erban.bean.NetResult;
 import com.erban.bean.NormalGoods;
@@ -232,7 +235,7 @@ public class WifiApi {
 				        new BasicNameValuePair("userid", userid) ,
 						new BasicNameValuePair("token", token) ,
 						new BasicNameValuePair("uptime", String.valueOf(System.currentTimeMillis()/1000)),
-				} ; 
+				}; 
 				HttpGet httpGet = mHttpApi.createHttpGet(urlManager.noticeUrl(),
 						values[0],
 						values[1],
@@ -240,7 +243,6 @@ public class WifiApi {
 						new BasicNameValuePair("fig", Security.get32MD5Str(values)));
 				 return mHttpApi.doHttpRequestObject(httpGet, new MsgBuilder());
 	}
-	
 	/**
      * 优惠列表
      */
@@ -260,4 +262,26 @@ public class WifiApi {
 				 return mHttpApi.doHttpRequestObject(httpGet, new UserLoginBuilder());
 	}
 	*/
+
+	/**
+	 * 会员卡列表
+	 * @throws XiaoMeiOtherException 
+	 * @throws XiaoMeiJSONException 
+	 * @throws XiaoMeiIOException 
+	 * @throws XiaoMeiCredentialsException 
+	 */
+	public List<MemberShip> showMemberShip(String userid, String token) 
+	        throws XiaoMeiCredentialsException, XiaoMeiIOException, XiaoMeiJSONException, XiaoMeiOtherException {
+	    BasicNameValuePair[] values = {
+                new BasicNameValuePair("userid", userid) ,
+                new BasicNameValuePair("token", token) ,
+                new BasicNameValuePair("uptime", String.valueOf(System.currentTimeMillis()/1000)),
+        };
+	    HttpGet httpGet = mHttpApi.createHttpGet(urlManager.noticeUrl(),
+                values[0],
+                values[1],
+                values[2],
+                new BasicNameValuePair("fig", Security.get32MD5Str(values)));
+         return mHttpApi.doHttpRequestObject(httpGet, new MemberShipBuilder());
+	}
 }

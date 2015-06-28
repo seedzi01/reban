@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="11dp"
+    android:layout_width="match_parent"
+    android:layout_height="220dp">
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:layout_alignWithParentIfMissing="false"
+        android:background="@drawable/red_header_bg">
+        
+        <TextView 
+            android:id="@+id/title"
+            android:text="xxgsdgags"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+        
+        <TextView 
+            android:id="@+id/num_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/title"
+            android:layout_alignParentRight="true"
+            android:textColor="#870b0f"
+            android:text="sgage"
+            />
+        
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_below="@id/header"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="@drawable/harf_bottom">
+        
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_height="80dp"
+            android:layout_width="110dp"
+            android:layout_margin="16dp"/>
+        
+        <ImageView
+            android:id="@+id/vip_mark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/green_vip"
+            android:layout_toRightOf="@id/icon"
+            android:layout_marginTop="32dp"/>
+        
+        <View
+            android:id="@+id/divider"
+            android:layout_below="@id/icon"
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:background="@drawable/xuxian_divider"/>
+        
+        <TextView 
+            android:id="@+id/address"
+            android:layout_below="@id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:text="gageagas"
+            android:layout_alignLeft="@id/icon"
+            android:textColor="#434343"/>
+        
+        <TextView 
+            android:id="@+id/phone"
+            android:layout_below="@id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="gageagsg"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:layout_alignLeft="@id/icon"
+            android:textColor="#434343"/>
+        
+    </RelativeLayout>
+    
+</RelativeLayout>
