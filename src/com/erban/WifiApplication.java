@@ -22,7 +22,9 @@ public class WifiApplication extends Application{
 
     private static WifiApplication instance;
 
-    public synchronized static WifiApplication getInstance(){
+    private static Context appContext;
+    
+    public synchronized static WifiApplication getInstance() {
         if(instance == null){
             instance = new WifiApplication();
         }
@@ -35,6 +37,7 @@ public class WifiApplication extends Application{
     public void onCreate() {
         super.onCreate();
         instance = this;
+        appContext = this.getApplicationContext();
         api = new WifiApi("Wifi1.0", this);
         ControlFactory.init(this);
         initImageLoader(this);
@@ -74,8 +77,13 @@ public class WifiApplication extends Application{
         return mCurrentActivity;
     } 
 
+    private static RequestQueue reqQueue;
+    
     public static RequestQueue getRequestQueue() {
-        return Volley.newRequestQueue(instance);
+    	if (reqQueue == null) {
+    		reqQueue = Volley.newRequestQueue(appContext);
+    	}
+        return reqQueue;
     }
 
 }

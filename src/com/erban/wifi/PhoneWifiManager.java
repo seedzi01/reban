@@ -143,10 +143,15 @@ public class PhoneWifiManager {
      * @return connected or not.
      */
     public static boolean isConnected(Context context, int netWorkType) {
-        ConnectivityManager connManager = (ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo info = connManager.getNetworkInfo(netWorkType);
-        return info != null && info.isConnected();
+    	try {
+    		ConnectivityManager connManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+    		NetworkInfo info = connManager.getNetworkInfo(netWorkType);
+            return info != null && info.isConnected();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return false;
     }
 
     /**

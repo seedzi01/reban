@@ -277,7 +277,7 @@ public class WifiApi {
                 new BasicNameValuePair("token", token) ,
                 new BasicNameValuePair("uptime", String.valueOf(System.currentTimeMillis()/1000)),
         };
-	    HttpGet httpGet = mHttpApi.createHttpGet(urlManager.noticeUrl(),
+	    HttpGet httpGet = mHttpApi.createHttpGet(urlManager.memberShip(),
                 values[0],
                 values[1],
                 values[2],

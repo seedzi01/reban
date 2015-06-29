@@ -59,10 +59,10 @@ public class UserCenterControl extends BaseControl {
 	                "1",
                     UserUtil.getUser().getToken());
 	        mModel.setMemberShip(data);
-	        // sendMessage("showMemberShipCallback");
+	        sendMessage("showMemberShipCallback");
 	    } catch (Exception e) {
 	        e.printStackTrace();
-	        // sendMessage("showMemberShipExceptionCallback");
+	        sendMessage("showMemberShipExceptionCallback");
 	    }
 	}
 }

@@ -41,8 +41,8 @@ public class FilterView extends RelativeLayout {
         Drawable rightIcon = getResources().getDrawable(
                 selected ? R.drawable.pull_up : R.drawable.pull_down);
         titleView.setTextColor(selected 
-                ? WifiApplication.getInstance().getResources().getColor(R.color.font_module_pressed) 
-                : WifiApplication.getInstance().getResources().getColor(R.color.color_app_black));
+                ? getResources().getColor(R.color.font_module_pressed) 
+                : getResources().getColor(R.color.color_app_black));
         rightIcon.setBounds(0, 0, rightIcon.getMinimumWidth(), rightIcon.getMinimumHeight());
         if(rightIconVisiable)
 	        titleView.setCompoundDrawables(

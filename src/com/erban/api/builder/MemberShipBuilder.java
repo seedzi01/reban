@@ -7,8 +7,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.erban.bean.MemberShip;
+import com.erban.bean.MemberShipListModel;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 public class MemberShipBuilder extends AbstractJSONBuilder<List<MemberShip>> {
 
@@ -19,9 +19,15 @@ public class MemberShipBuilder extends AbstractJSONBuilder<List<MemberShip>> {
             return Collections.emptyList();
         }
         Gson gson = new Gson();
-        List<MemberShip> memberShips = gson.fromJson(jsonObject.toString(), 
-                new TypeToken<List<MemberShipBuilder>>(){}.getType());
-        return memberShips;
+        MemberShipListModel memberShips = gson.fromJson(jsonObject.toString(), 
+                MemberShipListModel.class);
+        if (memberShips != null && memberShips.code == 0) {
+        	if (memberShips.msg == null) {
+        		return Collections.emptyList();
+        	}
+        	return memberShips.msg;
+        }
+        return Collections.emptyList();
     }
 
 }

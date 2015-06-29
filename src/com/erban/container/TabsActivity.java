@@ -20,7 +20,7 @@ public class TabsActivity extends  com.erban.AbstractActivity{
 
 
     public static void startActivity(Activity ac){
-        Intent intent = new Intent(ac,TabsActivity.class);
+        Intent intent = new Intent(ac, TabsActivity.class);
         ac.startActivity(intent);
         ac.overridePendingTransition(R.anim.activity_slid_in_from_right, R.anim.activity_slid_out_no_change);
     }
