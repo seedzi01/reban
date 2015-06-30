@@ -149,13 +149,14 @@ public class UserFragment extends BaseFragment<UserControl> implements View.OnCl
 		case R.id.register_button://注册
 			LoginAndRegisterActivity.startActivity(getActivity(), false);
 			break;
-		case R.id.line1:  //我的订单
+		case R.id.line1:  
 //			UserOrderListActivity.startActivity(getActivity());
 			break;
-		case R.id.line2: 
+		case R.id.line2: //我的优惠
 		    DiscountActivity.startActivity(getActivity());
 			break;
-		case R.id.line3: 
+		case R.id.line3: //我的会员
+			android.util.Log.d("111", "我的会员");
 			MembershipCardActivity.startActivity(getActivity());
 			break;
 		case R.id.line4: //我的消息

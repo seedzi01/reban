@@ -53,11 +53,11 @@ public class UserCenterControl extends BaseControl {
 	
 	@AsynMethod
 	public void showMemeberShipAsyn() {
+		android.util.Log.d("111", "showMemeberShipAsyn");
 	    try {
 	        // TODO replace 1 with UserUtil.getUser().getUserInfo().getUserid()
 	        List<MemberShip> data = WifiApplication.getInstance().getApi().showMemberShip(
-	                "1",
-                    UserUtil.getUser().getToken());
+	                "1",UserUtil.getUser().getToken());
 	        mModel.setMemberShip(data);
 	        sendMessage("showMemberShipCallback");
 	    } catch (Exception e) {
