@@ -165,7 +165,7 @@ public class UserInfoActivity extends AbstractActivity<UserInfoControl> implemen
             UserInfoModifyActivity.startActivity(this, "姓名", "username", UserUtil.getUser().getUserInfo().getUsername());
             break;
         case R.id.item4:
-            UserInfoModifyActivity.startActivity(this, "性别", "gender", UserUtil.getUser().getUserInfo().getGender());
+            UserInfoModify4SexActivity.startActivity(this,UserUtil.getUser().getUserInfo().getGender());
             break;
         case R.id.item6:
             UserInfoModifyActivity.startActivity(this, "所在地", "addr", UserUtil.getUser().getUserInfo().getAddress());

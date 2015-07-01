@@ -13,13 +13,14 @@ public class LauncherActivity extends AbstractActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_launcher_layout);
-//		new Handler().postDelayed(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				TabsActivity.startActivity(LauncherActivity.this);
-//			}
-//		}, 3000);
+		new Handler().postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				TabsActivity.startActivity(LauncherActivity.this);
+				finish();
+			}
+		}, 3000);
 	}
 
 }

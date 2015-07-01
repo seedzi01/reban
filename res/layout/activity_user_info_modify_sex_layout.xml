@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#eeeeee">
+    
+<include android:id="@+id/titlebar"  layout="@layout/title_bar_layout"/>
+
+<LinearLayout 
+    android:id="@+id/sev_nan"
+    android:layout_marginTop="15dp"
+    android:paddingLeft="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:background="#ffffff">
+    <TextView 
+        android:layout_width="wrap_content"
+       	android:layout_height="wrap_content"
+       	android:textSize="16sp"
+        android:text="男"
+        android:textColor="#000000"/>
+    <ImageView 
+        android:layout_marginLeft="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sex_checked"/>
+</LinearLayout>
+<View
+    android:layout_marginLeft="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="1px"
+    android:background="#000000"
+    />
+<LinearLayout 
+    android:id="@+id/sev_nv"
+    android:paddingLeft="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:background="#ffffff">
+    <TextView 
+        android:layout_width="wrap_content"
+       	android:layout_height="wrap_content"
+       	android:textSize="16sp"
+        android:text="女"
+        android:textColor="#000000"/>
+    <ImageView 
+        android:layout_marginLeft="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sex_checked"/>
+</LinearLayout>
+</LinearLayout>
