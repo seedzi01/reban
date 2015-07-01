@@ -5,10 +5,7 @@ import java.util.List;
 
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,7 +25,6 @@ import com.erban.view.SingleItemAdapter;
 import com.erban.view.SingleItemAdapter.ExecuteItem;
 import com.erban.volley.GsonRequest;
 import com.erban.volley.HttpUrls;
-import com.erban.webview.WebPageActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class DiscountShopFragment extends BaseShopFragment {
@@ -54,6 +50,7 @@ public class DiscountShopFragment extends BaseShopFragment {
         filterViewGroup.setListener(new onSelectedListener() {
             @Override
             public void onSelected(int pos) {
+                shadowView.setVisibility(View.VISIBLE);
                 switch (pos) {
                 case 0:
                     bindDistances(filterListView);

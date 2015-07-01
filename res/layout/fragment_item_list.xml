@@ -47,4 +47,13 @@
         android:layout_height="match_parent"
         android:layout_below="@id/divide_line" >
     </ListView>
+    
+    <View
+        android:id="@+id/shadow"
+        android:visibility="gone"
+        android:background="#80000000"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/divide_line" />
+    
 </RelativeLayout>

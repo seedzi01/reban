@@ -11,55 +11,55 @@ import android.widget.TextView;
 
 public class WifiStatusArea extends RelativeLayout {
 
-	private View connectedView;
-	private View disConnectedView;
-	
-	private TextView nameView;
-	private Button refreshButton;
-	
-	public WifiStatusArea(Context context, AttributeSet attrs, int defStyleAttr) {
-		super(context, attrs, defStyleAttr);
-	}
+    private View connectedView;
+    private View disConnectedView;
 
-	public WifiStatusArea(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
+    private TextView nameView;
+    private Button refreshButton;
 
-	public WifiStatusArea(Context context) {
-		super(context);
-	}
+    public WifiStatusArea(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
 
-	@Override
-	protected void onFinishInflate() {
-		super.onFinishInflate();
-		connectedView = findViewById(R.id.wifi_connected_info);
-		disConnectedView = findViewById(R.id.wifi_disconnected_info);
-		nameView = (TextView) findViewById(R.id.wifi_name);
-		refreshButton = (Button) findViewById(R.id.wifi_refresh_button);
-	}
+    public WifiStatusArea(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-	public void showConnectedStatus(String wifiName) {
-		connectedView.setVisibility(View.VISIBLE);
-		disConnectedView.setVisibility(View.GONE);
-		nameView.setText(wifiName);
-	}
-	
-	public void showDisConnectedStatus() {
-		connectedView.setVisibility(View.GONE);
-		disConnectedView.setVisibility(View.VISIBLE);
-	}
+    public WifiStatusArea(Context context) {
+        super(context);
+    }
 
-	public void setRefreshCallBack(final RefreshCallBack callback) {
-		refreshButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				callback.onRefresh();
-			}
-		});
-	}
-	
-	public interface RefreshCallBack {
-		void onRefresh();
-	}
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        connectedView = findViewById(R.id.wifi_connected_info);
+        disConnectedView = findViewById(R.id.wifi_disconnected_info);
+        nameView = (TextView) findViewById(R.id.wifi_name);
+        refreshButton = (Button) findViewById(R.id.wifi_refresh_button);
+    }
+
+    public void showConnectedStatus(String wifiName) {
+        connectedView.setVisibility(View.VISIBLE);
+        disConnectedView.setVisibility(View.GONE);
+        nameView.setText(wifiName);
+    }
+
+    public void showDisConnectedStatus() {
+        connectedView.setVisibility(View.GONE);
+        disConnectedView.setVisibility(View.VISIBLE);
+    }
+
+    public void setRefreshCallBack(final RefreshCallBack callback) {
+        refreshButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                callback.onRefresh();
+            }
+        });
+    }
+
+    public interface RefreshCallBack {
+        void onRefresh();
+    }
 }

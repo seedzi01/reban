@@ -1,5 +1,6 @@
 package com.erban.view;
 
+import java.io.SequenceInputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,8 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.erban.R;
+import com.erban.WifiApplication;
 import com.erban.util.ViewUtils;
 import com.erban.view.dialog.ConnectWifiDialog;
+import com.erban.wifi.PhoneWifiManager;
 import com.erban.wifi.SecurityType;
 import com.erban.wifi.PhoneWifiInfo;
 
@@ -207,6 +210,12 @@ public class WifiAdapter extends BaseAdapter {
 
                 @Override
                 public void onClick(View v) {
+                    if (SecurityType.NONE.equals(wifiInfo.getSecurityType())) {
+                        PhoneWifiManager.getInstance(
+                                WifiApplication.getInstance()).connect(
+                                        wifiInfo.getWifiName(), "", wifiInfo.getSecurityType());
+                        return;
+                    }
                     FragmentManager transaction = ((Activity) view.getContext())
                             .getFragmentManager();
                     ConnectWifiDialog dialog = ConnectWifiDialog

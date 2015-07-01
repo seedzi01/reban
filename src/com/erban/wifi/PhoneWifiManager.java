@@ -143,15 +143,15 @@ public class PhoneWifiManager {
      * @return connected or not.
      */
     public static boolean isConnected(Context context, int netWorkType) {
-    	try {
-    		ConnectivityManager connManager = (ConnectivityManager) context
+        try {
+            ConnectivityManager connManager = (ConnectivityManager) context
                     .getSystemService(Context.CONNECTIVITY_SERVICE);
-    		NetworkInfo info = connManager.getNetworkInfo(netWorkType);
+            NetworkInfo info = connManager.getNetworkInfo(netWorkType);
             return info != null && info.isConnected();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-    	return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     /**
@@ -195,7 +195,7 @@ public class PhoneWifiManager {
 
         // remember wifi.
         wifiManager.enableNetwork(networkId, true);
-        wifiManager.saveConfiguration(); 
+        wifiManager.saveConfiguration();
         // reconnect.
         wifiManager.reconnect();
     }
@@ -249,4 +249,15 @@ public class PhoneWifiManager {
         return wifiConfiguration;
     }
 
+    public void closeWifi() {
+        wifiManager.setWifiEnabled(false);
+    }
+
+    public void openWifi() {
+        wifiManager.setWifiEnabled(true);
+    }
+
+    public boolean isWifiEnabled() {
+        return wifiManager.isWifiEnabled();
+    }
 }

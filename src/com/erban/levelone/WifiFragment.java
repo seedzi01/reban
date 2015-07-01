@@ -17,10 +17,11 @@ import com.erban.WifiApplication;
 import com.erban.util.ViewUtils;
 import com.erban.view.WifiAdapter;
 import com.erban.view.WifiStatusArea;
+import com.erban.view.WifiStatusArea.RefreshCallBack;
 import com.erban.wifi.DevicesState;
+import com.erban.wifi.PhoneWifiInfo;
 import com.erban.wifi.PhoneWifiManager;
 import com.erban.wifi.SecurityType;
-import com.erban.wifi.PhoneWifiInfo;
 import com.erban.wifi.WifiStateListener;
 
 public class WifiFragment extends Fragment {
@@ -67,6 +68,11 @@ public class WifiFragment extends Fragment {
 
         wifiListView = (ListView) view.findViewById(R.id.wifi_listview);
         wifiSwitcher = (ImageView) view.findViewById(R.id.wifi_switcher);
+        enable = PhoneWifiManager.getInstance(
+                WifiApplication.getInstance()).isWifiEnabled();
+        wifiSwitcher
+                .setImageResource(enable ? R.drawable.view_switcher_on
+                        : R.drawable.view_switcher_off);
         initListView();
         wifiSwitcher.setOnClickListener(new View.OnClickListener() {
 
@@ -85,11 +91,23 @@ public class WifiFragment extends Fragment {
                 R.layout.view_wifi_function_area);
         wifiListView.addHeaderView(statusView);
         adapter = new WifiAdapter();
+        statusView.setRefreshCallBack(new RefreshCallBack() {
+            
+            @Override
+            public void onRefresh() {
+                PhoneWifiManager.getInstance(WifiApplication.getInstance()).startScan();
+            }
+        });
         wifiListView.setAdapter(adapter);
     }
 
     private void toggle() {
         enable = !enable;
+        if (enable) {
+            PhoneWifiManager.getInstance(getActivity()).openWifi();
+        } else {
+            PhoneWifiManager.getInstance(getActivity()).closeWifi();
+        }
         wifiSwitcher.setImageResource(enable ? R.drawable.view_switcher_on
                 : R.drawable.view_switcher_off);
     }
@@ -114,7 +132,6 @@ public class WifiFragment extends Fragment {
 
     private void updateWifiStatus() {
         if (statusView != null) {
-
             if (!PhoneWifiManager.isConnected(WifiApplication.getInstance(),
                     ConnectivityManager.TYPE_WIFI)) {
                 statusView.showDisConnectedStatus();

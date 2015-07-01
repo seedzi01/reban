@@ -43,7 +43,6 @@ public class WifiApplication extends Application{
         initImageLoader(this);
     }
 
-    
     private void initImageLoader(Context context) {
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
         .cacheInMemory(true)

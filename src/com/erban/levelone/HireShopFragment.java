@@ -51,6 +51,7 @@ public class HireShopFragment extends BaseShopFragment {
         filterViewGroup.setListener(new onSelectedListener() {
             @Override
             public void onSelected(int pos) {
+                shadowView.setVisibility(View.VISIBLE);
                 switch (pos) {
                 case 0:
                     bindZoom(filterListView);

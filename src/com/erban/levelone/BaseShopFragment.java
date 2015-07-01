@@ -27,6 +27,7 @@ public class BaseShopFragment extends Fragment {
     protected FilterView third;
 
     protected PopupWindow popupWindow;
+    protected View shadowView;
     
     protected FilterViewGroup filterViewGroup;
 
@@ -39,7 +40,7 @@ public class BaseShopFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         shopListView = (ListView) view.findViewById(R.id.shopListView);
-
+        shadowView = view.findViewById(R.id.shadow);
         first = (FilterView) view.findViewById(R.id.first);
         second = (FilterView) view.findViewById(R.id.second);
         third = (FilterView) view.findViewById(R.id.third);
@@ -70,12 +71,12 @@ public class BaseShopFragment extends Fragment {
         popupWindow.setContentView(filterListView);
         popupWindow.setOutsideTouchable(true);
         popupWindow.setOnDismissListener(new OnDismissListener() {
-            
             @Override
             public void onDismiss() {
                 tabs.get(0).setSelected(false);
                 tabs.get(1).setSelected(false);
                 tabs.get(2).setSelected(false);
+                shadowView.setVisibility(View.GONE);
             }
         });
         popupWindow.setAnimationStyle(android.R.style.Animation_Dialog);

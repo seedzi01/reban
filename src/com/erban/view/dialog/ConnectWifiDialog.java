@@ -51,8 +51,7 @@ public class ConnectWifiDialog extends DialogFragment {
 
         final Dialog dialog = new Dialog(getActivity(), R.style.Dialog_No_Border);
         
-        TextView titleView = (TextView) dialogView
-                .findViewById(R.id.dialog_title);
+        TextView titleView = (TextView) dialogView.findViewById(R.id.dialog_title);
         titleView.setText(wifiInfo.getWifiName());
 
         final EditText input = (EditText) dialogView.findViewById(R.id.dialog_input);
@@ -66,7 +65,6 @@ public class ConnectWifiDialog extends DialogFragment {
                     ViewUtils.showShortToast(R.string.no_password);
                     return;
                 }
-                // TODO connect wifi.
                 PhoneWifiManager.getInstance(
                         WifiApplication.getInstance()).connect(
                                 wifiInfo.getWifiName(), input.getText().toString(), wifiInfo.getSecurityType());
