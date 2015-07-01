@@ -12,4 +12,7 @@ public class HttpUrls {
         return ROOT_URL + "sale/sales";
     }
 
+    public static String getAreaWifi() {
+        return ROOT_URL + "wifi/areas";
+    }
 }

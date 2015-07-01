@@ -28,13 +28,13 @@ public class BaseShopFragment extends Fragment {
 
     protected PopupWindow popupWindow;
     protected View shadowView;
-    
+
     protected FilterViewGroup filterViewGroup;
 
     protected List<FilterView> tabs;
-    
+
     protected ListView filterListView;
-    
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -57,9 +57,9 @@ public class BaseShopFragment extends Fragment {
         filterViewGroup.appendView(third);
 
         initItems();
-        
+
         initHeader();
-        
+
         initPopUpWindow();
     }
 
@@ -91,10 +91,10 @@ public class BaseShopFragment extends Fragment {
 
     protected void initHeader() {
     }
-    
+
     protected void initItems() {
     }
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -144,9 +144,9 @@ public class BaseShopFragment extends Fragment {
                 filterViews.get(i).setSelected(i == position);
             }
         }
-        
+
     }
-    
+
     public interface onSelectedListener {
         void onSelected(int pos);
     }
