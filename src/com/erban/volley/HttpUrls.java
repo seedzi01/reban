@@ -15,4 +15,12 @@ public class HttpUrls {
     public static String getAreaWifi() {
         return ROOT_URL + "wifi/areas";
     }
+
+    public static String getExactWifi() {
+        return ROOT_URL + "wifi/exact";
+    }
+
+    public static String getRecordWifi() {
+        return ROOT_URL + "wifi/record";
+    }
 }
