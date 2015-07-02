@@ -105,60 +105,60 @@ public class UserInfoModify4SexActivity extends AbstractActivity<UserInfoControl
 	}
 	
 	// =========================================== CallBack =================================================
-		public void updateUserInfoCallBack(){
-			User user = UserUtil.getUser();
-			UserInfo userInfo = user.getUserInfo();
-			userInfo.setGender(mCurrentSex);
-			User.save(user);
-		    dismissDialog();
-		    Toast.makeText(this, "修改成功", 0).show();
-		    finish();
-		}
+	public void updateUserInfoCallBack(){
+		User user = UserUtil.getUser();
+		UserInfo userInfo = user.getUserInfo();
+		userInfo.setGender(mCurrentSex);
+		User.save(user);
+	    dismissDialog();
+	    Toast.makeText(this, "修改成功", 0).show();
+	    finish();
+	}
+	
+	public void updateUserInfoExceptionCallBack(){
+	    dismissDialog();
+	    Toast.makeText(this, "修改失败", 0).show();
+	    finish();
+	}
 		
-		public void updateUserInfoExceptionCallBack(){
-		    dismissDialog();
-		    Toast.makeText(this, "修改失败", 0).show();
-		    finish();
-		}
+	// =========================================== Dialog =================================================
+	private ProgressDialog mProgressDialog;
+	private boolean showDialog4UserUpload(){
+        AlertDialog.Builder builder = new Builder(this);
+        builder.setMessage("您确认修改信息吗?");  
+        builder.setTitle("提示");  
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				mControl.updateUserInfo("gender",mCurrentSex);
+                dialog.dismiss();    
+                showProgressDialog("用户信息上传中...");
+			}
+		});
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+                finish();
+			}
+		});
+        builder.create().show();
+        return false;
+    }
 		
-		// =========================================== Dialog =================================================
-		private ProgressDialog mProgressDialog;
-		private boolean showDialog4UserUpload(){
-	        AlertDialog.Builder builder = new Builder(this);
-	        builder.setMessage("您确认修改信息吗?");  
-	        builder.setTitle("提示");  
-	        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					mControl.updateUserInfo("gender",mCurrentSex);
-	                dialog.dismiss();    
-	                showProgressDialog("用户信息上传中...");
-				}
-			});
-	        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
-	                finish();
-				}
-			});
-	        builder.create().show();
-	        return false;
-	    }
-		
-		   private void showProgressDialog(String message){
-		        if(mProgressDialog!=null && mProgressDialog.isShowing())
-		            mProgressDialog.dismiss();
-		        mProgressDialog = new ProgressDialog(this);
-		        mProgressDialog.setTitle("提示");
-		        mProgressDialog.setMessage(message);
-		        mProgressDialog.setCancelable(false);
-		        mProgressDialog.show();
-		    }
-		   
-		    private void dismissDialog(){
-		        if(mProgressDialog!=null && mProgressDialog.isShowing())
-		            mProgressDialog.dismiss();
-		    }
+   private void showProgressDialog(String message){
+        if(mProgressDialog!=null && mProgressDialog.isShowing())
+            mProgressDialog.dismiss();
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setTitle("提示");
+        mProgressDialog.setMessage(message);
+        mProgressDialog.setCancelable(false);
+        mProgressDialog.show();
+    }
+   
+    private void dismissDialog(){
+        if(mProgressDialog!=null && mProgressDialog.isShowing())
+            mProgressDialog.dismiss();
+    }
 
 }
