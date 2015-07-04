@@ -13,12 +13,11 @@ import com.erban.WifiApplication;
 import com.erban.bean.PrivateWifiListModel;
 import com.erban.util.Security;
 import com.erban.wifi.PhoneWifiInfo;
-import com.erban.wifi.WifiInfoWrapper;
 import com.google.gson.Gson;
 
 public class WifiHandler {
 
-    public static void requestAreaWifis(float lon, float alt) {
+    public static void requestAreaWifis(float lon, float alt, final FetchListener lisFetchResult) {
 
         BasicNameValuePair[] values = {
                 new BasicNameValuePair("long", String.valueOf(lon)),
@@ -30,10 +29,10 @@ public class WifiHandler {
         String figStr = Security.get32MD5Str(values);
         params.put("fig", figStr);
 
-        sendWifiRequest(params, HttpUrls.getAreaWifi());
+        sendWifiRequest(params, HttpUrls.getAreaWifi(), lisFetchResult);
     }
 
-    public static void exactWifis(List<String> ssids) {
+    public static void exactWifis(List<String> ssids, final FetchListener lisFetchResult) {
         String ssidList = new Gson().toJson(ssids);
 
         BasicNameValuePair[] values = { new BasicNameValuePair("ssid", ssidList), };
@@ -43,10 +42,11 @@ public class WifiHandler {
         String figStr = Security.get32MD5Str(values);
         params.put("fig", figStr);
 
-        sendWifiRequest(params, HttpUrls.getExactWifi());
+        sendWifiRequest(params, HttpUrls.getExactWifi(), lisFetchResult);
     }
 
-    public static void recordWifi(PhoneWifiInfo wifiInfo, String pwd, float lon, float alt) {
+    public static void recordWifi(
+            PhoneWifiInfo wifiInfo, String pwd, float lon, float alt, final FetchListener lisFetchResult) {
         BasicNameValuePair[] values = {
                 new BasicNameValuePair("ssid", wifiInfo.getWifiName()),
                 new BasicNameValuePair("pwd", pwd),
@@ -57,32 +57,40 @@ public class WifiHandler {
         Map<String, String> params = new HashMap<String, String>();
         params.put("ssid", wifiInfo.getWifiName());
         params.put("pwd", pwd);
-        params.put("type", String.valueOf(wifiInfo.getSecurityType()));
+        if (wifiInfo.getSecurityType() != null) {
+            params.put("type", String.valueOf(wifiInfo.getSecurityType()));
+        }
         params.put("long", String.valueOf(lon));
         params.put("alti", String.valueOf(alt));
         String figStr = Security.get32MD5Str(values);
         params.put("fig", figStr);
         
-        sendWifiRequest(params, HttpUrls.getRecordWifi());
+        sendWifiRequest(params, HttpUrls.getRecordWifi(), lisFetchResult);
     }
     
-    private static void sendWifiRequest(Map<String, String> params, String url) {
+    private static void sendWifiRequest(
+            Map<String, String> params, String url, final FetchListener lisFetchResult) {
         GsonRequest<PrivateWifiListModel> request = new GsonRequest<PrivateWifiListModel>(
                 Request.Method.POST, url, PrivateWifiListModel.class, params,
                 new Response.Listener<PrivateWifiListModel>() {
 
                     @Override
                     public void onResponse(PrivateWifiListModel arg0) {
-
+                        lisFetchResult.onResponse(arg0);
                     }
                 }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError arg0) {
-
+                        lisFetchResult.onError();
                     }
                 });
         WifiApplication.getRequestQueue().add(request);
+    }
+
+    public interface FetchListener {
+        void onResponse(PrivateWifiListModel model);
+        void onError();
     }
 
 }

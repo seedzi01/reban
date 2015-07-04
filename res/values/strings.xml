@@ -6,6 +6,7 @@
     
     <string name="wifi_without_password">免密码wifi (%1$d)</string>
     <string name="wifi_need_password">需要密码wifi (%1$d)</string>
+    <string name="wifi_special">专属wifi (%1$d)</string>
 	
     <string name="wifi_disconnected">暂时没有连接到WiFi</string>
     <string name="wifi_connected">已连接</string>

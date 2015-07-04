@@ -6,6 +6,7 @@ import java.util.List;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,12 @@ import android.widget.ListView;
 
 import com.erban.R;
 import com.erban.WifiApplication;
+import com.erban.bean.PrivateWifiListModel;
 import com.erban.util.ViewUtils;
 import com.erban.view.WifiAdapter;
 import com.erban.view.WifiStatusArea;
 import com.erban.view.WifiStatusArea.RefreshCallBack;
+import com.erban.volley.WifiHandler;
 import com.erban.wifi.DevicesState;
 import com.erban.wifi.PhoneWifiInfo;
 import com.erban.wifi.PhoneWifiManager;
@@ -26,6 +29,8 @@ import com.erban.wifi.WifiStateListener;
 
 public class WifiFragment extends Fragment {
 
+    private static final String TAG = WifiFragment.class.getSimpleName();
+    
     private ListView wifiListView;
     private ImageView wifiSwitcher;
     private WifiStatusArea statusView;
@@ -84,6 +89,21 @@ public class WifiFragment extends Fragment {
         // load wifis scan.
         updateWifis();
         updateWifiStatus();
+        WifiHandler.requestAreaWifis(1.2141F, 124141.235125F, new WifiHandler.FetchListener() {
+            
+            @Override
+            public void onResponse(PrivateWifiListModel model) {
+                Log.d(TAG, "fetch recent wifi success.");
+                if (model != null && model.msg != null && model.msg.size() != 0) {
+                    adapter.setSpecialWifis(model.msg);
+                }
+            }
+            
+            @Override
+            public void onError() {
+                Log.d(TAG, "fetch recent wifi failed");
+            }
+        });
     }
 
     private void initListView() {
