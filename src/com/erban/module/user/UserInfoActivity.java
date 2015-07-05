@@ -106,14 +106,12 @@ public class UserInfoActivity extends AbstractActivity<UserInfoControl>
 		mTitlebar.setTitle("用戶信息");
 		mTitlebar.setBackgroundColor(Color.parseColor("#28b937"));
 		mTitlebar.findViewById(R.id.right_root).setVisibility(View.GONE);
-//		mTitlebar.setBackListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//			    if(!showDialog4UserUpload()){
-//			        finish();
-//			    }
-//			}
-//		});
+		mTitlebar.setBackListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+		        finish();
+			}
+		});
 //		findViewById(R.id.loginout).setOnClickListener(this);
 		mUserIcon = (CircleImageView) findViewById(R.id.user_icon);
 		mUserIcon.setOnClickListener(this);
