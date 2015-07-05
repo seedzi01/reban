@@ -6,6 +6,7 @@ import java.util.List;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -89,27 +90,34 @@ public class WifiFragment extends Fragment {
         // load wifis scan.
         updateWifis();
         updateWifiStatus();
-        Location location = WifiApplication.getInstance().getLbsManager()
-                .getLocation();
-        if (location != null) {
-            WifiHandler.requestAreaWifis(location.getmLongitude(),
-                    location.getmLatitude(), new WifiHandler.FetchListener() {
+        Log.d("location", System.currentTimeMillis() + " begin fetch");
+        wifiSwitcher.postDelayed((new Runnable() {
+            
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                Location location = WifiApplication.getInstance().getLbsManager().getLocation();
+                if (location != null && !TextUtils.isEmpty(location.getmLatitude())) {
+                    WifiHandler.requestAreaWifis(location.getmLongitude(),
+                            location.getmLatitude(), new WifiHandler.FetchListener() {
 
-                        @Override
-                        public void onResponse(PrivateWifiListModel model) {
-                            Log.d(TAG, "fetch recent wifi success.");
-                            if (model != null && model.msg != null
-                                    && model.msg.size() != 0) {
-                                adapter.setSpecialWifis(model.msg);
-                            }
-                        }
+                                @Override
+                                public void onResponse(PrivateWifiListModel model) {
+                                    Log.d(TAG, "fetch recent wifi success.");
+                                    if (model != null && model.msg != null
+                                            && model.msg.size() != 0) {
+                                        adapter.setSpecialWifis(model.msg);
+                                    }
+                                }
 
-                        @Override
-                        public void onError() {
-                            Log.d(TAG, "fetch recent wifi failed");
-                        }
-                    });
-        }
+                                @Override
+                                public void onError() {
+                                    Log.d(TAG, "fetch recent wifi failed");
+                                }
+                            });
+                }
+            }
+        }), 1000);
     }
 
     private void initListView() {

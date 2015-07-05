@@ -53,6 +53,7 @@ public class LbsManager {
 	public class MyLocationListener implements BDLocationListener {
 		@Override
 		public void onReceiveLocation(BDLocation location) {
+		    Log.d("location", System.currentTimeMillis() + " receive callback");
 			//Receive Location 
 			StringBuffer sb = new StringBuffer(256);
 			sb.append("time : ");
@@ -109,6 +110,7 @@ public class LbsManager {
 		option.setScanSpan(span);//设置发起定位请求的间隔时间为5000ms
 		option.setIsNeedAddress(true);
 		mLocationClient.setLocOption(option);
+		Log.d("location", System.currentTimeMillis() + " begin init");
 	}
 	
 	public Location getLocation(){
