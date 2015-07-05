@@ -70,7 +70,7 @@ public class ShopAdapter extends BaseAdapter {
                 if (TextUtils.isEmpty(item.jump)) {
                     return;
                 }
-                WebPageActivity.launch(v.getContext(), item.jump);
+                WebPageActivity.launch(v.getContext(), item.jump, String.valueOf(item.id));
             }
         });
         return convertView;

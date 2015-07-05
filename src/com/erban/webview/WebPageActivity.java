@@ -1,5 +1,10 @@
 package com.erban.webview;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.http.message.BasicNameValuePair;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -9,22 +14,41 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.erban.R;
+import com.erban.WifiApplication;
+import com.erban.bean.FavBean;
+import com.erban.util.UserUtil;
+import com.erban.util.ViewUtils;
+import com.erban.volley.GsonRequest;
+import com.erban.volley.HttpUrls;
 
 public class WebPageActivity extends Activity {
 
     private static final String ARGU_URL = "argument_url";
+    private static final String ARGU_SALES_ID = "argument_sales_id";
     
     private String url;
+    private String salesId;
+    private String favId;
+
     private WebView webView;
     private View back;
-    
+    private ImageView collection;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
+        
+        handleIntent();
+        
         back = findViewById(R.id.back);
+        collection = (ImageView) findViewById(R.id.collection);
         back.setOnClickListener(new View.OnClickListener() {
             
             @Override
@@ -32,26 +56,44 @@ public class WebPageActivity extends Activity {
                 finish();
             }
         });
-        handleIntent();
+        if (!TextUtils.isEmpty(salesId)) {
+            collection.setOnClickListener(new View.OnClickListener() {
+                
+                @Override
+                public void onClick(View v) {
+                    toggleFav();
+                }
+            });
+            updateFavIcon();
+        } else {
+            collection.setVisibility(View.GONE);
+        }
         launchWebView();
     }
     
     private void handleIntent() {
         if (getIntent() != null) {
             url = getIntent().getStringExtra(ARGU_URL);
+            salesId = getIntent().getStringExtra(ARGU_SALES_ID);
         }
         if (TextUtils.isEmpty(url)) {
             finish();
         }
     }
-    
+
     public static void launch(Context context, String url) {
-        Intent intent = new Intent(context, WebPageActivity.class);
-        intent.putExtra(ARGU_URL, url);
-        context.startActivity(intent);
+        launch(context, url, null);
     }
 
-
+    public static void launch(Context context, String url, String salesId) {
+        Intent intent = new Intent(context, WebPageActivity.class);
+        intent.putExtra(ARGU_URL, url);
+        if (!TextUtils.isEmpty(salesId)) {
+            intent.putExtra(ARGU_SALES_ID, salesId);
+        }
+        context.startActivity(intent);
+    }
+    
     private void launchWebView(){
        webView = (WebView) findViewById(R.id.webView);
         //WebView加载web资源
@@ -70,4 +112,45 @@ public class WebPageActivity extends Activity {
        });
     }
 
+    private void toggleFav() {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("userid", UserUtil.getUser().getUserInfo().getUserid());
+        params.put("token", UserUtil.getUser().getToken());
+        params.put("saleid", salesId);
+        if (!TextUtils.isEmpty(favId)) {
+            params.put("favid", favId);
+        }
+
+        GsonRequest<FavBean> gsonRequest = new GsonRequest<FavBean>(
+                Request.Method.POST, 
+                TextUtils.isEmpty(favId) ? HttpUrls.getAddFav() : HttpUrls.getDelFav(), 
+                FavBean.class, params,
+                new Response.Listener<FavBean>() {
+
+                    @Override
+                    public void onResponse(FavBean fav) {
+                        ViewUtils.showShortToast(R.string.fav_success);
+                        // TODO update fav icon.
+                        updateFavIcon();
+                    }
+
+                },
+                new Response.ErrorListener(){
+
+                    @Override
+                    public void onErrorResponse(VolleyError arg0) {
+                        ViewUtils.showShortToast(R.string.fav_failed);
+                    }
+
+                });
+        WifiApplication.getRequestQueue().add(gsonRequest);
+    }
+    
+    private void updateFavIcon() {
+        if (!TextUtils.isEmpty(favId)) {
+            collection.setImageResource(R.drawable.already_fav);
+        } else {
+            collection.setImageResource(R.drawable.favorite);
+        }
+    }
 }

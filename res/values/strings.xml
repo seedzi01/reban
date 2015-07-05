@@ -37,4 +37,10 @@
     
     <string name="state_connecting">正在连接中...</string>
     <string name="state_connected">连接成功</string>
+    
+    <string name="wifi_not_enabled">请先开启wifi</string>
+    
+    <string name="fav_failed">收藏失败</string>
+    <string name="fav_success">收藏成功</string>
+    
 </resources>

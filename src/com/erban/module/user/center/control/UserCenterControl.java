@@ -63,7 +63,7 @@ public class UserCenterControl extends BaseControl {
 	    try {
 	        // TODO replace 1 with UserUtil.getUser().getUserInfo().getUserid()
 	        List<MemberShip> data = WifiApplication.getInstance().getApi().showMemberShip(
-	                "1",UserUtil.getUser().getToken());
+	                UserUtil.getUser().getUserInfo().getUserid(),UserUtil.getUser().getToken());
 	        mModel.setMemberShip(data);
 	        sendMessage("showMemberShipCallback");
 	    } catch (Exception e) {

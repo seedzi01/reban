@@ -3,7 +3,6 @@ package com.erban.levelone;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -11,8 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.erban.R;
 import com.erban.WifiApplication;
@@ -34,10 +33,8 @@ public class WifiFragment extends Fragment {
     private static final String TAG = WifiFragment.class.getSimpleName();
 
     private ListView wifiListView;
-    private ImageView wifiSwitcher;
     private WifiStatusArea statusView;
-
-    private boolean enable;
+    private TextView tipsView;
 
     private WifiAdapter adapter;
 
@@ -62,8 +59,7 @@ public class WifiFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        return ViewUtils.newInstance(inflater, container,
-                R.layout.fragment_wifi);
+        return ViewUtils.newInstance(inflater, container, R.layout.fragment_wifi);
     }
 
     @Override
@@ -74,24 +70,13 @@ public class WifiFragment extends Fragment {
         PhoneWifiManager.getInstance(getActivity()).startScan();
 
         wifiListView = (ListView) view.findViewById(R.id.wifi_listview);
-        wifiSwitcher = (ImageView) view.findViewById(R.id.wifi_switcher);
-        enable = PhoneWifiManager.getInstance(WifiApplication.getInstance())
-                .isWifiEnabled();
-        wifiSwitcher.setImageResource(enable ? R.drawable.view_switcher_on
-                : R.drawable.view_switcher_off);
         initListView();
-        wifiSwitcher.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                toggle();
-            }
-        });
+        tipsView = (TextView) view.findViewById(R.id.tips);
         // load wifis scan.
         updateWifis();
         updateWifiStatus();
         Log.d("location", System.currentTimeMillis() + " begin fetch");
-        wifiSwitcher.postDelayed((new Runnable() {
+        wifiListView.postDelayed((new Runnable() {
             
             @Override
             public void run() {
@@ -136,17 +121,6 @@ public class WifiFragment extends Fragment {
         wifiListView.setAdapter(adapter);
     }
 
-    private void toggle() {
-        enable = !enable;
-        if (enable) {
-            PhoneWifiManager.getInstance(getActivity()).openWifi();
-        } else {
-            PhoneWifiManager.getInstance(getActivity()).closeWifi();
-        }
-        wifiSwitcher.setImageResource(enable ? R.drawable.view_switcher_on
-                : R.drawable.view_switcher_off);
-    }
-
     private void updateWifis() {
         List<PhoneWifiInfo> wifiInfos = PhoneWifiManager.getInstance(
                 getActivity()).getLastestWifis();
@@ -166,16 +140,18 @@ public class WifiFragment extends Fragment {
     }
 
     private void updateWifiStatus() {
-        if (statusView != null) {
-            if (!PhoneWifiManager.isConnected(WifiApplication.getInstance(),
-                    ConnectivityManager.TYPE_WIFI)) {
+        if (getActivity() != null) {
+            if (!PhoneWifiManager.getInstance(WifiApplication.getInstance())
+                    .isWifiEnabled()) {
                 statusView.showDisConnectedStatus();
+                tipsView.setVisibility(View.VISIBLE);
                 return;
             }
             PhoneWifiInfo wifiInfo = PhoneWifiManager
                     .getInstance(getActivity()).getConnectedWifi();
             if (wifiInfo != null) {
                 statusView.showConnectedStatus(wifiInfo.getWifiName());
+                tipsView.setVisibility(View.GONE);
             }
         }
     }

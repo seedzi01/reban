@@ -46,16 +46,18 @@ public class WifiHandler {
     }
 
     public static void recordWifi(
-            PhoneWifiInfo wifiInfo, String pwd, float lon, float alt, final FetchListener lisFetchResult) {
+            PhoneWifiInfo wifiInfo, String pwd, String lon, String alt, final FetchListener lisFetchResult) {
         BasicNameValuePair[] values = {
                 new BasicNameValuePair("ssid", wifiInfo.getWifiName()),
                 new BasicNameValuePair("pwd", pwd),
+                new BasicNameValuePair("bssid", wifiInfo.getBSSID()),
                 new BasicNameValuePair("type", String.valueOf(wifiInfo.getSecurityType())),
-                new BasicNameValuePair("long", String.valueOf(lon)),
-                new BasicNameValuePair("alti", String.valueOf(alt))};
+                new BasicNameValuePair("long", lon),
+                new BasicNameValuePair("alti", alt)};
         
         Map<String, String> params = new HashMap<String, String>();
         params.put("ssid", wifiInfo.getWifiName());
+        params.put("bssid", wifiInfo.getBSSID());
         params.put("pwd", pwd);
         if (wifiInfo.getSecurityType() != null) {
             params.put("type", String.valueOf(wifiInfo.getSecurityType()));

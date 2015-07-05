@@ -9,7 +9,7 @@ public class HttpUrls {
     }
 
     public static String getDiscountUrl() {
-        return ROOT_URL + "sale/sales";
+        return ROOT_URL + "sale/sales?userid=1&token=sgageag";
     }
 
     public static String getAreaWifi() {
@@ -23,4 +23,13 @@ public class HttpUrls {
     public static String getRecordWifi() {
         return ROOT_URL + "wifi/record";
     }
+    
+    public static String getAddFav() {
+        return ROOT_URL + "fav/add";
+    }
+
+    public static String getDelFav() {
+        return ROOT_URL + "fav/del";
+    }
+
 }

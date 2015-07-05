@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.erban.R;
 import com.erban.WifiApplication;
 import com.erban.util.ViewUtils;
+import com.erban.volley.WifiReporterProcesser;
 import com.erban.wifi.PhoneWifiInfo;
 import com.erban.wifi.PhoneWifiManager;
 
@@ -68,6 +69,9 @@ public class ConnectWifiDialog extends DialogFragment {
                 PhoneWifiManager.getInstance(
                         WifiApplication.getInstance()).connect(
                                 wifiInfo.getWifiName(), input.getText().toString(), wifiInfo.getSecurityType());
+                
+                WifiReporterProcesser.getInstance().addWifi(wifiInfo, input.getText().toString());
+                
                 dialog.cancel();
                 FragmentManager transaction = ((Activity) view.getContext())
                         .getFragmentManager();

@@ -1,6 +1,7 @@
 package com.erban.view;
 
 import com.erban.R;
+import com.erban.wifi.WifiUtil;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -41,7 +42,7 @@ public class WifiStatusArea extends RelativeLayout {
     public void showConnectedStatus(String wifiName) {
         connectedView.setVisibility(View.VISIBLE);
         disConnectedView.setVisibility(View.GONE);
-        nameView.setText(wifiName);
+        nameView.setText(WifiUtil.removeDoubleQuotes(wifiName));
     }
 
     public void showDisConnectedStatus() {

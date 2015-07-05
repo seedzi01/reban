@@ -18,14 +18,6 @@
             android:src="@drawable/view_banner_icon"
             android:layout_gravity="center" />
         
-        <ImageView 
-            android:id="@+id/wifi_switcher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="15dp"
-            android:src="@drawable/view_switcher_off"
-            android:layout_gravity="center_vertical|right"/>
-        
     </FrameLayout>
 
     <ListView
@@ -33,6 +25,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null"
+        android:layout_below="@id/title_bar"/>
+
+    <TextView
+        android:id="@+id/tips"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="@color/color_white"
+        android:textSize="20sp"
+        android:text="@string/wifi_not_enabled"
+        android:visibility="gone"
         android:layout_below="@id/title_bar"/>
     
 </RelativeLayout>
