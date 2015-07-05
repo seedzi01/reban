@@ -2,6 +2,10 @@ package com.erban;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.GeofenceClient;
+import com.baidu.location.LocationClient;
 import com.erban.api.WifiApi;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -12,8 +16,12 @@ import com.yuekuapp.proxy.ControlFactory;
 
 import android.app.Activity;
 import android.app.Application;
+import android.app.Service;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.os.Vibrator;
+import android.util.Log;
+import android.widget.TextView;
 
 /**
  * Created by huzhi on 15-2-16.
@@ -33,6 +41,8 @@ public class WifiApplication extends Application{
     
     private WifiApi api;
     
+    private LbsManager mLbsManager;
+    
     @Override
     public void onCreate() {
         super.onCreate();
@@ -41,6 +51,16 @@ public class WifiApplication extends Application{
         api = new WifiApi("Wifi1.0", this);
         ControlFactory.init(this);
         initImageLoader(this);
+        
+        mLbsManager = LbsManager.getInstance(this);
+        mLbsManager.start();
+    }
+    
+    @Override
+    public void onTerminate() {
+    	super.onTerminate();
+    	if(mLbsManager!=null)
+    		mLbsManager.stop();
     }
 
     private void initImageLoader(Context context) {
