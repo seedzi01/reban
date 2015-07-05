@@ -117,6 +117,10 @@ public class DiscountActivity extends AbstractActivity<UserCenterControl> implem
 		}
 	}
     
+    private void getSaleCount(){
+    	
+    }
+    
     // ======================================= Callback ============================================= //
     
     public void showFavListCallback(){

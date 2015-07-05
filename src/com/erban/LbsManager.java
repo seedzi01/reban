@@ -112,4 +112,8 @@ public class LbsManager {
 		option.setIsNeedAddress(true);
 		mLocationClient.setLocOption(option);
 	}
+	
+	public Location getLocation(){
+		return mLocation;
+	}
 }

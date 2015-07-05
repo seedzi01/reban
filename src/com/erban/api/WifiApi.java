@@ -20,6 +20,7 @@ import com.erban.api.builder.MemberShipBuilder;
 import com.erban.api.builder.MsgBuilder;
 import com.erban.api.builder.NetResultBuilder;
 import com.erban.api.builder.NormalGoodsBuilder;
+import com.erban.api.builder.SaleCountBuilder;
 import com.erban.api.builder.UploadFIleBuilder;
 import com.erban.api.builder.UserLoginBuilder;
 import com.erban.api.builder.UserRegisterBuilder;
@@ -34,6 +35,7 @@ import com.erban.bean.MemberShip;
 import com.erban.bean.Msg;
 import com.erban.bean.NetResult;
 import com.erban.bean.NormalGoods;
+import com.erban.bean.SaleCount;
 import com.erban.bean.User;
 import com.erban.module.user.LoginAndRegisterActivity;
 import com.erban.util.FileUtils;
@@ -283,5 +285,19 @@ public class WifiApi {
                 values[2],
                 new BasicNameValuePair("fig", Security.get32MD5Str(values)));
          return mHttpApi.doHttpRequestObject(httpGet, new MemberShipBuilder());
+	}
+	
+	/**
+	 * 优惠个数
+	 */
+	public SaleCount mysaleCount() 
+	        throws XiaoMeiCredentialsException, XiaoMeiIOException, XiaoMeiJSONException, XiaoMeiOtherException {
+	    BasicNameValuePair[] values = {
+                new BasicNameValuePair("uptime", String.valueOf(System.currentTimeMillis()/1000)),
+        };
+	    HttpGet httpGet = mHttpApi.createHttpGet(urlManager.memberShip(),
+                values[0],
+                new BasicNameValuePair("fig", Security.get32MD5Str(values)));
+         return mHttpApi.doHttpRequestObject(httpGet, new SaleCountBuilder());
 	}
 }
