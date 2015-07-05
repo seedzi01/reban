@@ -89,7 +89,7 @@ public class WifiApplication extends Application{
     } 
 
     private static RequestQueue reqQueue;
-    
+
     public static RequestQueue getRequestQueue() {
     	if (reqQueue == null) {
     		reqQueue = Volley.newRequestQueue(appContext);
@@ -97,4 +97,7 @@ public class WifiApplication extends Application{
         return reqQueue;
     }
 
+    public LbsManager getLbsManager() {
+        return mLbsManager;
+    }
 }

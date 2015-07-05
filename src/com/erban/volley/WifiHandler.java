@@ -17,11 +17,11 @@ import com.google.gson.Gson;
 
 public class WifiHandler {
 
-    public static void requestAreaWifis(float lon, float alt, final FetchListener lisFetchResult) {
+    public static void requestAreaWifis(String lon, String alt, final FetchListener lisFetchResult) {
 
         BasicNameValuePair[] values = {
-                new BasicNameValuePair("long", String.valueOf(lon)),
-                new BasicNameValuePair("alti", String.valueOf(alt)), };
+                new BasicNameValuePair("long", lon),
+                new BasicNameValuePair("alti", alt), };
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("long", String.valueOf(lon));

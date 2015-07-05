@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.erban.R;
 import com.erban.WifiApplication;
+import com.erban.bean.Location;
 import com.erban.bean.PrivateWifiListModel;
 import com.erban.util.ViewUtils;
 import com.erban.view.WifiAdapter;
@@ -30,7 +31,7 @@ import com.erban.wifi.WifiStateListener;
 public class WifiFragment extends Fragment {
 
     private static final String TAG = WifiFragment.class.getSimpleName();
-    
+
     private ListView wifiListView;
     private ImageView wifiSwitcher;
     private WifiStatusArea statusView;
@@ -73,11 +74,10 @@ public class WifiFragment extends Fragment {
 
         wifiListView = (ListView) view.findViewById(R.id.wifi_listview);
         wifiSwitcher = (ImageView) view.findViewById(R.id.wifi_switcher);
-        enable = PhoneWifiManager.getInstance(
-                WifiApplication.getInstance()).isWifiEnabled();
-        wifiSwitcher
-                .setImageResource(enable ? R.drawable.view_switcher_on
-                        : R.drawable.view_switcher_off);
+        enable = PhoneWifiManager.getInstance(WifiApplication.getInstance())
+                .isWifiEnabled();
+        wifiSwitcher.setImageResource(enable ? R.drawable.view_switcher_on
+                : R.drawable.view_switcher_off);
         initListView();
         wifiSwitcher.setOnClickListener(new View.OnClickListener() {
 
@@ -89,21 +89,27 @@ public class WifiFragment extends Fragment {
         // load wifis scan.
         updateWifis();
         updateWifiStatus();
-        WifiHandler.requestAreaWifis(1.2141F, 124141.235125F, new WifiHandler.FetchListener() {
-            
-            @Override
-            public void onResponse(PrivateWifiListModel model) {
-                Log.d(TAG, "fetch recent wifi success.");
-                if (model != null && model.msg != null && model.msg.size() != 0) {
-                    adapter.setSpecialWifis(model.msg);
-                }
-            }
-            
-            @Override
-            public void onError() {
-                Log.d(TAG, "fetch recent wifi failed");
-            }
-        });
+        Location location = WifiApplication.getInstance().getLbsManager()
+                .getLocation();
+        if (location != null) {
+            WifiHandler.requestAreaWifis(location.getmLongitude(),
+                    location.getmLatitude(), new WifiHandler.FetchListener() {
+
+                        @Override
+                        public void onResponse(PrivateWifiListModel model) {
+                            Log.d(TAG, "fetch recent wifi success.");
+                            if (model != null && model.msg != null
+                                    && model.msg.size() != 0) {
+                                adapter.setSpecialWifis(model.msg);
+                            }
+                        }
+
+                        @Override
+                        public void onError() {
+                            Log.d(TAG, "fetch recent wifi failed");
+                        }
+                    });
+        }
     }
 
     private void initListView() {
@@ -112,10 +118,11 @@ public class WifiFragment extends Fragment {
         wifiListView.addHeaderView(statusView);
         adapter = new WifiAdapter();
         statusView.setRefreshCallBack(new RefreshCallBack() {
-            
+
             @Override
             public void onRefresh() {
-                PhoneWifiManager.getInstance(WifiApplication.getInstance()).startScan();
+                PhoneWifiManager.getInstance(WifiApplication.getInstance())
+                        .startScan();
             }
         });
         wifiListView.setAdapter(adapter);

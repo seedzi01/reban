@@ -47,8 +47,6 @@ public class LbsManager {
 		mLocation = new Location();
 	}
 	
-	
-	
 	/**
 	 * 实现实位回调监听 (lbs)
 	 */
