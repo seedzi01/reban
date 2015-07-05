@@ -11,6 +11,7 @@ import com.baidu.location.GeofenceClient;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.LocationClientOption.LocationMode;
+import com.erban.bean.Location;
 
 public class LbsManager {
 	
@@ -35,6 +36,7 @@ public class LbsManager {
 	public Vibrator mVibrator;
 	
 	private String tempcoor="gcj02";
+	private Location mLocation;
 	
 	public void onCreate(Context context){
 		mLocationClient = new LocationClient(context);
@@ -42,6 +44,7 @@ public class LbsManager {
 		mLocationClient.registerLocationListener(mMyLocationListener);
 		mGeofenceClient = new GeofenceClient(context);
 		mVibrator =(Vibrator)context.getSystemService(Service.VIBRATOR_SERVICE);
+		mLocation = new Location();
 	}
 	
 	
@@ -81,6 +84,8 @@ public class LbsManager {
 				sb.append(location.getOperators());
 			}
 			Log.d("BaiduLocationApiDem", sb.toString());
+			mLocation.setmLatitude(String.valueOf(location.getLatitude()));
+			mLocation.setmLongitude(String.valueOf(location.getLongitude()));
 		}
 	}
 	

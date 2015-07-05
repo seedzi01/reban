@@ -2,10 +2,6 @@ package com.erban;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
-import com.baidu.location.GeofenceClient;
-import com.baidu.location.LocationClient;
 import com.erban.api.WifiApi;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -16,12 +12,8 @@ import com.yuekuapp.proxy.ControlFactory;
 
 import android.app.Activity;
 import android.app.Application;
-import android.app.Service;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Vibrator;
-import android.util.Log;
-import android.widget.TextView;
 
 /**
  * Created by huzhi on 15-2-16.
