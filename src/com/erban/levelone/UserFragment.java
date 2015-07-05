@@ -5,6 +5,7 @@ import com.erban.bean.User;
 import com.erban.levelone.control.UserControl;
 import com.erban.module.user.LoginAndRegisterActivity;
 import com.erban.module.user.UserInfoActivity;
+import com.erban.module.user.center.AboutActivity;
 import com.erban.module.user.center.DiscountActivity;
 import com.erban.module.user.center.FavActivity;
 import com.erban.module.user.center.MembershipCardActivity;
@@ -165,7 +166,7 @@ public class UserFragment extends BaseFragment<UserControl> implements View.OnCl
 			FavActivity.startActivity(getActivity());
 			break;
 		case R.id.line6: //关于我们
-//			AboutActivity.startActivity(getActivity());
+			AboutActivity.startActivity(getActivity());
 			break;
 //		case R.id.line7: 
 //			showProgressDialog();

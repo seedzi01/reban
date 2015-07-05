@@ -101,7 +101,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
  		</activity>
- 		
+ 		<activity 
+ 		    android:name="com.erban.module.user.center.AboutActivity"
+ 		    android:theme="@android:style/Theme.NoTitleBar">
+ 		</activity>
  		
  		<!-- 定位 -->
  		<service
