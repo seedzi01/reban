@@ -3,9 +3,14 @@ package com.erban.module.user.center.control;
 import java.util.List;
 
 import com.erban.WifiApplication;
+import com.erban.api.exception.XiaoMeiCredentialsException;
+import com.erban.api.exception.XiaoMeiIOException;
+import com.erban.api.exception.XiaoMeiJSONException;
+import com.erban.api.exception.XiaoMeiOtherException;
 import com.erban.bean.MemberShip;
 import com.erban.bean.Msg;
 import com.erban.bean.NormalGoods;
+import com.erban.bean.SaleCount;
 import com.erban.module.user.center.model.UserCenterModel;
 import com.erban.util.UserUtil;
 import com.yuekuapp.BaseControl;
@@ -13,6 +18,8 @@ import com.yuekuapp.annotations.AsynMethod;
 import com.yuekuapp.proxy.MessageProxy;
 
 public class UserCenterControl extends BaseControl {
+	
+	private final String PER_PAGE_SIZE = "10";
 	
 	private UserCenterModel mModel;
 
@@ -63,5 +70,37 @@ public class UserCenterControl extends BaseControl {
 	        e.printStackTrace();
 	        sendMessage("showMemberShipExceptionCallback");
 	    }
+	}
+	
+	@AsynMethod
+	public void getSaleCountAsyn(){
+		try {
+			SaleCount saleCount = WifiApplication.getInstance().getApi().getSaleCount(UserUtil.getUser().getUserInfo().getUserid()
+					,UserUtil.getUser().getToken());
+			mModel.setSaleCount(saleCount);
+			sendMessage("getSaleCountAsynCallback");
+		} catch (Exception e) {
+			e.printStackTrace();
+			sendMessage("getSaleCountAsynExceptionCallback");
+		}
+	}
+	
+	/**
+	 * 优惠列表
+	 */
+	@AsynMethod
+	public void getMySaleAsyn(String classify,String curpage){
+		try {
+			List<NormalGoods> list = WifiApplication.getInstance().getApi().getMySale(UserUtil.getUser().getUserInfo().getUserid(), 
+					UserUtil.getUser().getToken(), 
+					classify, 
+					"1", 
+					PER_PAGE_SIZE);
+			mModel.setGoodsList(list);
+			sendMessage("showFavListCallback");
+		} catch (Exception e) {
+			e.printStackTrace();
+			sendMessage("showFavListExceptionCallback");
+		}
 	}
 }

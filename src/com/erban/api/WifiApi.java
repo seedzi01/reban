@@ -290,14 +290,39 @@ public class WifiApi {
 	/**
 	 * 优惠个数
 	 */
-	public SaleCount mysaleCount() 
+	public SaleCount getSaleCount(String userid, String token) 
 	        throws XiaoMeiCredentialsException, XiaoMeiIOException, XiaoMeiJSONException, XiaoMeiOtherException {
 	    BasicNameValuePair[] values = {
+	    		new BasicNameValuePair("userid", userid) ,
+                new BasicNameValuePair("token", token) ,
                 new BasicNameValuePair("uptime", String.valueOf(System.currentTimeMillis()/1000)),
         };
-	    HttpGet httpGet = mHttpApi.createHttpGet(urlManager.memberShip(),
+	    HttpGet httpGet = mHttpApi.createHttpGet(urlManager.mysaleCount(),
                 values[0],
                 new BasicNameValuePair("fig", Security.get32MD5Str(values)));
          return mHttpApi.doHttpRequestObject(httpGet, new SaleCountBuilder());
+	}
+	/**
+	 * 优惠列表
+	 */
+	public List<NormalGoods> getMySale(String userid, String token,String classify,String curpage,String perpage) 
+	        throws XiaoMeiCredentialsException, XiaoMeiIOException, XiaoMeiJSONException, XiaoMeiOtherException {
+	    BasicNameValuePair[] values = {
+	    		new BasicNameValuePair("userid", userid) ,
+                new BasicNameValuePair("token", token) ,
+                new BasicNameValuePair("classify", classify) ,
+                new BasicNameValuePair("curpage", curpage) ,
+                new BasicNameValuePair("perpage", perpage) ,
+                new BasicNameValuePair("uptime", String.valueOf(System.currentTimeMillis()/1000)),
+        };
+	    HttpGet httpGet = mHttpApi.createHttpGet(urlManager.mysale(),
+                values[0],
+                values[1],
+                values[2],
+                values[3],
+                values[4],
+                values[5],
+                new BasicNameValuePair("fig", Security.get32MD5Str(values)));
+         return mHttpApi.doHttpRequestObject(httpGet, new NormalGoodsBuilder());
 	}
 }

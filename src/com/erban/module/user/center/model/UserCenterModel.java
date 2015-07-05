@@ -5,6 +5,7 @@ import java.util.List;
 import com.erban.bean.MemberShip;
 import com.erban.bean.Msg;
 import com.erban.bean.NormalGoods;
+import com.erban.bean.SaleCount;
 
 public class UserCenterModel {
 	
@@ -37,5 +38,15 @@ public class UserCenterModel {
 	public List<MemberShip> getMemberShips() {
         return mMemberShips;
     }
+	
+	private SaleCount mSaleCount;
+	
+	public void setSaleCount(SaleCount saleCount){
+		mSaleCount = saleCount;
+	}
+	
+	public SaleCount getSaleCount(){
+		return mSaleCount;
+	}
 
 }

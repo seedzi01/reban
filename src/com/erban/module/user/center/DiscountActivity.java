@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.erban.AbstractActivity;
 import com.erban.R;
+import com.erban.bean.SaleCount;
 import com.erban.module.user.center.control.UserCenterControl;
 import com.erban.view.FilterView;
 import com.erban.view.ShopAdapter;
@@ -91,7 +92,8 @@ public class DiscountActivity extends AbstractActivity<UserCenterControl> implem
     
     
     private void initData(){
-        mControl.showFavList();
+    	getSaleCount();
+//        mControl.showFavList();
     }
     
     @Override
@@ -101,16 +103,19 @@ public class DiscountActivity extends AbstractActivity<UserCenterControl> implem
 			mFirstTitle.setSelected(true);
 			mSecondTitle.setSelected(false);
 			mThirdTttle.setSelected(false);
+			mControl.getMySaleAsyn("gets", "1");
 			break;
 		case R.id.second:
 			mFirstTitle.setSelected(false);
 			mSecondTitle.setSelected(true);
 			mThirdTttle.setSelected(false);
+			mControl.getMySaleAsyn("expire", "1");
 			break;
 		case R.id.third:
 			mFirstTitle.setSelected(false);
 			mSecondTitle.setSelected(false);
 			mThirdTttle.setSelected(true);
+			mControl.getMySaleAsyn("used", "1");
 			break;
 		default:
 			break;
@@ -118,7 +123,7 @@ public class DiscountActivity extends AbstractActivity<UserCenterControl> implem
 	}
     
     private void getSaleCount(){
-    	
+    	mControl.getSaleCountAsyn();
     }
     
     // ======================================= Callback ============================================= //
@@ -129,8 +134,20 @@ public class DiscountActivity extends AbstractActivity<UserCenterControl> implem
     }
     
     public void showFavListExceptionCallback(){
-        
+    	
     }
 
+    public void getSaleCountAsynCallback(){
+    	SaleCount saleCount = mControl.getModel().getSaleCount();
+    	if(saleCount!=null){
+    		mFirstTitle.setTitle("已抢购" + "(" + saleCount.getGets()+ ")");
+    		mSecondTitle.setTitle("已过期" + "(" + saleCount.getExpire()+ ")");
+    		mThirdTttle.setTitle("已使用" + "(" + saleCount.getUsed()+ ")");
+    	}
+    }
+    
+    public void getSaleCountAsynExceptionCallback(){
+    	
+    }
 	
 }

@@ -17,6 +17,10 @@ public class SaleCountBuilder extends AbstractJSONBuilder<SaleCount> {
 		if(DebugRelease.isDebug)
 			Log.d("json", jsonObject.toString());
 		SaleCount saleCount = new SaleCount();
+		if(jsonObject.has("msg"))
+			jsonObject = jsonObject.getJSONObject("msg");
+		else
+			return saleCount;
 		if(jsonObject.has("gets"))
 			saleCount.setGets(jsonObject.getString("gets"));
 		if(jsonObject.has("expire"))

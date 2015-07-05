@@ -58,6 +58,10 @@ public class HttpUrlManager {
     String mysaleCount(){
     	return HOST + "/sale/mysale_count";
     }
+    /**优惠接口 分类列表*/
+    String mysale(){
+    	return HOST + "/sale/mysale";
+    }
     /**优惠*/
     String showDiscount(){
         return HOST + "/user/sales";
