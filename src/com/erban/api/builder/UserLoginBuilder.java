@@ -55,8 +55,8 @@ public class UserLoginBuilder extends AbstractJSONBuilder<User> {
 				userInfo.setCreatedate(js.getString("createdate"));
 			if(js.has("userid"))
 				userInfo.setUserid(js.getString("userid"));
-			if(js.has("mobile"))
-				userInfo.setMobile(js.getString("mobile"));
+			if(js.has("link"))
+				userInfo.setLink(js.getString("link"));
 	         if(js.has("avatar"))
 	                userInfo.setAvatar(js.getString("avatar"));
    	         if(js.has("cost"))
@@ -65,8 +65,8 @@ public class UserLoginBuilder extends AbstractJSONBuilder<User> {
                     userInfo.setAddress(js.getString("addr"));
              if(js.has("idcard"))
                     userInfo.setIdcard(js.getString("idcard"));
-             if(js.has("brith"))
-                    userInfo.setBirth(js.getString("brith"));
+             if(js.has("birth"))
+                    userInfo.setBirth(js.getString("birth"));
              if(js.has("nickname"))
                     userInfo.setNickname(js.getString("nickname"));
              if(js.has("telno"))

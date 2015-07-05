@@ -3,6 +3,7 @@ package com.erban.module.user;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
@@ -21,6 +22,7 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,12 +34,15 @@ import com.erban.WifiApplication;
 import com.erban.bean.User;
 import com.erban.bean.User.UserInfo;
 import com.erban.module.user.control.UserInfoControl;
+import com.erban.util.Log;
 import com.erban.util.UserUtil;
+import com.erban.view.dialog.DatePickerFragment;
 import com.erban.widget.CircleImageView;
 import com.erban.widget.TitleBar;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-public class UserInfoActivity extends AbstractActivity<UserInfoControl> implements View.OnClickListener{
+public class UserInfoActivity extends AbstractActivity<UserInfoControl> 
+		implements View.OnClickListener,DatePickerFragment.DateTimeListener{
 
 	public static void startActivity(Activity ac){
 		Intent intent = new Intent(ac,UserInfoActivity.class);
@@ -167,6 +172,9 @@ public class UserInfoActivity extends AbstractActivity<UserInfoControl> implemen
         case R.id.item4:
             UserInfoModify4SexActivity.startActivity(this,UserUtil.getUser().getUserInfo().getGender());
             break;
+        case R.id.item5:
+        	DatePickerFragment.showDatePickerDialog(getFragmentManager());
+            break;            
         case R.id.item6:
             UserInfoModifyActivity.startActivity(this, "所在地", "addr", UserUtil.getUser().getUserInfo().getAddress());
             break;
@@ -327,5 +335,20 @@ public class UserInfoActivity extends AbstractActivity<UserInfoControl> implemen
 		return false;
 	}
 
+	@Override
+	public void onDateSet(int year, int month, int day) {
+		String data = String.valueOf(year) + "-" + String.valueOf(month) + "-" + String.valueOf(day);
+		User user = UserUtil.getUser();
+		user.getUserInfo().setBirth(data);
+		User.save(user);
+		mControl.updateUserInfo("birth", data);
+		
+		onResume();
+	}
+
+	public void updateUserInfoCallBack(){
+	}
+	public void updateUserInfoExceptionCallBack(){
+	}
 	
 }
