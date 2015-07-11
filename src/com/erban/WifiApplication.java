@@ -1,5 +1,7 @@
 package com.erban;
 
+import cn.waps.AppConnect;
+
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.erban.api.WifiApi;
@@ -47,7 +49,7 @@ public class WifiApplication extends Application{
         mLbsManager = LbsManager.getInstance(this);
         mLbsManager.start();
     }
-    
+
     @Override
     public void onTerminate() {
     	super.onTerminate();

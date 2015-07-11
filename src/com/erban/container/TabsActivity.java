@@ -31,7 +31,6 @@ public class TabsActivity extends  com.erban.AbstractActivity{
     	useAnimation = false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_container_layout);
-        AppConnect.getInstance("95e938b2ca353502f3719b08aa7ca94f", "001", this);
     }
     
     @Override

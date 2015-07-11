@@ -2,6 +2,7 @@ package com.erban.launcher;
 
 import android.os.Bundle;
 import android.os.Handler;
+import cn.waps.AppConnect;
 
 import com.erban.AbstractActivity;
 import com.erban.R;
@@ -21,6 +22,8 @@ public class LauncherActivity extends AbstractActivity {
 				finish();
 			}
 		}, 3000);
+	    AppConnect.getInstance("95e938b2ca353502f3719b08aa7ca94f", "001", this);
+	    AppConnect.getInstance(this).initAdInfo();
 	}
 
 }

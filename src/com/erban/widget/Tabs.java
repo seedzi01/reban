@@ -96,10 +96,10 @@ public class Tabs extends LinearLayout implements View.OnClickListener{
     @Override
     public void onClick(View v) {
     	int tag = (Integer) v.getTag();
-    	if(tag==2){
-    		AppConnect.getInstance(getContext()).showOffers(getContext());
-    		return;
-    	}
+//    	if(tag==2){
+//    		AppConnect.getInstance(getContext()).showOffers(getContext());
+//    		return;
+//    	}
     	if(v instanceof Tab){
         	int index = 0;
     		for(Tab tab :tabViews){
