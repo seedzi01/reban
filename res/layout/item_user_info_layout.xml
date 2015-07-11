@@ -7,6 +7,7 @@
             android:layout_marginLeft="@dimen/item_margin_normal"
             android:id="@+id/title"
             android:text="昵称"
+            android:textColor="#434343"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
@@ -28,7 +29,7 @@
             android:layout_toLeftOf="@id/tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            
+            android:textColor="#9a9a9a"
             android:text="我的订单"/><!-- android:textColor="#969696" -->
         
             <View 

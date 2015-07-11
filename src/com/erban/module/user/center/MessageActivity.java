@@ -58,7 +58,6 @@ public class MessageActivity extends AbstractActivity<UserCenterControl>{
 
   // ======================================= Callback ============================================= //
     public void showUserNoticeCallback(){
-    	Log.d("111", "showUserNoticeCallback");
        	mAdapter.setItems(mControl.getModel().getMsgList());
     	mAdapter.notifyDataSetChanged();
     }

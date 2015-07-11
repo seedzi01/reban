@@ -16,10 +16,12 @@ import com.erban.bean.SaleCount;
 import com.erban.module.user.center.control.UserCenterControl;
 import com.erban.view.FilterView;
 import com.erban.view.ShopAdapter;
+import com.erban.view.pullrefreshview.PullToRefreshBase.OnRefreshListener;
 import com.erban.view.pullrefreshview.PullToRefreshListView;
 import com.erban.widget.TitleBar;
 
-public class DiscountActivity extends AbstractActivity<UserCenterControl> implements View.OnClickListener{
+public class DiscountActivity extends AbstractActivity<UserCenterControl> 
+	implements View.OnClickListener,OnRefreshListener{
 
 
     public static void startActivity(Activity ac){
@@ -62,6 +64,7 @@ public class DiscountActivity extends AbstractActivity<UserCenterControl> implem
         mFirstTitle.performClick();
         
         mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.list);
+        mPullToRefreshListView.setPullToRefreshEnabled(false);
         mListView = mPullToRefreshListView.getRefreshableView();
         mAdapter = new ShopAdapter();
         mListView.setAdapter(mAdapter);
@@ -149,5 +152,10 @@ public class DiscountActivity extends AbstractActivity<UserCenterControl> implem
     public void getSaleCountAsynExceptionCallback(){
     	
     }
+
+	@Override
+	public void onRefresh() {
+		
+	}
 	
 }
