@@ -68,7 +68,7 @@ public class TreasureFragment extends Fragment {
         adInfoList = AppConnect.getInstance(getActivity()).getAdInfoList();
     }
     
-    private class TreasureAdapter extends BaseAdapter{
+    private class TreasureAdapter extends BaseAdapter implements View.OnClickListener{
 
         @Override
         public int getCount() {
@@ -97,18 +97,23 @@ public class TreasureFragment extends Fragment {
                 holder.titleTv = (TextView) convertView.findViewById(R.id.title);
                 holder.contentTv = (TextView) convertView.findViewById(R.id.content);
                 holder.iconIv = (ImageView) convertView.findViewById(R.id.icon);
-//                holder.descriptionTv = (TextView) convertView.findViewById(R.id.description);
-                holder.sizeTv = (TextView) convertView.findViewById(R.id.size);
+                holder.download = (TextView) convertView.findViewById(R.id.download);
+                holder.download.setOnClickListener(this);
                 convertView.setTag(holder);
             }
             holder = (Holder) convertView.getTag();
             holder.titleTv.setText(anInfo.getAdName());
             holder.contentTv.setText(anInfo.getAdText());
             holder.iconIv.setImageBitmap(anInfo.getAdIcon());
-//            holder.descriptionTv.setText(anInfo.getDescription());
-            holder.sizeTv.setText(anInfo.getFilesize()+"MB");
+            holder.download.setTag(Integer.valueOf(position));
             return convertView;
         }
+        
+        @Override
+    	public void onClick(View v) {
+    		int position = (Integer) v.getTag();
+    		AppConnect.getInstance(getActivity()).downloadAd(getActivity(), adInfoList.get(position).getAdId());
+    	}
         
     }
     
@@ -118,5 +123,8 @@ public class TreasureFragment extends Fragment {
         private ImageView iconIv;
         private TextView descriptionTv;
         private TextView sizeTv;
+        private View download;
     }
+
+	
 }
