@@ -11,6 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.erban.WifiApplication;
 import com.erban.bean.PrivateWifiListModel;
+import com.erban.bean.SimpleResult;
 import com.erban.util.Security;
 import com.erban.wifi.PhoneWifiInfo;
 import com.google.gson.Gson;
@@ -67,7 +68,26 @@ public class WifiHandler {
         String figStr = Security.get32MD5Str(values);
         params.put("fig", figStr);
         
-        sendWifiRequest(params, HttpUrls.getRecordWifi(), lisFetchResult);
+        GsonRequest<SimpleResult> request = new GsonRequest<SimpleResult>(
+                Request.Method.POST, HttpUrls.getRecordWifi(), SimpleResult.class, params,
+                new Response.Listener<SimpleResult>() {
+
+                    @Override
+                    public void onResponse(SimpleResult arg0) {
+                        if (arg0.code == 0) {
+                            lisFetchResult.onResponse(null);
+                        } else {
+                            lisFetchResult.onError();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError arg0) {
+                        lisFetchResult.onError();
+                    }
+                });
+        WifiApplication.getRequestQueue().add(request);
     }
     
     private static void sendWifiRequest(

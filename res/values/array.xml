@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string-array name="tabs_names" tools:ignore="MissingTranslation">
         <item>WIFI</item>
-        <item>商家</item>
+        <item>发现</item>
         <item>百宝箱</item>
         <item>我</item>
     </string-array>

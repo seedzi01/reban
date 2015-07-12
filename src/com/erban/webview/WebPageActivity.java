@@ -3,8 +3,6 @@ package com.erban.webview;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.http.message.BasicNameValuePair;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -145,7 +143,7 @@ public class WebPageActivity extends Activity {
                 });
         WifiApplication.getRequestQueue().add(gsonRequest);
     }
-    
+
     private void updateFavIcon() {
         if (!TextUtils.isEmpty(favId)) {
             collection.setImageResource(R.drawable.already_fav);

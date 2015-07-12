@@ -11,8 +11,8 @@
         android:layout_centerHorizontal="true"
         android:textSize="17sp"
         android:textColor="@color/color_app_black"
-        android:layout_marginBottom="17dp"
-        android:layout_marginTop="17dp"/>
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"/>
 
     <View
         android:id="@+id/dialog_line"
@@ -32,10 +32,10 @@
         android:textSize="15sp"
         android:textColor="@color/color_app_grey"
         android:drawableLeft="@drawable/input_password_icon"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@id/dialog_line"/>
 
-    <CheckBox 
+    <CheckBox
         android:id="@+id/dialog_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
     
     <Button
         android:id="@+id/dialog_confirm"
-        android:layout_height="wrap_content"
+        android:layout_height="42dp"
         android:layout_width="wrap_content"
         android:layout_below="@id/dialog_checkbox"
         android:layout_centerHorizontal="true"
@@ -60,6 +60,7 @@
         android:text="@string/confirm"
         android:textSize="17sp"
         android:textColor="@color/color_white"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"/>
     
 </RelativeLayout>

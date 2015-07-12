@@ -72,6 +72,9 @@ public class WifiReporterProcesser {
                     @Override
                     public void onResponse(PrivateWifiListModel model) {
                         Log.d("wifi-handler", "send wifi detail success.");
+                        if (model == null) {
+                            return;
+                        }
                         synchronized (waitingWifis) {
                             waitingWifis.remove(wifi);
                         }

@@ -40,6 +40,7 @@ public class BaseShopFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         shopListView = (ListView) view.findViewById(R.id.shopListView);
+        shopListView.setDivider(null);
         shadowView = view.findViewById(R.id.shadow);
         first = (FilterView) view.findViewById(R.id.first);
         second = (FilterView) view.findViewById(R.id.second);

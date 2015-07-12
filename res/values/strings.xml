@@ -4,9 +4,9 @@
     <string name="app_name">智连</string>
     <string name="wifi_refresh">一键WiFi查询</string>
     
-    <string name="wifi_without_password">免密码wifi (%1$d)</string>
-    <string name="wifi_need_password">需要密码wifi (%1$d)</string>
-    <string name="wifi_special">专属wifi (%1$d)</string>
+    <string name="wifi_without_password">免密码WiFi (%1$d)</string>
+    <string name="wifi_need_password">需要密码WiFi (%1$d)</string>
+    <string name="wifi_special">专属WiFi (%1$d)</string>
 	
     <string name="wifi_disconnected">暂时没有连接到WiFi</string>
     <string name="wifi_connected">已连接</string>
@@ -42,6 +42,7 @@
     
     <string name="fav_failed">收藏失败</string>
     <string name="fav_success">收藏成功</string>
+    <string name="already_receive">已领取</string>
     
     <string name="queding_xieyi">同意<u>WIFI用户协议</u></string>
 </resources>

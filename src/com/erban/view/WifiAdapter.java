@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import android.app.Activity;
-import android.app.FragmentManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -15,7 +13,6 @@ import android.widget.TextView;
 import com.erban.R;
 import com.erban.WifiApplication;
 import com.erban.util.ViewUtils;
-import com.erban.view.dialog.ConnectWifiDialog;
 import com.erban.wifi.PhoneWifiInfo;
 import com.erban.wifi.PhoneWifiManager;
 import com.erban.wifi.SecurityType;
@@ -117,16 +114,44 @@ public class WifiAdapter extends BaseAdapter {
             convertView.setTag(binder);
         }
         // bind data.
+        if (ViewType.SPECAIL_WIFI_ITEM.equals(viewType)) {
+            if (binder instanceof WifiItemBinder) {
+                ((WifiItemBinder) binder)
+                        .setShowBottomLine(position != getSpecialWifiSize());
+            }
+        }
         if (ViewType.NO_PASSWORD_ITEM.equals(viewType)) {
             if (binder instanceof WifiItemBinder) {
                 ((WifiItemBinder) binder)
-                        .setShowBottomLine(position != noPasswords.size());
+                        .setShowBottomLine(
+                                position != (getNoPasswordWifiSize() + 
+                                        (getSpecialWifiSize() == 0 ? 0 : getSpecialWifiSize() + 1)));
+            }
+        }
+        if (ViewType.NEED_PASSWORD_ITEM.equals(viewType)) {
+            if (binder instanceof WifiItemBinder) {
+                ((WifiItemBinder) binder)
+                        .setShowBottomLine(position != (getNormalWifiSize()  
+                                + (getNoPasswordWifiSize() == 0 ? 0 : getNoPasswordWifiSize() + 1)
+                                + (getSpecialWifiSize() == 0 ? 0 : getSpecialWifiSize() + 1)));
             }
         }
         binder.bind(convertView, model);
         return convertView;
     }
 
+    private int getSpecialWifiSize() {
+        return specialWifis == null ? 0 : specialWifis.size();
+    }
+    
+    private int getNormalWifiSize() {
+        return normalWifis == null ? 0 : normalWifis.size();
+    }
+    
+    private int getNoPasswordWifiSize() {
+        return noPasswords == null ? 0 : noPasswords.size();
+    }
+    
     @Override
     public int getItemViewType(int position) {
         return types.get(position).ordinal();
@@ -252,12 +277,7 @@ public class WifiAdapter extends BaseAdapter {
                                 wifiInfo.getSecurityType());
                         return;
                     }
-                    FragmentManager transaction = ((Activity) view.getContext())
-                            .getFragmentManager();
-                    ConnectWifiDialog dialog = ConnectWifiDialog
-                            .newInstance(wifiInfo);
-                    dialog.setStyle(R.style.Dialog_No_Border, 0);
-                    dialog.show(transaction, "ConnectDialog");
+                    DialogManager.getInstance(v.getContext()).showConnectDialog(view.getContext(), wifiInfo);
                 }
             });
         }
