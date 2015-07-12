@@ -252,12 +252,7 @@ public class WifiAdapter extends BaseAdapter {
                                 wifiInfo.getSecurityType());
                         return;
                     }
-                    FragmentManager transaction = ((Activity) view.getContext())
-                            .getFragmentManager();
-                    ConnectWifiDialog dialog = ConnectWifiDialog
-                            .newInstance(wifiInfo);
-                    dialog.setStyle(R.style.Dialog_No_Border, 0);
-                    dialog.show(transaction, "ConnectDialog");
+                    DialogManager.getInstance(v.getContext()).showConnectDialog(view.getContext(), wifiInfo);
                 }
             });
         }

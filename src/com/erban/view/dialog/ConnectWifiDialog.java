@@ -1,10 +1,8 @@
 package com.erban.view.dialog;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -50,37 +48,37 @@ public class ConnectWifiDialog extends DialogFragment {
         View dialogView = inflater.inflate(R.layout.dialog_connect_wifi, null,
                 false);
 
-        final Dialog dialog = new Dialog(getActivity(), R.style.Dialog_No_Border);
-        
-        TextView titleView = (TextView) dialogView.findViewById(R.id.dialog_title);
+        final Dialog dialog = new Dialog(getActivity(),
+                R.style.Dialog_No_Border);
+
+        TextView titleView = (TextView) dialogView
+                .findViewById(R.id.dialog_title);
         titleView.setText(wifiInfo.getWifiName());
 
-        final EditText input = (EditText) dialogView.findViewById(R.id.dialog_input);
-        
+        final EditText input = (EditText) dialogView
+                .findViewById(R.id.dialog_input);
+
         Button confirm = (Button) dialogView.findViewById(R.id.dialog_confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
-            
+
             @Override
             public void onClick(View view) {
                 if (TextUtils.isEmpty(input.getText().toString())) {
                     ViewUtils.showShortToast(R.string.no_password);
                     return;
                 }
-                PhoneWifiManager.getInstance(
-                        WifiApplication.getInstance()).connect(
-                                wifiInfo.getWifiName(), input.getText().toString(), wifiInfo.getSecurityType());
-                
-                WifiReporterProcesser.getInstance().addWifi(wifiInfo, input.getText().toString());
-                
+                PhoneWifiManager.getInstance(WifiApplication.getInstance())
+                        .connect(wifiInfo.getWifiName(),
+                                input.getText().toString(),
+                                wifiInfo.getSecurityType());
+
+                WifiReporterProcesser.getInstance().addWifi(wifiInfo,
+                        input.getText().toString());
+
                 dialog.cancel();
-                FragmentManager transaction = ((Activity) view.getContext())
-                        .getFragmentManager();
-                ConnectingWifiDialog connectWifiDialog = ConnectingWifiDialog.newInstance();
-                connectWifiDialog.setStyle(R.style.Dialog_No_Border, 0);
-                connectWifiDialog.show(transaction, "ConnectingDialog");
             }
         });
-        
+
         dialog.setContentView(dialogView);
         dialog.setCanceledOnTouchOutside(true);
         return dialog;

@@ -77,7 +77,7 @@ public class WifiFragment extends Fragment {
         updateWifiStatus();
         Log.d("location", System.currentTimeMillis() + " begin fetch");
         wifiListView.postDelayed((new Runnable() {
-            
+
             @Override
             public void run() {
                 // TODO Auto-generated method stub

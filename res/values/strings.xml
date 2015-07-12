@@ -43,4 +43,6 @@
     <string name="fav_failed">收藏失败</string>
     <string name="fav_success">收藏成功</string>
     
+    
+    <string name="connect_wifi_failed">连接WiFi失败，请确认密码是否正确</string>
 </resources>

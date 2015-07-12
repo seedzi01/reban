@@ -27,26 +27,6 @@ public class ConnectingWifiDialog extends DialogFragment {
         return dialogFragment;
     }
     
-    private WifiStateListener statusListener = new WifiStateListener() {
-
-        @Override
-        public void onWifiScanSuccess() {
-        }
-
-        @Override
-        public void onDevicesStateChanged(DevicesState state) {
-        }
-
-        @Override
-        public void onWifiStateChanged() {
-            if (statusView != null && PhoneWifiManager.isConnected(WifiApplication.getInstance(),
-                    ConnectivityManager.TYPE_WIFI)) {
-                completeButton.setVisibility(View.VISIBLE);
-                statusView.setVisibility(View.GONE);
-            }
-        }
-    };
-    
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflater = LayoutInflater.from(getActivity());
@@ -59,6 +39,8 @@ public class ConnectingWifiDialog extends DialogFragment {
         statusView.setText(R.string.state_connecting);
         completeButton = (Button) dialogView.findViewById(R.id.complete);
         completeButton.setVisibility(View.GONE);
+        completeButton.setVisibility(View.VISIBLE);
+        statusView.setVisibility(View.GONE);
         completeButton.setOnClickListener(new View.OnClickListener() {
             
             @Override
@@ -72,7 +54,6 @@ public class ConnectingWifiDialog extends DialogFragment {
         dialog = new Dialog(getActivity(), R.style.Dialog_No_Border);
         dialog.setContentView(dialogView);
         
-        PhoneWifiManager.getInstance(getActivity()).addListener(statusListener);
         return dialog;
     }
 
