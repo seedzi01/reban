@@ -43,4 +43,5 @@
     <string name="fav_failed">收藏失败</string>
     <string name="fav_success">收藏成功</string>
     
+    <string name="queding_xieyi">同意<u>WIFI用户协议</u></string>
 </resources>

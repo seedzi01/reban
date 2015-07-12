@@ -154,4 +154,30 @@
         android:textColor="#ffffff"
         android:text="@string/login"
         android:textSize="16sp"/><!-- android:background="@drawable/user_login_button_selector" -->
+        
+  <RelativeLayout 
+      android:id="@+id/xieyi_layout"
+      android:layout_below="@id/launch"
+      android:layout_marginTop="18dp"
+      android:layout_marginLeft="18dp"
+      android:layout_width="match_parent"
+      android:gravity="center_vertical"
+      android:layout_height="wrap_content">
+		<CheckBox 
+		   android:id="@+id/checkbox"
+		   android:layout_width="wrap_content"
+		   android:layout_height="wrap_content"
+		   android:button="@null"
+		   android:background="@drawable/xieyi_selector"/>
+		<TextView 
+		   android:id="@+id/tishi" 
+		   android:textSize="13sp"
+		   android:layout_marginLeft="8dp"
+		   android:layout_centerVertical="true"
+		   android:layout_toRightOf="@id/checkbox"
+		   android:layout_width="wrap_content"
+		   android:layout_height="wrap_content"
+		   android:text="@string/queding_xieyi"
+		   />	    
+  </RelativeLayout>      
 </RelativeLayout>

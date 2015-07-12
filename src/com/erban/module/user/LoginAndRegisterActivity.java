@@ -4,6 +4,7 @@ package com.erban.module.user;
 
 import com.erban.AbstractActivity;
 import com.erban.R;
+import com.erban.WebViewActivity;
 import com.erban.container.TabsActivity;
 import com.erban.module.user.control.UserControl;
 import com.erban.util.InputUtils;
@@ -19,9 +20,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -77,6 +80,8 @@ public class LoginAndRegisterActivity extends AbstractActivity<UserControl>
 				Toast.makeText(LoginAndRegisterActivity.this, "请输入正确的数据", 0).show();
 				return;
 			}
+			
+			
 			showProgressDialog("注册中...");
 			mControl.registeAsyn(mRegisterUserMobileEdit.getText().toString(),
 					mRegisterUserPasswordEdit.getText().toString(),
@@ -90,6 +95,11 @@ public class LoginAndRegisterActivity extends AbstractActivity<UserControl>
 			clearMessge();
 			if(!checkInputData4Login()){
 				Toast.makeText(LoginAndRegisterActivity.this, "请输入正确的数据", 0).show();
+				return;
+			}
+			CheckBox box = (CheckBox) findViewById(R.id.checkbox);
+			if(!box.isChecked()){
+				Toast.makeText(LoginAndRegisterActivity.this, "请同意wifi用户协议", 0).show();
 				return;
 			}
 			showProgressDialog("登录中...");
@@ -157,10 +167,17 @@ public class LoginAndRegisterActivity extends AbstractActivity<UserControl>
 		forgetPassword = findViewById(R.id.forget_password);
 		forgetPassword.setOnClickListener(this);
 		mTitleBar.getTitle().setTextColor(Color.parseColor("#ffffff"));
+		
+		TextView tishiTv = (TextView) findViewById(R.id.tishi);
+		tishiTv.setText(Html.fromHtml("<font color=#000000>同意</font><u><font color=#E61A6B>WIFI用户协议</font></u>"));
+		tishiTv.setOnClickListener(this);
+		
 		if(getIntent().getBooleanExtra("is_login", true))
 			mTitleBar.findViewById(R.id.login).performClick();
 		else 
 			mTitleBar.findViewById(R.id.register).performClick();
+		
+		
 	}
 	
 	@Override
@@ -170,6 +187,7 @@ public class LoginAndRegisterActivity extends AbstractActivity<UserControl>
 		forgetPassword.setVisibility(View.VISIBLE);
 		mLaunchListener  = LAUNCH_LOGIN;
 		mLaunchButton.setText("登录");
+		findViewById(R.id.xieyi_layout).setVisibility(View.VISIBLE);
 	}
 
 	@Override
@@ -179,6 +197,7 @@ public class LoginAndRegisterActivity extends AbstractActivity<UserControl>
 		forgetPassword.setVisibility(View.GONE);
 		mLaunchListener  = LAUNCH_REGISTER;
 		mLaunchButton.setText("注册");
+		findViewById(R.id.xieyi_layout).setVisibility(View.INVISIBLE);
 	}
 
 	@Override
@@ -192,8 +211,11 @@ public class LoginAndRegisterActivity extends AbstractActivity<UserControl>
 			InputUtils.hidSoftInput(LoginAndRegisterActivity.this);//强制关闭软键盘
 			mLaunchListener.onLaunch();
 			break;
-		case	R.id.get_verification:
+		case R.id.get_verification:
 			getVerification(mRegisterUserMobileEdit.getText().toString());
+			break;
+		case R.id.tishi:	
+			WebViewActivity.startActivity(this);
 			break;
 		default:
 			break;
