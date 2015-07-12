@@ -34,7 +34,7 @@ public class PrivateWifiListModel {
         @Override
         public SecurityType getSecurityType() {
             // TODO unknown.
-            if (!TextUtils.isEmpty(type)) {
+            if (TextUtils.isEmpty(type)) {
                 return SecurityType.NONE;
             } else {
                 try {

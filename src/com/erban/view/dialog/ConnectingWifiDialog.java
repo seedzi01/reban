@@ -46,6 +46,7 @@ public class ConnectingWifiDialog extends DialogFragment {
             }
         });
 
+        dialog = new Dialog(getActivity(), R.style.Dialog_No_Border);
         dialog.setContentView(dialogView);
 
         return dialog;

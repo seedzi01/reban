@@ -39,9 +39,9 @@ public class DialogManager {
 
         @Override
         public void onWifiStateChanged() {
+            boolean connected = PhoneWifiManager.isConnected(WifiApplication.getInstance(),
+                    ConnectivityManager.TYPE_WIFI);
             if (hasClickedWifi) {
-                boolean connected = PhoneWifiManager.isConnected(WifiApplication.getInstance(),
-                        ConnectivityManager.TYPE_WIFI);
                 if (connected) {
                     showAdsDialog(context);
                 } else {
@@ -52,7 +52,9 @@ public class DialogManager {
                             Toast.LENGTH_SHORT).show();
                 }
             }
-            hasClickedWifi = false;
+            if (connected) {
+                hasClickedWifi = false;
+            }
         }
 
         @Override
