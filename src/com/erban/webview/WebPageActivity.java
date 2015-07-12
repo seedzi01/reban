@@ -145,7 +145,7 @@ public class WebPageActivity extends Activity {
                 });
         WifiApplication.getRequestQueue().add(gsonRequest);
     }
-    
+
     private void updateFavIcon() {
         if (!TextUtils.isEmpty(favId)) {
             collection.setImageResource(R.drawable.already_fav);
