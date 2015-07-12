@@ -2,7 +2,6 @@ package com.erban.view.dialog;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.erban.R;
-import com.erban.WifiApplication;
-import com.erban.wifi.DevicesState;
-import com.erban.wifi.PhoneWifiManager;
-import com.erban.wifi.WifiStateListener;
 
 public class ConnectingWifiDialog extends DialogFragment {
 
@@ -50,10 +45,9 @@ public class ConnectingWifiDialog extends DialogFragment {
                 }
             }
         });
-        
-        dialog = new Dialog(getActivity(), R.style.Dialog_No_Border);
+
         dialog.setContentView(dialogView);
-        
+
         return dialog;
     }
 

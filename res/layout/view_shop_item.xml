@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="11dp"
+    android:paddingLeft="11dp"
+    android:paddingTop="11dp"
     android:background="@color/color_white"
     android:layout_width="match_parent"
     android:layout_height="118dp" >
@@ -18,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_alignParentRight="true"
+        android:paddingRight="11dp"
         android:textColor="#939393"
         android:textSize="12sp"
         />
@@ -27,8 +29,10 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_toRightOf="@id/icon"
-        android:layout_toLeftOf="@id/first"
+        android:layout_toLeftOf="@id/distance"
+        android:layout_marginRight="5dp"
         android:textColor="#000000"
+        android:singleLine="true"
         android:textSize="15sp"
         />
      
@@ -37,6 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_toRightOf="@id/icon"
+        android:paddingRight="11dp"
         android:layout_marginTop="11dp"
         android:layout_below="@id/title"
         android:textColor="#797979"
@@ -49,7 +54,9 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_marginBottom="8dp"
         android:layout_alignParentBottom="true"
+        android:paddingRight="11dp"
         android:textColor="#939393"
         android:textSize="12sp"
         />
@@ -58,7 +65,8 @@
          android:id="@+id/money_mark"
          android:layout_height="wrap_content"
          android:layout_width="wrap_content"
-         android:layout_alignBottom="@id/icon"
+         android:layout_marginBottom="7dp"
+         android:layout_alignParentBottom="true"
          android:layout_toRightOf="@id/icon"
          android:textColor="#ff4305"
          android:textSize="17sp"
@@ -69,7 +77,8 @@
          android:id="@+id/current"
          android:layout_height="wrap_content"
          android:layout_width="wrap_content"
-         android:layout_alignBottom="@id/icon"
+         android:layout_marginBottom="5dp"
+         android:layout_alignParentBottom="true"
          android:layout_toRightOf="@id/money_mark"
          android:layout_marginRight="5dp"
          android:textColor="#ff4305"
@@ -81,10 +90,17 @@
          android:id="@+id/origin"
          android:layout_height="wrap_content"
          android:layout_width="wrap_content"
-         android:layout_alignBottom="@id/icon"
+         android:layout_marginBottom="8dp"
+         android:layout_alignParentBottom="true"
          android:layout_toRightOf="@id/current"
          android:textColor="#939393"
          android:textSize="12sp"
          android:text="￥200"/>
 
+     <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dcdcdc"
+        android:layout_alignParentBottom="true"/>
+     
 </RelativeLayout>

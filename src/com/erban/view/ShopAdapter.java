@@ -3,11 +3,13 @@ package com.erban.view;
 import java.util.List;
 
 import com.erban.R;
+import com.erban.WifiApplication;
 import com.erban.bean.NormalGoods;
 import com.erban.util.ViewUtils;
 import com.erban.webview.WebPageActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import android.graphics.Paint;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,9 +61,10 @@ public class ShopAdapter extends BaseAdapter {
         viewHolder.distance.setText("500m");
         viewHolder.title.setText(item.getGoods());
         viewHolder.subTitle.setText(item.getDesc());
-        viewHolder.count.setText(item.getGets());
+        viewHolder.count.setText(WifiApplication.getInstance().getString(R.string.already_receive) + item.getGets());
         viewHolder.current.setText(item.getDprice());
-        viewHolder.origin.setText(item.getPrice());
+        viewHolder.origin.setText("￥" + item.getPrice());
+        viewHolder.origin.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         ImageLoader.getInstance().displayImage(item.getLogo(), viewHolder.icon);
         convertView.setOnClickListener(new View.OnClickListener() {
             
