@@ -1,6 +1,8 @@
 package com.erban.bean;
 
-public class Msg {
+import java.io.Serializable;
+
+public class Msg implements Serializable{
 	/*
 	{
 	    "msg": [

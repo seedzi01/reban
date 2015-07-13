@@ -22,11 +22,13 @@
     android:layout_height="wrap_content">
     <TextView 
      android:id="@+id/from"   
+     android:textColor="#393939"
      android:layout_alignParentLeft="true"
      android:layout_height="wrap_content"
      android:layout_width="wrap_content"/>
     <TextView 
      android:id="@+id/time"   
+     android:textColor="#393939"
      android:drawableLeft="@drawable/time_icon"
      android:layout_alignParentRight="true"
      android:layout_height="wrap_content"

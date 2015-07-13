@@ -47,20 +47,20 @@ public class MsgAdapter extends BaseAdapter implements View.OnClickListener{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder viewHolder;
-		if (convertView != null) {
-			viewHolder = (ViewHolder) convertView.getTag(ITEM_TAG);
-		} else {
+		if (convertView == null) {
 			convertView = ViewUtils
 					.newInstance(parent, R.layout.view_msg_item);
 			viewHolder = new ViewHolder(convertView);
-			convertView.setTag(ITEM_TAG, viewHolder);
+			convertView.setTag(viewHolder);
 			convertView.setOnClickListener(this);
 		}
+		viewHolder = (ViewHolder) convertView.getTag();
 	    Msg item = getItem(position);
         viewHolder.title.setText(item.getTitle());
         viewHolder.from.setText(item.getFrom());
         viewHolder.content.setText(item.getContent());
         viewHolder.time.setText(item.getUptime());
+        viewHolder.msg = item;
         return convertView;
 	}
 
@@ -70,6 +70,7 @@ public class MsgAdapter extends BaseAdapter implements View.OnClickListener{
 	        private TextView from;
 	        private TextView content;
 	        private TextView time;
+	        private Msg msg;
 
 	        public ViewHolder(View view) {
 	            title = (TextView) view.findViewById(R.id.title);
@@ -86,6 +87,7 @@ public class MsgAdapter extends BaseAdapter implements View.OnClickListener{
 
 	@Override
 	public void onClick(View v) {
-		MessageDetailActivity.startActivity(mAc);
+	    ViewHolder viewHolder = (ViewHolder) v.getTag();
+		MessageDetailActivity.startActivity(mAc,viewHolder.msg);
 	}
 }
