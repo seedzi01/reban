@@ -93,10 +93,12 @@ public class DiscountAdapter extends BaseAdapter {
             break;
         case GUO_QI_SHI_XIAO:
             viewHolder.bt.setText("过期失效");
+            viewHolder.bt.setBackgroundResource(R.drawable.guo_qi_shi_xiao);
             viewHolder.bt.setTextColor(Color.parseColor("#000000"));
             break;
         case YI_SHI_YONG:
             viewHolder.bt.setText("已使用");
+            viewHolder.bt.setBackgroundResource(R.drawable.yi_shi_yong);
             viewHolder.bt.setTextColor(Color.parseColor("#ffffff"));
             break;
         default:
