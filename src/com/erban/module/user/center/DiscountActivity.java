@@ -14,6 +14,7 @@ import com.erban.AbstractActivity;
 import com.erban.R;
 import com.erban.bean.SaleCount;
 import com.erban.module.user.center.control.UserCenterControl;
+import com.erban.view.DiscountAdapter;
 import com.erban.view.FilterView;
 import com.erban.view.ShopAdapter;
 import com.erban.view.pullrefreshview.PullToRefreshBase.OnRefreshListener;
@@ -32,7 +33,7 @@ public class DiscountActivity extends AbstractActivity<UserCenterControl>
     private TitleBar mTitlebar;
     private PullToRefreshListView mPullToRefreshListView;
     private ListView mListView;
-    private ShopAdapter mAdapter;
+    private DiscountAdapter mAdapter;
     
     protected void onCreate(android.os.Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,13 +62,14 @@ public class DiscountActivity extends AbstractActivity<UserCenterControl>
         setupNavItem(mFirstTitle);
         setupNavItem(mSecondTitle);
         setupNavItem(mThirdTttle);
-        mFirstTitle.performClick();
         
         mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.list);
         mPullToRefreshListView.setPullToRefreshEnabled(false);
         mListView = mPullToRefreshListView.getRefreshableView();
-        mAdapter = new ShopAdapter();
+        mAdapter = new DiscountAdapter();
         mListView.setAdapter(mAdapter);
+        
+        mFirstTitle.performClick();
     }
     
     FilterView mFirstTitle;
@@ -106,18 +108,21 @@ public class DiscountActivity extends AbstractActivity<UserCenterControl>
 			mFirstTitle.setSelected(true);
 			mSecondTitle.setSelected(false);
 			mThirdTttle.setSelected(false);
+            mAdapter.mCurrentPage = DiscountAdapter.LI_JI_SHI_YONG;
 			mControl.getMySaleAsyn("gets", "1");
 			break;
 		case R.id.second:
 			mFirstTitle.setSelected(false);
 			mSecondTitle.setSelected(true);
 			mThirdTttle.setSelected(false);
+			mAdapter.mCurrentPage = DiscountAdapter.GUO_QI_SHI_XIAO;
 			mControl.getMySaleAsyn("expire", "1");
 			break;
 		case R.id.third:
 			mFirstTitle.setSelected(false);
 			mSecondTitle.setSelected(false);
 			mThirdTttle.setSelected(true);
+			mAdapter.mCurrentPage = DiscountAdapter.YI_SHI_YONG;
 			mControl.getMySaleAsyn("used", "1");
 			break;
 		default:

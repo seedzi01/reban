@@ -10,10 +10,12 @@ import com.erban.AbstractActivity;
 import com.erban.R;
 import com.erban.module.user.center.control.UserCenterControl;
 import com.erban.view.MemberShipAdapter;
+import com.erban.view.pullrefreshview.PullToRefreshBase.OnRefreshListener;
+import com.erban.view.pullrefreshview.PullToRefreshBase.OnRefreshListener2;
 import com.erban.view.pullrefreshview.PullToRefreshListView;
 import com.erban.widget.TitleBar;
 
-public class MembershipCardActivity extends AbstractActivity<UserCenterControl> {
+public class MembershipCardActivity extends AbstractActivity<UserCenterControl> implements OnRefreshListener{
 
     public static void startActivity(Activity ac) {
         Intent intent = new Intent(ac, MembershipCardActivity.class);
@@ -46,6 +48,7 @@ public class MembershipCardActivity extends AbstractActivity<UserCenterControl> 
         mTitlebar.setTitle("我的会员");
 
         mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.list);
+        mPullToRefreshListView.setOnRefreshListener(this);
         mListView = mPullToRefreshListView.getRefreshableView();
         mAdapter = new MemberShipAdapter();
         mListView.setAdapter(mAdapter);
@@ -60,9 +63,16 @@ public class MembershipCardActivity extends AbstractActivity<UserCenterControl> 
     public void showMemberShipCallback() {
         mAdapter.setItems(mControl.getModel().getMemberShips());
         mAdapter.notifyDataSetChanged();
+        mPullToRefreshListView.onRefreshComplete();
     }
 
     public void showMemberShipExceptionCallback() {
 
     }
+
+    @Override
+    public void onRefresh() {
+        mControl.showMemeberShipAsyn();
+    }
+
 }

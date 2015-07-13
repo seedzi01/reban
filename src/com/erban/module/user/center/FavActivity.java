@@ -63,6 +63,7 @@ public class FavActivity extends AbstractActivity<UserCenterControl>{
     public void showFavListCallback(){
     	mAdapter.setItems(mControl.getModel().getGoodsList());
     	mAdapter.notifyDataSetChanged();
+    	android.util.Log.d("111", mControl.getModel().getGoodsList().get(0).getJump());
     }
     
     public void showFavListExceptionCallback(){
