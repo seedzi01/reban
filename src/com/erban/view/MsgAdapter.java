@@ -4,14 +4,18 @@ import java.util.List;
 
 import com.erban.R;
 import com.erban.bean.Msg;
+import com.erban.module.user.center.MessageDetailActivity;
 import com.erban.util.ViewUtils;
 
+import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class MsgAdapter extends BaseAdapter {
+public class MsgAdapter extends BaseAdapter implements View.OnClickListener{
+	
+	private Activity mAc;
 	
 	private int ITEM_TAG = R.id.tag;
 	
@@ -50,6 +54,7 @@ public class MsgAdapter extends BaseAdapter {
 					.newInstance(parent, R.layout.view_msg_item);
 			viewHolder = new ViewHolder(convertView);
 			convertView.setTag(ITEM_TAG, viewHolder);
+			convertView.setOnClickListener(this);
 		}
 	    Msg item = getItem(position);
         viewHolder.title.setText(item.getTitle());
@@ -74,4 +79,13 @@ public class MsgAdapter extends BaseAdapter {
 	        }
 
 	    }
+	 
+	public void setActivity(Activity ac){
+		mAc = ac;
+	} 
+
+	@Override
+	public void onClick(View v) {
+		MessageDetailActivity.startActivity(mAc);
+	}
 }

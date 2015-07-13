@@ -109,6 +109,10 @@
  		    android:name="com.erban.WebViewActivity"
  		    android:theme="@android:style/Theme.NoTitleBar">
  		</activity>
+		<activity 
+ 		    android:name="com.erban.module.user.center.MessageDetailActivity"
+ 		    android:theme="@android:style/Theme.NoTitleBar">
+ 		</activity> 		
  		
  		<!-- 定位 -->
  		<service
