@@ -51,6 +51,8 @@ public class MessageActivity extends AbstractActivity<UserCenterControl>{
         mAdapter = new MsgAdapter();
         mAdapter.setActivity(this);
         mListView.setAdapter(mAdapter);
+        
+        mPullToRefreshListView.setPullToRefreshEnabled(false);
     }
 
     private void initData(){

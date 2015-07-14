@@ -52,6 +52,8 @@ public class FavActivity extends AbstractActivity<UserCenterControl>{
     	mListView = mPullToRefreshListView.getRefreshableView();
     	mAdapter = new ShopAdapter();
     	mListView.setAdapter(mAdapter);
+    	
+    	mPullToRefreshListView.setPullToRefreshEnabled(false);
     }
     
     private void initData(){
