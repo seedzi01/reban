@@ -16,15 +16,15 @@ public class WifiInfoWrapper implements PhoneWifiInfo {
 		this.wifiInfo = wifiInfo;
 		this.config = configuration;
 	}
-	
+
 	@Override
 	public String getWifiName() {
-		return wifiInfo.getSSID();
+		return WifiUtil.removeDoubleQuotes(config.SSID);
 	}
 
 	@Override
 	public String getBSSID() {
-		return wifiInfo.getBSSID();
+		return config.BSSID;
 	}
 
 	@Override

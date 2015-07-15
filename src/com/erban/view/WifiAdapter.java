@@ -270,7 +270,15 @@ public class WifiAdapter extends BaseAdapter {
 
                 @Override
                 public void onClick(View v) {
-                    if (SecurityType.NONE.equals(wifiInfo.getSecurityType())) {
+                	
+                	int matchedId = 
+                			PhoneWifiManager.getInstance(WifiApplication.getInstance()).getMatchedNetworkId(wifiInfo);
+    				
+                	if (matchedId > 0) {
+                		PhoneWifiManager.getInstance(
+                                WifiApplication.getInstance()).connect(matchedId);
+                		return;
+                	} else if (SecurityType.NONE.equals(wifiInfo.getSecurityType())) {
                         PhoneWifiManager.getInstance(
                                 WifiApplication.getInstance()).connect(
                                 wifiInfo.getWifiName(), "",

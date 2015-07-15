@@ -11,14 +11,16 @@
         android:layout_centerHorizontal="true"
         android:textSize="17sp"
         android:textColor="@color/color_app_black"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="10dp"/>
 
     <View
         android:id="@+id/dialog_line"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/dialog_title"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:background="@color/wifi_count_line" />
 
     <EditText
@@ -32,7 +34,9 @@
         android:textSize="15sp"
         android:textColor="@color/color_app_grey"
         android:drawableLeft="@drawable/input_password_icon"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_below="@id/dialog_line"/>
 
     <CheckBox
@@ -48,11 +52,11 @@
         android:layout_below="@id/dialog_input"
         android:layout_alignLeft="@id/dialog_input"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="21dp"/>
     
     <Button
         android:id="@+id/dialog_confirm"
-        android:layout_height="42dp"
+        android:layout_height="45dp"
         android:layout_width="wrap_content"
         android:layout_below="@id/dialog_checkbox"
         android:layout_centerHorizontal="true"
