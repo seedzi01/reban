@@ -60,7 +60,9 @@ public class ShopAdapter extends BaseAdapter {
         final NormalGoods item = getItem(position);
         viewHolder.distance.setText("500m");
         viewHolder.title.setText(item.getGoods());
-        viewHolder.subTitle.setText(item.getDesc());
+        if(TextUtils.isEmpty(item.getDesc())){
+        	viewHolder.subTitle.setText(item.getDesc());	
+        }
         viewHolder.count.setText(WifiApplication.getInstance().getString(R.string.already_receive) + item.getGets());
         viewHolder.current.setText(item.getDprice());
         viewHolder.origin.setText("￥" + item.getPrice());

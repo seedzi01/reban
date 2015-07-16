@@ -31,7 +31,12 @@ public class DiscountAdapter extends BaseAdapter {
     private int ITEM_TAG = R.id.tag;
 
     private List<NormalGoods> items;
-
+    
+    private View.OnClickListener mListener;
+    
+    public void setListener(View.OnClickListener listener){
+    	mListener = listener;
+    }
     public void setItems(List<NormalGoods> items) {
         this.items = items;
     }
@@ -85,21 +90,33 @@ public class DiscountAdapter extends BaseAdapter {
                 WebPageActivity.launch(v.getContext(), item.jump, String.valueOf(item.id));
             }
         });
+        viewHolder.bt.setTag(String.valueOf(item.getId()));
+        viewHolder.bt.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(mListener!=null){
+					mListener.onClick(v);
+				}
+			}
+		});
         switch (mCurrentPage) {
         case LI_JI_SHI_YONG:
             viewHolder.bt.setText("立即使用");
             viewHolder.bt.setBackgroundResource(R.drawable.download_selector);
             viewHolder.bt.setTextColor(Color.parseColor("#ffffff"));
+            viewHolder.bt.setEnabled(true);
             break;
         case GUO_QI_SHI_XIAO:
             viewHolder.bt.setText("过期失效");
             viewHolder.bt.setBackgroundResource(R.drawable.guo_qi_shi_xiao);
             viewHolder.bt.setTextColor(Color.parseColor("#000000"));
+            viewHolder.bt.setEnabled(false);
             break;
         case YI_SHI_YONG:
             viewHolder.bt.setText("已使用");
             viewHolder.bt.setBackgroundResource(R.drawable.yi_shi_yong);
             viewHolder.bt.setTextColor(Color.parseColor("#ffffff"));
+            viewHolder.bt.setEnabled(false);
             break;
         default:
             break;

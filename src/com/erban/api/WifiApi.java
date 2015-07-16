@@ -325,4 +325,22 @@ public class WifiApi {
                 new BasicNameValuePair("fig", Security.get32MD5Str(values)));
          return mHttpApi.doHttpRequestObject(httpGet, new NormalGoodsBuilder());
 	}
+	/**
+	 * 优惠列表
+	 */
+	public NetResult useYouHuiCard(String userid, String token,String id) 
+	        throws XiaoMeiCredentialsException, XiaoMeiIOException, XiaoMeiJSONException, XiaoMeiOtherException {
+	    BasicNameValuePair[] values = {
+	    		new BasicNameValuePair("userid", userid) ,
+                new BasicNameValuePair("token", token) ,
+                new BasicNameValuePair("id", id) ,
+                new BasicNameValuePair("uptime", String.valueOf(System.currentTimeMillis()/1000)),
+        };
+	    HttpGet httpGet = mHttpApi.createHttpGet(urlManager.userYouhuiCard(),
+                values[0],
+                values[1],
+                values[2],
+                new BasicNameValuePair("fig", Security.get32MD5Str(values)));
+         return mHttpApi.doHttpRequestObject(httpGet, new NetResultBuilder());
+	}
 }

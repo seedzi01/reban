@@ -1,6 +1,7 @@
 package com.erban.module.user.center;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.LayoutInflater.Filter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.erban.AbstractActivity;
 import com.erban.R;
@@ -67,6 +69,7 @@ public class DiscountActivity extends AbstractActivity<UserCenterControl>
         mPullToRefreshListView.setPullToRefreshEnabled(false);
         mListView = mPullToRefreshListView.getRefreshableView();
         mAdapter = new DiscountAdapter();
+        mAdapter.setListener(this);
         mListView.setAdapter(mAdapter);
         
         mFirstTitle.performClick();
@@ -125,6 +128,10 @@ public class DiscountActivity extends AbstractActivity<UserCenterControl>
 			mAdapter.mCurrentPage = DiscountAdapter.YI_SHI_YONG;
 			mControl.getMySaleAsyn("used", "1");
 			break;
+		case R.id.bt:
+			showProgressDialog("加载中...");
+			mControl.useYouHuiCard((String)v.getTag());
+			break;
 		default:
 			break;
 		}
@@ -142,7 +149,8 @@ public class DiscountActivity extends AbstractActivity<UserCenterControl>
     }
     
     public void showFavListExceptionCallback(){
-    	
+    	mAdapter.setItems(null);
+    	mAdapter.notifyDataSetChanged();
     }
 
     public void getSaleCountAsynCallback(){
@@ -163,4 +171,33 @@ public class DiscountActivity extends AbstractActivity<UserCenterControl>
 		
 	}
 	
+	public void useYouHuiCardCallback(){
+		dismissDialog();
+		mControl.getMySaleAsyn("gets", "1");
+		getSaleCount();
+		Toast.makeText(this, "使用成功", 0).show();
+	}
+	
+	public void useYouHuiCardExceptionCallback(){
+		dismissDialog();
+		Toast.makeText(this, "加载失败", 0).show();
+	}
+	
+	// =========================================== ProgressDialog ===================================================
+	
+	private ProgressDialog mProgressDialog;
+	private void showProgressDialog(String message){
+		if(mProgressDialog!=null && mProgressDialog.isShowing())
+			mProgressDialog.dismiss();
+		mProgressDialog = new ProgressDialog(this);
+		mProgressDialog.setTitle("提示");
+		mProgressDialog.setMessage(message);
+		mProgressDialog.setCancelable(false);
+		mProgressDialog.show();
+	}
+	
+	private void dismissDialog(){
+		if(mProgressDialog!=null && mProgressDialog.isShowing())
+			mProgressDialog.dismiss();
+	}
 }

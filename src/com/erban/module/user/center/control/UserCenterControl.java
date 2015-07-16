@@ -19,7 +19,7 @@ import com.yuekuapp.proxy.MessageProxy;
 
 public class UserCenterControl extends BaseControl {
 	
-	private final String PER_PAGE_SIZE = "10";
+	private final String PER_PAGE_SIZE = "200";
 	
 	private UserCenterModel mModel;
 
@@ -102,5 +102,23 @@ public class UserCenterControl extends BaseControl {
 			e.printStackTrace();
 			sendMessage("showFavListExceptionCallback");
 		}
+	}
+	/**
+	 * 使用优惠卡
+	 */
+	@AsynMethod
+	public void useYouHuiCard(String id){
+		try {
+			WifiApplication
+					.getInstance()
+					.getApi()
+					.useYouHuiCard(
+							UserUtil.getUser().getUserInfo().getUserid(),
+							UserUtil.getUser().getToken(), id);
+			sendMessage("useYouHuiCardCallback");
+		} catch (Exception e) {
+			e.printStackTrace();
+			sendMessage("useYouHuiCardExceptionCallback");
+		} 
 	}
 }

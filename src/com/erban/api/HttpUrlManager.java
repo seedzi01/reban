@@ -70,9 +70,13 @@ public class HttpUrlManager {
     String noticeUrl(){
     	return HOST + "/notice/lists";
     }
-    /*会员卡列表*/
+    /**会员卡列表*/
     String memberShip() {
         return HOST + "/vip/lists";
+    }
+    /**使用优惠卡*/
+    String userYouhuiCard(){//http://101.200.176.151/client/sale/usage?userid=12&token=abcd&id=123
+    	return HOST + "/sale/usage";
     }
 }
 
