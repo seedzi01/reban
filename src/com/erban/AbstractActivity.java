@@ -3,6 +3,7 @@ package com.erban;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.umeng.analytics.MobclickAgent;
 import com.yuekuapp.BaseActivity;
 import com.yuekuapp.BaseControl;
 
@@ -11,7 +12,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
 
@@ -52,11 +52,16 @@ public class AbstractActivity<T extends BaseControl> extends BaseActivity<T> {
 	@Override
     public void onResume() {
         super.onResume();
+        MobclickAgent.setDebugMode(true);
+        MobclickAgent.openActivityDurationTrack(false);
+        MobclickAgent.updateOnlineConfig(this);
     }
     
     @Override
     public void onPause() {
         super.onPause();
+        MobclickAgent.onPageStart( this.getClass().getSimpleName() );
+        MobclickAgent.onResume(this);
     }
 
     @Override

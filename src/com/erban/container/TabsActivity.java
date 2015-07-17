@@ -3,6 +3,7 @@ package com.erban.container;
 import cn.waps.AppConnect;
 
 import com.erban.R;
+import com.umeng.analytics.MobclickAgent;
 
 import android.app.Activity;
 import android.content.Context;
@@ -31,6 +32,8 @@ public class TabsActivity extends  com.erban.AbstractActivity{
     	useAnimation = false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_container_layout);
+        MobclickAgent.setDebugMode(true);
+        MobclickAgent.openActivityDurationTrack(false);
     }
     
     @Override

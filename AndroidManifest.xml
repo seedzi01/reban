@@ -127,7 +127,11 @@
        	<meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="0HOBFIfNsKRiDPf4pMxWtDkw" />
- 		
+       	<!-- 友盟统计 -->
+ 	   <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="" >
+        </meta-data>
     </application>
 
 </manifest>
