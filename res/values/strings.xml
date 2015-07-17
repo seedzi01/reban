@@ -46,4 +46,6 @@
     
     <string name="connect_wifi_failed">连接WiFi失败，请确认密码是否正确</string>
     <string name="queding_xieyi">同意<u>WIFI用户协议</u></string>
+    
+    <string name="refreshing">正在刷新中...</string>
 </resources>

@@ -1,6 +1,9 @@
 package com.erban;
 
-import cn.waps.AppConnect;
+import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
+import android.graphics.Bitmap;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -11,11 +14,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.yuekuapp.proxy.ControlFactory;
-
-import android.app.Activity;
-import android.app.Application;
-import android.content.Context;
-import android.graphics.Bitmap;
 
 /**
  * Created by huzhi on 15-2-16.

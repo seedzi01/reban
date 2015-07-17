@@ -3,6 +3,7 @@ package com.erban.levelone;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.R.integer;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -26,6 +27,8 @@ public class BaseShopFragment extends Fragment {
     protected FilterView second;
     protected FilterView third;
 
+    protected int currentPos = -1;
+    
     protected PopupWindow popupWindow;
     protected View shadowView;
 
@@ -74,16 +77,23 @@ public class BaseShopFragment extends Fragment {
         popupWindow.setOnDismissListener(new OnDismissListener() {
             @Override
             public void onDismiss() {
-                tabs.get(0).setSelected(false);
+            	tabs.get(0).setSelected(false);
                 tabs.get(1).setSelected(false);
                 tabs.get(2).setSelected(false);
-                shadowView.setVisibility(View.GONE);
             }
         });
         popupWindow.setAnimationStyle(android.R.style.Animation_Dialog);
         popupWindow.setBackgroundDrawable(new ColorDrawable(getResources()
                 .getColor(R.color.color_white)));
         filterListView.setDivider(null);
+        shadowView.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				shadowView.setVisibility(View.GONE);
+				popupWindow.dismiss();
+			}
+		});
     }
 
     protected void initTabs(List<FilterView> tabs) {

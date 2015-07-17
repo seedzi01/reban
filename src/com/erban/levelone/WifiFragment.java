@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.erban.R;
 import com.erban.WifiApplication;
@@ -119,6 +120,7 @@ public class WifiFragment extends Fragment {
 
 			@Override
 			public void onRefresh() {
+				Toast.makeText(getActivity(), R.string.refreshing, Toast.LENGTH_SHORT).show();
 				PhoneWifiManager.getInstance(WifiApplication.getInstance())
 						.startScan();
 			}

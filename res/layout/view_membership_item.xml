@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="11dp"
+    android:background="@color/color_white"
     android:layout_width="match_parent"
     android:layout_height="220dp">
 
@@ -14,7 +15,6 @@
         
         <TextView 
             android:id="@+id/title"
-            android:text="xxgsdgags"
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:layout_width="wrap_content"
@@ -27,8 +27,11 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/title"
             android:layout_alignParentRight="true"
-            android:textColor="#870b0f"
-            android:text="sgage"
+            android:textColor="@color/color_white"
+            android:maxLines="1"
+            android:ellipsize="middle"
+            android:layout_toRightOf="@id/title"
+            android:layout_marginLeft="10dp"
             />
         
     </RelativeLayout>
