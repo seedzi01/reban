@@ -31,6 +31,17 @@ public class TreasureFragment extends Fragment {
     private ListView mListView;
     private TreasureAdapter mAdapter;
     private TitleBar mTitlebar;
+    private Handler mHandler = new Handler(){
+    	public void handleMessage(android.os.Message msg) {
+    		adInfoList = AppConnect.getInstance(getActivity()).getAdInfoList();
+    		if(adInfoList==null || adInfoList.size()==0){
+    			AppConnect.getInstance(getActivity()).initAdInfo();
+    			mHandler.sendEmptyMessageDelayed(0, 500);
+    		}else{
+    			mAdapter.notifyDataSetChanged();
+    		}
+    	};
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,7 +76,7 @@ public class TreasureFragment extends Fragment {
     }
     
     private void initData(){
-        adInfoList = AppConnect.getInstance(getActivity()).getAdInfoList();
+    	mHandler.sendEmptyMessage(0);
     }
     
     private class TreasureAdapter extends BaseAdapter implements View.OnClickListener{
